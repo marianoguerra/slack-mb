@@ -1,0 +1,16 @@
+// The 17 fixtures at or above 512 KB, 38 MB in total. Fetched on demand by
+// scripts/fetch-large-fixtures.sh and gitignored; the test skips with a log
+// line when they are absent, so a fresh clone is green without them.
+//
+// Native-only not because the code is native, but because parsing 38 MB of JSON
+// on wasm turns `moon test` from seconds into minutes.
+import {
+}
+
+import {
+  "marianoguerra/slack/blocks",
+  "marianoguerra/slack-ext/test/fixtures",
+  "moonbitlang/core/json",
+} for "test"
+
+supported_targets = "+native"

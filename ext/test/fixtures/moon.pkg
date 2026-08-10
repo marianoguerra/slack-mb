@@ -1,0 +1,7 @@
+// Reading the vendored reference corpus. Its own package because both
+// test/corpus and test/corpus_large need it, and because a file that reads the
+// filesystem cannot live in a package whose only imports are `for "test"`.
+import {
+  "moonbitlang/x/fs",
+  "moonbitlang/core/json",
+}

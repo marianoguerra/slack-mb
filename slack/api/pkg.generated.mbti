@@ -1,0 +1,128 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "marianoguerra/slack/api"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn build_request(String, String, Params, token? : String, extra_headers? : Map[String, String], bool_style? : BoolStyle) -> HttpRequest
+
+pub let default_api_url : String
+
+pub fn encode_form(Params, bool_style? : BoolStyle) -> String
+
+pub fn normalize_api_url(String) -> String
+
+pub fn parse_retry_after(String) -> Int?
+
+pub fn percent_encode_component(String) -> String
+
+pub fn split_scopes(String) -> Array[String]
+
+pub fn to_slack_error(Error) -> SlackError
+
+pub let user_agent : String
+
+// Errors
+pub(all) suberror SlackError {
+  RequestError(String)
+  HttpError(status~ : Int, headers~ : Map[String, String], body~ : String)
+  PlatformError(result~ : ApiResponse)
+  RateLimitedError(retry_after~ : Int)
+  FileUploadInvalidArgumentsError(String)
+  FileUploadReadFileDataError(String)
+} derive(@debug.Debug)
+pub fn SlackError::code(Self) -> String
+pub fn SlackError::describe_error(Self) -> String
+pub fn SlackError::describe_error_java(Self) -> String
+pub impl Show for SlackError
+
+// Types and methods
+pub(all) struct ApiResponse {
+  ok : Bool
+  error : String?
+  warning : String?
+  needed : String?
+  provided : String?
+  response_metadata : ResponseMetadata
+  raw : Json
+} derive(Eq, @debug.Debug)
+pub fn ApiResponse::get(Self, String) -> Json?
+pub fn ApiResponse::get_str(Self, String) -> String?
+pub fn ApiResponse::of_http(HttpResponse) -> Self
+pub fn ApiResponse::of_json(Json) -> Self
+
+pub(all) enum BoolStyle {
+  TrueFalse
+  OneZero
+} derive(Eq, @debug.Debug)
+
+pub(all) struct HttpRequest {
+  url : String
+  http_method : String
+  headers : Map[String, String]
+  body : Bytes
+} derive(Eq, @debug.Debug)
+pub fn HttpRequest::body_text(Self) -> String
+pub fn HttpRequest::content_length(Self) -> Int
+
+pub(all) struct HttpResponse {
+  status : Int
+  headers : Map[String, String]
+  body : String
+} derive(Eq, @debug.Debug)
+pub fn HttpResponse::header(Self, String) -> String?
+
+pub(all) enum ParamValue {
+  Str(String)
+  Int(Int)
+  I64(Int64)
+  Num(Double)
+  Bool(Bool)
+  Csv(Array[String])
+  JsonVal(Json)
+} derive(Eq, @debug.Debug)
+pub fn ParamValue::to_wire(Self, bool_style~ : BoolStyle) -> String
+
+pub(all) struct Params {
+  entries : Array[(String, ParamValue)]
+} derive(Eq, @debug.Debug)
+pub fn Params::length(Self) -> Int
+pub fn Params::new() -> Self
+pub fn Params::of(Array[(String, ParamValue)]) -> Self
+pub fn Params::put(Self, String, ParamValue) -> Unit
+pub fn Params::put_bool(Self, String, Bool?) -> Unit
+pub fn Params::put_csv(Self, String, Array[String]?) -> Unit
+pub fn Params::put_i64(Self, String, Int64?) -> Unit
+pub fn Params::put_int(Self, String, Int?) -> Unit
+pub fn Params::put_json(Self, String, Json?) -> Unit
+pub fn Params::put_num(Self, String, Double?) -> Unit
+pub fn Params::put_opt(Self, String, ParamValue?) -> Unit
+pub fn Params::put_str(Self, String, String?) -> Unit
+
+pub(all) struct ResponseMetadata {
+  next_cursor : String?
+  warnings : Array[String]
+  messages : Array[String]
+  scopes : Array[String]
+  accepted_scopes : Array[String]
+  retry_after : Int?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+pub fn ResponseMetadata::diagnostics(Self) -> Array[(Severity, String)]
+pub fn ResponseMetadata::empty() -> Self
+
+pub(all) enum Severity {
+  Err
+  Warn
+} derive(Eq, @debug.Debug)
+pub impl Show for Severity
+
+// Type aliases
+
+// Traits
+pub(open) trait Transport {
+  async fn send(Self, HttpRequest) -> HttpResponse
+  fn describe(Self) -> String
+}

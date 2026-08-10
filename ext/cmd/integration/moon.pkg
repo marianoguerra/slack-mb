@@ -1,0 +1,20 @@
+// The integration harness: the library against a real Slack workspace.
+//
+// Separate from cmd/main because it drives the TYPED api -- typed blocks, the
+// paginator, the error taxonomy -- rather than passing strings through on the
+// command line. That is the half of the library a CLI cannot reach.
+//
+// Never runs in CI: it needs a token and a workspace.
+import {
+  "marianoguerra/slack/api",
+  "marianoguerra/slack/blocks",
+  "marianoguerra/slack/client",
+  "marianoguerra/slack/methods",
+  "marianoguerra/slack-ext/transport_http",
+  "moonbitlang/async",
+  "moonbitlang/core/env",
+}
+
+supported_targets = "+native"
+
+pkgtype(kind: "executable")

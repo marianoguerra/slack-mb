@@ -1,0 +1,29 @@
+{
+  "type": "dialog_submission",
+  "callback_id": "",
+  "submission": {},
+  "state": "",
+  "enterprise": {
+    "id": "",
+    "name": ""
+  },
+  "team": {
+    "id": "",
+    "domain": "",
+    "enterprise_id": "",
+    "enterprise_name": ""
+  },
+  "user": {
+    "id": "",
+    "name": "",
+    "team_id": ""
+  },
+  "channel": {
+    "id": "",
+    "name": ""
+  },
+  "action_ts": "",
+  "token": "",
+  "response_url": "",
+  "is_enterprise_install": false
+}

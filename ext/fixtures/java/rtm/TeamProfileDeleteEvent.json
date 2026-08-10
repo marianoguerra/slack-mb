@@ -1,0 +1,10 @@
+{
+  "type": "team_profile_delete",
+  "profile": {
+    "fields": [
+      {
+        "id": ""
+      }
+    ]
+  }
+}

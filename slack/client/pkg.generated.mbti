@@ -1,0 +1,123 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "marianoguerra/slack/client"
+
+import {
+  "marianoguerra/slack/api",
+  "marianoguerra/slack/blocks",
+}
+
+// Values
+pub let default_page_size : Int
+
+pub fn home_view(Array[@blocks.LayoutBlock], callback_id? : String, private_metadata? : String) -> Json
+
+pub fn interpret_response(@api.HttpResponse) -> @api.ApiResponse raise @api.SlackError
+
+pub fn merge_params(@api.Params, @api.Params) -> @api.Params
+
+pub fn modal(String, Array[@blocks.LayoutBlock], submit? : String, close? : String, callback_id? : String, private_metadata? : String) -> Json
+
+pub fn page_items(@api.ApiResponse, String) -> Array[Json]
+
+pub fn view(String, Array[@blocks.LayoutBlock], title? : String, submit? : String, close? : String, callback_id? : String, private_metadata? : String, external_id? : String, clear_on_close? : Bool, notify_on_close? : Bool) -> Json
+
+// Errors
+
+// Types and methods
+pub struct Client {
+  transport : &@api.Transport
+  token : String
+  base_url : String
+  bool_style : @api.BoolStyle
+  extra_headers : Map[String, String]
+  team_id : String?
+}
+pub async fn Client::api_test(Self, error? : String, extra? : @api.Params) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::auth_revoke(Self, dry_run? : Bool) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::auth_test(Self) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::bookmarks_add(Self, channel_id~ : String, title~ : String, type_~ : String, link? : String, emoji? : String, entity_id? : String, parent_id? : String) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::bookmarks_list(Self, channel_id~ : String) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::call(Self, String, @api.Params) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::chat_delete(Self, channel~ : String, ts~ : String, as_user? : Bool) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::chat_delete_scheduled_message(Self, channel~ : String, scheduled_message_id~ : String, as_user? : Bool) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::chat_get_permalink(Self, channel~ : String, message_ts~ : String) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::chat_me_message(Self, channel~ : String, text~ : String) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::chat_post_ephemeral(Self, channel~ : String, user~ : String, text? : String, blocks? : Array[@blocks.LayoutBlock], attachments? : Json, thread_ts? : String, parse? : String, link_names? : Bool, username? : String, icon_emoji? : String, icon_url? : String, markdown_text? : String) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::chat_post_message(Self, channel~ : String, text? : String, blocks? : Array[@blocks.LayoutBlock], attachments? : Json, thread_ts? : String, reply_broadcast? : Bool, unfurl_links? : Bool, unfurl_media? : Bool, mrkdwn? : Bool, parse? : String, link_names? : Bool, username? : String, icon_emoji? : String, icon_url? : String, metadata? : Json, markdown_text? : String) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::chat_schedule_message(Self, channel~ : String, post_at~ : Int64, text? : String, blocks? : Array[@blocks.LayoutBlock], attachments? : Json, thread_ts? : String, reply_broadcast? : Bool, unfurl_links? : Bool, unfurl_media? : Bool, metadata? : Json, markdown_text? : String) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::chat_scheduled_messages_list(Self, channel? : String, cursor? : String, limit? : Int, latest? : String, oldest? : String) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::chat_unfurl(Self, channel~ : String, ts~ : String, unfurls~ : Json, user_auth_required? : Bool, user_auth_message? : String, user_auth_url? : String, user_auth_blocks? : Array[@blocks.LayoutBlock]) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::chat_update(Self, channel~ : String, ts~ : String, text? : String, blocks? : Array[@blocks.LayoutBlock], attachments? : Json, link_names? : Bool, parse? : String, metadata? : Json, markdown_text? : String) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::conversations_archive(Self, channel~ : String) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::conversations_close(Self, channel~ : String) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::conversations_create(Self, name~ : String, is_private? : Bool) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::conversations_history(Self, channel~ : String, cursor? : String, limit? : Int, latest? : String, oldest? : String, inclusive? : Bool, include_all_metadata? : Bool) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::conversations_history_all(Self, channel~ : String, latest? : String, oldest? : String, page_size? : Int, max_pages? : Int) -> Array[Json] raise @api.SlackError
+pub async fn Client::conversations_info(Self, channel~ : String, include_locale? : Bool, include_num_members? : Bool) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::conversations_invite(Self, channel~ : String, users~ : Array[String], force? : Bool) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::conversations_join(Self, channel~ : String) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::conversations_kick(Self, channel~ : String, user~ : String) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::conversations_leave(Self, channel~ : String) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::conversations_list(Self, types? : Array[String], exclude_archived? : Bool, limit? : Int, cursor? : String) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::conversations_list_all(Self, types? : Array[String], exclude_archived? : Bool, page_size? : Int, max_pages? : Int) -> Array[Json] raise @api.SlackError
+pub async fn Client::conversations_mark(Self, channel~ : String, ts~ : String) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::conversations_members(Self, channel~ : String, cursor? : String, limit? : Int) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::conversations_members_all(Self, channel~ : String, page_size? : Int, max_pages? : Int) -> Array[Json] raise @api.SlackError
+pub async fn Client::conversations_open(Self, channel? : String, users? : Array[String], return_im? : Bool, prevent_creation? : Bool) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::conversations_rename(Self, channel~ : String, name~ : String) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::conversations_replies(Self, channel~ : String, ts~ : String, cursor? : String, limit? : Int, latest? : String, oldest? : String, inclusive? : Bool) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::conversations_set_purpose(Self, channel~ : String, purpose~ : String) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::conversations_set_topic(Self, channel~ : String, topic~ : String) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::files_complete_upload_external(Self, files~ : Json, channel_id? : String, initial_comment? : String, thread_ts? : String) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::files_delete(Self, file~ : String) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::files_get_upload_url_external(Self, filename~ : String, length~ : Int, alt_txt? : String, snippet_type? : String) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::files_info(Self, file~ : String, cursor? : String, limit? : Int) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::files_list(Self, channel? : String, user? : String, types? : Array[String], ts_from? : String, ts_to? : String, count? : Int, page? : Int) -> @api.ApiResponse raise @api.SlackError
+pub fn Client::interpret(Self, @api.HttpResponse) -> @api.ApiResponse raise @api.SlackError
+pub fn Client::new(&@api.Transport, String, base_url? : String, bool_style? : @api.BoolStyle, extra_headers? : Map[String, String], team_id? : String) -> Self
+pub async fn Client::paginate(Self, String, @api.Params, (@api.ApiResponse) -> Bool, page_size? : Int, cursor? : String, max_pages? : Int) -> Int raise @api.SlackError
+pub async fn Client::paginate_collect(Self, String, @api.Params, String, page_size? : Int, max_pages? : Int) -> Array[Json] raise @api.SlackError
+pub async fn Client::pins_add(Self, channel~ : String, timestamp? : String) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::pins_list(Self, channel~ : String) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::pins_remove(Self, channel~ : String, timestamp? : String) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::reactions_add(Self, channel~ : String, timestamp~ : String, name~ : String) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::reactions_get(Self, channel? : String, timestamp? : String, file? : String, file_comment? : String, full? : Bool) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::reactions_list(Self, user? : String, cursor? : String, limit? : Int, full? : Bool) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::reactions_remove(Self, name~ : String, channel? : String, timestamp? : String, file? : String, file_comment? : String) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::team_info(Self, team? : String, domain? : String) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::team_profile_get(Self, visibility? : String) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::usergroups_create(Self, name~ : String, handle? : String, description? : String, channels? : Array[String], include_count? : Bool) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::usergroups_list(Self, include_disabled? : Bool, include_count? : Bool, include_users? : Bool) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::usergroups_users_list(Self, usergroup~ : String, include_disabled? : Bool) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::usergroups_users_update(Self, usergroup~ : String, users~ : Array[String], include_count? : Bool) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::users_conversations(Self, user? : String, types? : Array[String], exclude_archived? : Bool, cursor? : String, limit? : Int) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::users_get_presence(Self, user? : String) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::users_info(Self, user~ : String, include_locale? : Bool) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::users_list(Self, cursor? : String, limit? : Int, include_locale? : Bool) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::users_list_all(Self, include_locale? : Bool, page_size? : Int, max_pages? : Int) -> Array[Json] raise @api.SlackError
+pub async fn Client::users_lookup_by_email(Self, email~ : String) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::users_profile_get(Self, user? : String, include_labels? : Bool) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::users_profile_set(Self, user? : String, profile? : Json, name? : String, value? : String) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::users_set_presence(Self, presence~ : String) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::views_open(Self, trigger_id~ : String, view~ : Json) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::views_publish(Self, user_id~ : String, view~ : Json, hash? : String) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::views_push(Self, trigger_id~ : String, view~ : Json) -> @api.ApiResponse raise @api.SlackError
+pub async fn Client::views_update(Self, view~ : Json, view_id? : String, external_id? : String, hash? : String) -> @api.ApiResponse raise @api.SlackError
+
+pub struct Paginator {
+  page_size : Int
+  mut cursor : String?
+  mut finished : Bool
+  mut pages : Int
+}
+pub fn Paginator::accept(Self, @api.ApiResponse) -> Unit
+pub fn Paginator::cursor(Self) -> String?
+pub fn Paginator::is_finished(Self) -> Bool
+pub fn Paginator::new(page_size? : Int, cursor? : String) -> Self
+pub fn Paginator::next(Self) -> @api.Params?
+pub fn Paginator::pages(Self) -> Int
+pub fn Paginator::stop(Self) -> Unit
+
+// Type aliases
+
+// Traits

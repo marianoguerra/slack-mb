@@ -1,0 +1,33 @@
+{
+  "type": "app_mention",
+  "client_msg_id": "",
+  "user": "",
+  "username": "",
+  "bot_id": "",
+  "bot_profile": {
+    "id": "",
+    "deleted": false,
+    "name": "",
+    "updated": 123,
+    "app_id": "",
+    "icons": {
+      "image_36": "",
+      "image_48": "",
+      "image_72": ""
+    },
+    "team_id": ""
+  },
+  "subtype": "",
+  "text": "",
+  "blocks": [],
+  "attachments": [],
+  "ts": "",
+  "team": "",
+  "channel": "",
+  "edited": {
+    "user": "",
+    "ts": ""
+  },
+  "event_ts": "",
+  "thread_ts": ""
+}

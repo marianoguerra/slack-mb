@@ -1,0 +1,63 @@
+name: check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Set up MoonBit
+        run: |
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
+          echo "$HOME/.moon/bin" >> $GITHUB_PATH
+
+      - run: moon version --all && moon update
+
+      # `moon check` does not recurse into workspace members, so each module is
+      # checked in its own directory.
+      - name: check (library)
+        run: moon check --deny-warn
+        working-directory: slack
+
+      - name: check (ext)
+        run: moon check --deny-warn --target native
+        working-directory: ext
+
+      # The library is dependency-free precisely so that this passes.
+      - name: every backend
+        run: |
+          for t in wasm wasm-gc js native; do
+            moon check --target "$t"
+          done
+        working-directory: slack
+
+      - name: generated method table is current
+        run: ext/scripts/gen.sh --check
+
+      - name: interfaces are current
+        run: |
+          moon info --target all
+          git diff --exit-code
+
+      - name: formatted
+        run: |
+          moon fmt
+          git diff --exit-code
+
+      # wasm skips the native-only packages; native picks them up. The
+      # large-fixture corpus is not fetched here, so corpus_large self-skips.
+      - name: test
+        run: moon test
+
+      - name: test (native)
+        run: moon test --target native
+
+      - name: build the demo CLI
+        run: moon build --target native
+        working-directory: ext

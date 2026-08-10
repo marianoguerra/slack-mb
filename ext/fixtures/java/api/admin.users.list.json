@@ -1,0 +1,39 @@
+{
+  "ok": false,
+  "users": [
+    {
+      "id": "W00000000",
+      "email": "",
+      "is_admin": false,
+      "is_owner": false,
+      "is_primary_owner": false,
+      "is_restricted": false,
+      "is_ultra_restricted": false,
+      "is_bot": false,
+      "expiration_ts": 12345,
+      "username": "",
+      "full_name": "",
+      "is_active": false,
+      "date_created": 12345,
+      "roles": [
+        ""
+      ],
+      "workspaces": [
+        "T00000000"
+      ],
+      "has_2fa": false,
+      "has_sso": false,
+      "last_active_ts": 12345
+    }
+  ],
+  "response_metadata": {
+    "next_cursor": "",
+    "messages": [
+      ""
+    ]
+  },
+  "error": "",
+  "needed": "",
+  "provided": "",
+  "warning": ""
+}

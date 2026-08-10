@@ -1,0 +1,40 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "marianoguerra/slack/signature"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub let header_signature : String
+
+pub let header_timestamp : String
+
+pub let max_timestamp_age_seconds : Int
+
+pub let signing_secret_env : String
+
+// Errors
+pub(all) suberror SignatureError {
+  EmptySigningSecret
+  MalformedTimestamp(String)
+  ExpiredTimestamp(ts~ : String, now~ : Int64, max_age_seconds~ : Int)
+  WrongSignature(received~ : String, expected~ : String, body_len~ : Int)
+  MissingHeader(String)
+} derive(Eq, @debug.Debug)
+pub fn SignatureError::describe_error(Self) -> String
+pub impl Show for SignatureError
+
+// Types and methods
+pub struct Verifier {
+  secret : String
+  max_age_seconds : Int
+}
+pub fn Verifier::new(String, max_age_seconds? : Int) -> Self raise SignatureError
+pub fn Verifier::sign(Self, String, String) -> String
+pub fn Verifier::verify_at_time(Self, String, String, String, Int64) -> Unit raise SignatureError
+pub fn Verifier::verify_headers(Self, Map[String, String], String, Int64) -> Unit raise SignatureError
+
+// Type aliases
+
+// Traits

@@ -1,0 +1,179 @@
+#!/usr/bin/env bash
+#
+# Vendor the reference corpus this repo's conformance tests run against.
+#
+#   ext/scripts/vendor-fixtures.sh <java-slack-sdk clone> <slack-morphism-rust clone>
+#
+# Idempotent: run it again after re-cloning upstream and commit the diff.
+#
+# Two things come out of here. `metadata/` is the machine-readable description
+# of Slack's method surface -- the tier table plus the documented-method list
+# scraped into java-slack-sdk's MethodsTest -- and it is what the generator and
+# the coverage test read. `fixtures/` is 551 real API responses, scrubbed by
+# Slack's own SDK team into type-representative placeholders; they are the only
+# test data in this repo nobody hand-picked, which is exactly what makes them
+# worth 43 MB of somebody else's bandwidth.
+#
+# Files at or above 512 KB land in `*-large/` and are gitignored. Measured, that
+# threshold puts 17 files / 37.9 MB on one side and 534 / 5.1 MB on the other,
+# with the nearest small file at 316 KB -- so the split does not wobble when
+# upstream refreshes a fixture.
+set -euo pipefail
+
+if [ $# -ne 2 ]; then
+  sed -n '3,6p' "$0" >&2
+  exit 2
+fi
+
+JAVA_SDK=$(cd "$1" && pwd)
+MORPHISM=$(cd "$2" && pwd)
+EXT=$(cd "$(dirname "$0")/.." && pwd)
+
+LARGE_THRESHOLD=524288
+
+java_commit=$(git -C "$JAVA_SDK" rev-parse HEAD)
+morphism_commit=$(git -C "$MORPHISM" rev-parse HEAD)
+
+echo "java-slack-sdk    $java_commit"
+echo "slack-morphism    $morphism_commit"
+
+# --- metadata --------------------------------------------------------------
+
+mkdir -p "$EXT/metadata"
+cp "$JAVA_SDK/metadata/web-api/rate_limit_tiers.json" "$EXT/metadata/rate_limit_tiers.json"
+
+# The documented-method list and the exclusions live inside a JUnit source file
+# upstream. Pulled out into plain text so refreshing the doc scrape is a
+# one-file edit and the coverage test can name what drifted.
+python3 - "$JAVA_SDK/slack-api-client/src/test/java/test_locally/api/MethodsTest.java" \
+         "$EXT/metadata" <<'PY'
+import re, sys, pathlib
+
+src = pathlib.Path(sys.argv[1]).read_text()
+out = pathlib.Path(sys.argv[2])
+
+m = re.search(r'String methods = "([^"]+)";', src)
+if not m:
+    sys.exit("could not find the documented-method string in MethodsTest.java")
+documented = m.group(1).split(",")
+
+block = re.search(r'excludedMethodNames = Arrays\.asList\((.*?)\);', src, re.S)
+if not block:
+    sys.exit("could not find excludedMethodNames in MethodsTest.java")
+# The list is interleaved with `//` comments explaining each exclusion, and one
+# of them quotes the word "session" -- strip comments before reading strings.
+body = re.sub(r'//[^\n]*', '', block.group(1))
+excluded = re.findall(r'"([^"]+)"', body)
+
+(out / "documented_methods.txt").write_text("\n".join(documented) + "\n")
+(out / "excluded_methods.txt").write_text("\n".join(excluded) + "\n")
+print(f"documented {len(documented)}  excluded {len(excluded)}")
+PY
+
+# --- fixtures --------------------------------------------------------------
+
+rm -rf "$EXT/fixtures/java" "$EXT/fixtures/morphism"
+mkdir -p "$EXT/fixtures/java" "$EXT/fixtures/morphism/blocks" "$EXT/fixtures/morphism/events"
+
+copy_tree() {
+  local src=$1 name=$2
+  [ -d "$src" ] || return 0
+  local f rel size dest
+  while IFS= read -r -d '' f; do
+    rel=${f#"$src"/}
+    size=$(stat -c %s "$f")
+    if [ "$size" -ge "$LARGE_THRESHOLD" ]; then
+      dest="$EXT/fixtures/java/$name-large/$rel"
+    else
+      dest="$EXT/fixtures/java/$name/$rel"
+    fi
+    mkdir -p "$(dirname "$dest")"
+    cp "$f" "$dest"
+  done < <(find "$src" -type f -name '*.json' -print0)
+}
+
+for d in api events rtm app-backend scim audit status aws; do
+  copy_tree "$JAVA_SDK/json-logs/samples/$d" "$d"
+done
+copy_tree "$JAVA_SDK/json-logs/raw" "raw"
+
+cp "$MORPHISM"/src/models/blocks/fixtures/*.json "$EXT/fixtures/morphism/blocks/"
+cp "$MORPHISM"/src/models/events/fixtures/*.json "$EXT/fixtures/morphism/events/"
+cp "$MORPHISM"/src/api/fixtures/*.json "$EXT/fixtures/morphism/" 2>/dev/null || true
+
+# --- manifest --------------------------------------------------------------
+#
+# The corpus test reads this rather than walking directories: a fixture that
+# vanishes then becomes a test failure instead of silent zero coverage. It is
+# also how the test knows which files are `large` and may legitimately be
+# missing from a fresh clone.
+
+python3 - "$EXT" "$java_commit" "$morphism_commit" "$LARGE_THRESHOLD" <<'PY'
+import hashlib, json, pathlib, sys
+
+ext = pathlib.Path(sys.argv[1])
+java_commit, morphism_commit, threshold = sys.argv[2], sys.argv[3], int(sys.argv[4])
+root = ext / "fixtures"
+
+files = []
+for p in sorted(root.rglob("*.json")):
+    if p.name == "MANIFEST.json":
+        continue
+    data = p.read_bytes()
+    rel = p.relative_to(root).as_posix()
+    files.append({
+        "path": rel,
+        "bytes": len(data),
+        "sha256": hashlib.sha256(data).hexdigest(),
+        "tier": "large" if len(data) >= threshold else "small",
+    })
+
+manifest = {
+    "note": "Generated by ext/scripts/vendor-fixtures.sh. Paths are relative to ext/fixtures/.",
+    "large_threshold_bytes": threshold,
+    "sources": [
+        {"repo": "https://github.com/slackapi/java-slack-sdk", "commit": java_commit,
+         "license": "MIT", "path": "json-logs/samples, json-logs/raw, metadata/web-api"},
+        {"repo": "https://github.com/abdolence/slack-morphism-rust", "commit": morphism_commit,
+         "license": "Apache-2.0", "path": "src/models/**/fixtures, src/api/fixtures"},
+    ],
+    "files": files,
+}
+(root / "MANIFEST.json").write_text(json.dumps(manifest, indent=1) + "\n")
+
+small = [f for f in files if f["tier"] == "small"]
+large = [f for f in files if f["tier"] == "large"]
+print(f"small {len(small)} files {sum(f['bytes'] for f in small)/1e6:.1f} MB")
+print(f"large {len(large)} files {sum(f['bytes'] for f in large)/1e6:.1f} MB (gitignored)")
+PY
+
+cat > "$EXT/fixtures/VENDOR.md" <<EOF
+# Vendored reference fixtures
+
+Generated by \`ext/scripts/vendor-fixtures.sh\`. Do not edit by hand.
+
+These are real Slack API responses and payloads, scrubbed upstream into
+type-representative placeholders (\`U00000000\`, \`C00000000\`, \`0000000000.000000\`,
+\`https://www.example.com/\`). Each \`samples/api\` file is the union of every
+response shape its method has been observed to return, which is why they
+exercise parser fields no hand-written test would think to cover.
+
+\`ext/test/corpus\` and \`ext/test/corpus_large\` read them through
+\`MANIFEST.json\`; nothing else in this repo does.
+
+## Sources
+
+| Upstream | Commit | License | Paths taken |
+| --- | --- | --- | --- |
+| [slackapi/java-slack-sdk](https://github.com/slackapi/java-slack-sdk) | \`$java_commit\` | MIT | \`json-logs/samples/**\`, \`json-logs/raw/**\`, \`metadata/web-api/rate_limit_tiers.json\` |
+| [abdolence/slack-morphism-rust](https://github.com/abdolence/slack-morphism-rust) | \`$morphism_commit\` | Apache-2.0 | \`src/models/**/fixtures/*.json\`, \`src/api/fixtures/*.json\` |
+
+## Large files
+
+Anything at or above $((LARGE_THRESHOLD / 1024)) KB lives under \`java/*-large/\` and is **gitignored** --
+17 files, 38 MB, dominated by \`search.all.json\` (6.9 MB) and \`search.messages.json\`
+(5.3 MB). Fetch them with \`just fixtures\`. \`ext/test/corpus_large\` skips with a
+log line when they are absent, so a fresh clone is green without them.
+EOF
+
+echo "wrote $EXT/fixtures/MANIFEST.json and VENDOR.md"

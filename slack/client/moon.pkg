@@ -1,0 +1,15 @@
+// The only package that composes the others: the Client, the pure Paginator
+// state machine and the typed request builders.
+import {
+  "marianoguerra/slack/api",
+  "marianoguerra/slack/blocks",
+  "marianoguerra/slack/methods",
+  "moonbitlang/core/json",
+}
+
+import {
+  "marianoguerra/slack/testing",
+  "marianoguerra/slack/api",
+  "moonbitlang/core/test",
+  "moonbitlang/core/json",
+} for "test"

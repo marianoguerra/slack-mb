@@ -1,0 +1,17 @@
+{
+  "type": "link_shared",
+  "channel": "",
+  "user": "",
+  "message_ts": "",
+  "thread_ts": "",
+  "links": [
+    {
+      "domain": "",
+      "url": ""
+    }
+  ],
+  "is_bot_user_member": false,
+  "unfurl_id": "",
+  "source": "",
+  "event_ts": ""
+}

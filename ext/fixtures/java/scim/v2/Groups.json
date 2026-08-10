@@ -1,0 +1,35 @@
+{
+  "schemas": [
+    ""
+  ],
+  "Resources": [
+    {
+      "schemas": [
+        ""
+      ],
+      "id": "S00000000",
+      "meta": {
+        "created": "",
+        "location": "https://www.example.com/"
+      },
+      "displayName": "",
+      "members": [
+        {
+          "value": "U00000000",
+          "display": ""
+        },
+        {
+          "value": "",
+          "display": ""
+        }
+      ]
+    }
+  ],
+  "totalResults": 12345,
+  "itemsPerPage": 12345,
+  "startIndex": 12345,
+  "Errors": {
+    "description": "",
+    "code": 12345
+  }
+}

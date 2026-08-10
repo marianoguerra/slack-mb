@@ -1,0 +1,55 @@
+{
+  "ok": false,
+  "warning": "",
+  "error": "",
+  "needed": "",
+  "provided": "",
+  "token_type": "",
+  "access_token": "",
+  "scope": "",
+  "enterprise_id": "",
+  "team_name": "",
+  "team_id": "",
+  "user_id": "",
+  "incoming_webhook": {
+    "url": "",
+    "channel": "",
+    "channel_id": "",
+    "configuration_url": ""
+  },
+  "bot": {
+    "bot_user_id": "",
+    "bot_access_token": ""
+  },
+  "authorizing_user": {
+    "user_id": "",
+    "app_home": ""
+  },
+  "installer_user": {
+    "user_id": "",
+    "app_home": ""
+  },
+  "scopes": {
+    "app_home": [
+      ""
+    ],
+    "team": [
+      ""
+    ],
+    "channel": [
+      ""
+    ],
+    "group": [
+      ""
+    ],
+    "mpim": [
+      ""
+    ],
+    "im": [
+      ""
+    ],
+    "user": [
+      ""
+    ]
+  }
+}

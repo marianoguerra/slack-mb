@@ -1,0 +1,21 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "marianoguerra/slack-ext/transport_http"
+
+import {
+  "marianoguerra/slack/api",
+}
+
+// Values
+
+// Errors
+
+// Types and methods
+pub struct HttpTransport {
+  description : String
+}
+pub fn HttpTransport::new(description? : String) -> Self
+pub impl @api.Transport for HttpTransport
+
+// Type aliases
+
+// Traits

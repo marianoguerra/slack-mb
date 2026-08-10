@@ -1,0 +1,15 @@
+// A demo CLI whose real job is to exercise transport_http, which no unit test
+// covers. Needs a real token; never runs in CI.
+import {
+  "marianoguerra/slack/api",
+  "marianoguerra/slack/client",
+  "marianoguerra/slack-ext/transport_http",
+  "moonbitlang/async",
+  "moonbitlang/core/env",
+  "moonbitlang/core/string",
+  "marianoguerra/slack/methods",
+}
+
+supported_targets = "+native"
+
+pkgtype(kind: "executable")

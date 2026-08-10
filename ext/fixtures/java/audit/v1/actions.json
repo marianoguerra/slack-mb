@@ -1,0 +1,84 @@
+{
+  "actions": {
+    "workspace_or_org": [
+      ""
+    ],
+    "user": [
+      ""
+    ],
+    "file": [
+      ""
+    ],
+    "channel": [
+      ""
+    ],
+    "app": [
+      ""
+    ],
+    "workflow_builder": [
+      ""
+    ],
+    "message": [
+      ""
+    ],
+    "barrier": [
+      ""
+    ],
+    "huddle": [
+      ""
+    ],
+    "anomaly": [
+      ""
+    ],
+    "slack_cli": [
+      ""
+    ],
+    "subteam": [
+      ""
+    ],
+    "role": [
+      ""
+    ],
+    "account_type_role": [
+      ""
+    ],
+    "app_approval_automation_rule": [
+      ""
+    ],
+    "workflow_v2": [
+      ""
+    ],
+    "canvas": [
+      ""
+    ],
+    "function": [
+      ""
+    ],
+    "sales_elevate": [
+      ""
+    ],
+    "native_dlp": [
+      ""
+    ],
+    "template": [
+      ""
+    ],
+    "list": [
+      ""
+    ],
+    "slack_first_crm": [
+      ""
+    ],
+    "legal_hold": [
+      ""
+    ],
+    "salesforce_mcp_server": [
+      ""
+    ]
+  },
+  "ok": false,
+  "error": "",
+  "needed": "",
+  "provided": "",
+  "warning": ""
+}

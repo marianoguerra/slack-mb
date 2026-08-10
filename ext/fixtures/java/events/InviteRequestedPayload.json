@@ -1,0 +1,49 @@
+{
+  "token": "",
+  "enterprise_id": "",
+  "team_id": "",
+  "api_app_id": "",
+  "type": "",
+  "authed_users": [
+    ""
+  ],
+  "authed_teams": [
+    ""
+  ],
+  "authorizations": [
+    {
+      "enterprise_id": "",
+      "team_id": "",
+      "user_id": "",
+      "is_bot": false,
+      "is_enterprise_install": false
+    }
+  ],
+  "is_ext_shared_channel": false,
+  "event_id": "",
+  "event_time": 123,
+  "event_context": "",
+  "event": {
+    "type": "invite_requested",
+    "invite_request": {
+      "id": "",
+      "email": "",
+      "date_created": 123,
+      "requester_ids": [
+        ""
+      ],
+      "channel_ids": [
+        ""
+      ],
+      "invite_type": "",
+      "real_name": "",
+      "date_expire": 123,
+      "request_reason": "",
+      "team": {
+        "id": "",
+        "name": "",
+        "domain": ""
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "team_profile_change",
+  "profile": {
+    "fields": [
+      {
+        "id": ""
+      }
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+// Deliberately dependency-free. moonbitlang/core is the standard library, not a
+// dependency: this package builds on native, js, wasm and wasm-gc, which is the
+// whole reason the `Transport` trait lives HERE and not next to the HTTP stack
+// that implements it.
+//
+// utf8 is not optional. MoonBit strings are UTF-16, so percent-encoding and
+// Content-Length both have to go through the UTF-8 byte sequence or a body
+// carrying one accented character silently mis-encodes.
+import {
+  "moonbitlang/core/json",
+  "moonbitlang/core/encoding/utf8",
+  "moonbitlang/core/strconv",
+}
+
+import {
+  "moonbitlang/core/test",
+  "moonbitlang/core/json",
+} for "test"

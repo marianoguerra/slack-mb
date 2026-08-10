@@ -1,0 +1,17 @@
+.DS_Store
+_build/
+target/
+target
+.mooncakes/
+.moonagent/
+
+# The 17 reference fixtures at or above 512 KB (38 MB). Committing them would
+# make every clone pay for a corpus that only the conformance test reads.
+# Fetch with `just fixtures` (ext/scripts/fetch-large-fixtures.sh); the test
+# skips with a log line when they are absent.
+ext/fixtures/java/api-large/
+ext/fixtures/java/rtm-large/
+
+# Sidecar metadata some file managers write alongside files. Not part of the
+# project.
+.comments/

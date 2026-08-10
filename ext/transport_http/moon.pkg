@@ -1,0 +1,11 @@
+// The only package in this repo that talks to a socket, and the only one that
+// is not portable. It contains nothing but the adapter, so a
+// `moon check --target wasm` that skips it costs no coverage -- the same reason
+// marianoguerra/mcp's transport packages have no tests at all.
+import {
+  "marianoguerra/slack/api",
+  "moonbitlang/async/http",
+  "moonbitlang/core/encoding/utf8",
+}
+
+supported_targets = "+native"

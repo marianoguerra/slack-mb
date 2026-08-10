@@ -1,0 +1,15 @@
+{
+  "type": "channel_created",
+  "channel": {
+    "id": "",
+    "name": "",
+    "name_normalized": "",
+    "is_channel": false,
+    "is_shared": false,
+    "is_org_shared": false,
+    "created": 123,
+    "creator": "",
+    "context_team_id": ""
+  },
+  "event_ts": ""
+}

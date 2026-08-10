@@ -1,0 +1,34 @@
+{
+  "type": "subteam_updated",
+  "subteam": {
+    "id": "",
+    "team_id": "",
+    "enterprise_subteam_id": "",
+    "is_subteam": false,
+    "is_usergroup": false,
+    "name": "",
+    "description": "",
+    "handle": "",
+    "is_external": false,
+    "auto_provision": false,
+    "date_create": 123,
+    "date_update": 123,
+    "date_delete": 123,
+    "auto_type": "",
+    "created_by": "",
+    "updated_by": "",
+    "deleted_by": "",
+    "prefs": {
+      "channels": [
+        ""
+      ],
+      "groups": [
+        ""
+      ]
+    },
+    "users": [],
+    "user_count": 123,
+    "channel_count": 123
+  },
+  "event_ts": ""
+}

@@ -1,0 +1,30 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "marianoguerra/slack-ext/test/fixtures"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn collect_block_arrays(Json) -> Array[Json]
+
+pub fn fixtures(String) -> Array[Fixture]
+
+pub fn fixtures_root() -> String
+
+pub fn read_fixture(Fixture) -> Json
+
+pub fn tier_present(String) -> Bool
+
+// Errors
+
+// Types and methods
+pub(all) struct Fixture {
+  path : String
+  bytes : Int
+  tier : String
+} derive(Eq, @debug.Debug)
+
+// Type aliases
+
+// Traits

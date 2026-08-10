@@ -1,0 +1,488 @@
+{
+  "ok": true,
+  "warning": "",
+  "error": "",
+  "needed": "",
+  "provided": "",
+  "response_metadata": {
+    "next_cursor": "",
+    "messages": [],
+    "warnings": []
+  },
+  "entries": [
+    {
+      "id": "",
+      "date_create": 123,
+      "action": "",
+      "actor": {
+        "type": "",
+        "user": {
+          "id": "",
+          "name": "",
+          "email": "",
+          "team": "",
+          "account_type": ""
+        }
+      },
+      "entity": {
+        "type": "",
+        "app": {
+          "id": "",
+          "name": "",
+          "is_distributed": false,
+          "is_directory_approved": false,
+          "is_workflow_app": false,
+          "scopes": [
+            ""
+          ],
+          "scopes_bot": [],
+          "bot_scopes": [],
+          "creator": "",
+          "team": ""
+        },
+        "user": {
+          "id": "",
+          "name": "",
+          "email": "",
+          "team": "",
+          "account_type": ""
+        },
+        "usergroup": {
+          "id": "",
+          "name": ""
+        },
+        "workspace": {
+          "id": "",
+          "name": "",
+          "domain": ""
+        },
+        "enterprise": {
+          "id": "",
+          "name": "",
+          "domain": ""
+        },
+        "file": {
+          "id": "",
+          "name": "",
+          "filetype": "",
+          "title": ""
+        },
+        "channel": {
+          "id": "",
+          "name": "",
+          "privacy": "",
+          "is_shared": false,
+          "is_org_shared": false,
+          "teams_shared_with": [
+            ""
+          ],
+          "original_connected_channel_id": "",
+          "is_salesforce_channel": false
+        },
+        "message": {
+          "channel": "",
+          "team": "",
+          "timestamp": ""
+        },
+        "huddle": {
+          "id": "",
+          "date_start": 123,
+          "date_end": 123,
+          "participants": []
+        },
+        "role": {
+          "id": "",
+          "name": "",
+          "type": ""
+        },
+        "account_type_role": {
+          "id": "",
+          "name": ""
+        },
+        "workflow": {
+          "id": "",
+          "name": ""
+        },
+        "barrier": {
+          "id": "",
+          "primary_usergroup": "",
+          "barriered_from_usergroups": [
+            ""
+          ],
+          "restricted_subjects": [
+            ""
+          ]
+        },
+        "workflow_v2": {
+          "id": "",
+          "app_id": "",
+          "date_updated": 123,
+          "callback_id": "",
+          "name": "",
+          "updated_by": "",
+          "step_configuration": []
+        },
+        "list": {
+          "id": ""
+        },
+        "external_auth_oauth2_token": {},
+        "function": {
+          "id": "",
+          "app_id": "",
+          "callback_id": ""
+        }
+      },
+      "context": {
+        "session_id": "",
+        "location": {
+          "type": "",
+          "id": "",
+          "name": "",
+          "domain": ""
+        },
+        "ua": "",
+        "ip_address": "",
+        "app": {
+          "id": "",
+          "name": "",
+          "is_distributed": false,
+          "is_directory_approved": false,
+          "is_workflow_app": false,
+          "scopes": [],
+          "scopes_bot": [],
+          "bot_scopes": [],
+          "creator": "",
+          "team": ""
+        },
+        "acting_agent": "",
+        "agent_message": {
+          "team": "",
+          "channel_id": "",
+          "message_ts": "",
+          "thread_ts": ""
+        }
+      },
+      "details": {
+        "type": "",
+        "app_owner_id": "",
+        "scopes": [
+          ""
+        ],
+        "bot_scopes": [
+          ""
+        ],
+        "new_scopes": [
+          ""
+        ],
+        "previous_scopes": [
+          ""
+        ],
+        "inviter": {
+          "type": "",
+          "user": {
+            "id": "",
+            "name": "",
+            "email": "",
+            "team": "",
+            "account_type": ""
+          },
+          "id": "",
+          "name": "",
+          "email": "",
+          "team": ""
+        },
+        "kicker": {
+          "type": "",
+          "user": {
+            "id": "",
+            "name": "",
+            "email": "",
+            "team": "",
+            "account_type": ""
+          },
+          "id": "",
+          "name": "",
+          "email": "",
+          "team": ""
+        },
+        "installer_user_id": "",
+        "approver_id": "",
+        "approval_type": "",
+        "app_previously_approved": false,
+        "old_scopes": [
+          ""
+        ],
+        "name": "",
+        "bot_id": "",
+        "channels": [
+          ""
+        ],
+        "permissions": [
+          {
+            "resource": {
+              "type": "",
+              "grant": {
+                "type": "",
+                "resource_id": "",
+                "wildcard": {
+                  "type": ""
+                }
+              }
+            },
+            "scopes": [
+              ""
+            ]
+          }
+        ],
+        "shared_to": "",
+        "reason": {},
+        "is_internal_integration": false,
+        "cleared_resolution": "",
+        "is_workflow": false,
+        "mobile_only": false,
+        "web_only": false,
+        "non_sso_only": false,
+        "expires_on": 123,
+        "new_version_id": "",
+        "trigger": "",
+        "granular_bot_token": false,
+        "origin_team": "",
+        "target_team": "",
+        "resolution": "",
+        "app_previously_resolved": false,
+        "admin_app_id": "",
+        "export_type": "",
+        "export_start_ts": "",
+        "export_end_ts": "",
+        "barrier_id": "",
+        "primary_usergroup_id": "",
+        "barriered_from_usergroup_ids": [
+          ""
+        ],
+        "restricted_subjects": [
+          ""
+        ],
+        "duration": 123,
+        "desktop_app_browser_quit": false,
+        "invite_id": "",
+        "external_organization_id": "",
+        "external_organization_name": "",
+        "external_user_id": "",
+        "external_user_email": "",
+        "channel_id": "",
+        "added_team_id": "",
+        "is_token_rotation_enabled_app": false,
+        "old_retention_policy": {
+          "type": "",
+          "duration_days": 123
+        },
+        "new_retention_policy": {
+          "type": "",
+          "duration_days": 123
+        },
+        "who_can_post": {
+          "type": [
+            ""
+          ],
+          "user": [
+            ""
+          ]
+        },
+        "can_thread": {
+          "type": [
+            ""
+          ],
+          "user": [
+            ""
+          ]
+        },
+        "is_external_limited": false,
+        "exporting_team_id": 123,
+        "session_search_start": 123,
+        "deprecation_search_end": 123,
+        "is_error": false,
+        "app_id": "",
+        "enable_at_here": {
+          "enabled": false
+        },
+        "enable_at_channel": {
+          "enabled": false
+        },
+        "can_huddle": {
+          "enabled": false
+        },
+        "url_private": "",
+        "shared_with": {
+          "channel_id": "",
+          "access_level": ""
+        },
+        "initiated_by": "",
+        "source_team": "",
+        "destination_team": "",
+        "succeeded_users": [],
+        "failed_users": [],
+        "enterprise": "",
+        "team": "",
+        "subteam": "",
+        "action": "",
+        "idp_group_member_count": 123,
+        "workspace_member_count": 123,
+        "added_user_count": 123,
+        "added_user_error_count": 123,
+        "reactivated_user_count": 123,
+        "removed_user_count": 123,
+        "removed_user_error_count": 123,
+        "total_removal_count": 123,
+        "is_flagged": "",
+        "target_user": "",
+        "target_entity": "",
+        "idp_config_id": "",
+        "config_type": "",
+        "idp_entity_id": "",
+        "idp_entity_id_hash": "",
+        "label": "",
+        "previous_profile": {
+          "real_name": "",
+          "first_name": "",
+          "last_name": "",
+          "display_name": "",
+          "image_original": "",
+          "image_24": "",
+          "image_32": "",
+          "image_48": "",
+          "image_72": "",
+          "image_192": "",
+          "image_512": "",
+          "image_1024": ""
+        },
+        "new_profile": {
+          "real_name": "",
+          "first_name": "",
+          "last_name": "",
+          "display_name": "",
+          "image_original": "",
+          "image_24": "",
+          "image_32": "",
+          "image_48": "",
+          "image_72": "",
+          "image_192": "",
+          "image_512": "",
+          "image_1024": ""
+        },
+        "target_user_id": "",
+        "space_file_id": {
+          "payload": ""
+        },
+        "target_entity_id": "",
+        "changed_permissions": [],
+        "datastore_name": "",
+        "attributes": [],
+        "channel": "",
+        "entity_type": "",
+        "actor": "",
+        "access_level": "",
+        "functions": [],
+        "workflows": [],
+        "datastores": [],
+        "permissions_updated": false,
+        "matched_rule": {
+          "id": "",
+          "team_id": "",
+          "title": "",
+          "action": {
+            "resolution": {
+              "value": ""
+            },
+            "notify": []
+          },
+          "condition": {
+            "datatype": "",
+            "operator": "",
+            "values": [],
+            "entity_type": ""
+          }
+        },
+        "request": {
+          "id": "",
+          "team_id": ""
+        },
+        "rules_checked": [],
+        "disconnecting_team": "",
+        "is_channel_canvas": false,
+        "linked_channel_id": "",
+        "column_id": "",
+        "row_id": "",
+        "cell_date_updated": 123,
+        "view_id": "",
+        "user": "",
+        "file_id": "",
+        "trigger_id": "",
+        "trigger_config": {},
+        "permission_type": "",
+        "channel_ids": [],
+        "user_ids": [],
+        "is_slack_provided_template": false,
+        "template_title": "",
+        "cloned_file_id": "",
+        "thread_ts": "",
+        "status": "",
+        "entity_team": "",
+        "is_external_user": false,
+        "salesforce_org_id": "",
+        "salesforce_edition": "",
+        "salesforce_org_config": {},
+        "salesforce_tenant_guid": "",
+        "affected_users": {},
+        "provider_key": "",
+        "policy_name": "",
+        "authentication_mode": "",
+        "authentication_method": "",
+        "secondary_authentication_method": "",
+        "action_timestamp": "",
+        "client_ja3_fingerprint": "",
+        "previous_ip_address": "",
+        "previous_ua": "",
+        "user_agent_change_details": {},
+        "location": "",
+        "entity_ids": {},
+        "pref_name": "",
+        "email": "",
+        "md": {},
+        "md5_hash": "",
+        "is_ext_shared": false,
+        "teams_shared_with": [],
+        "folder_bookmark_id": "",
+        "is_allowed": false,
+        "variable_names": [],
+        "functions_added": [],
+        "workflows_added": [],
+        "datastores_added": [],
+        "who_can_dm_anyone": {
+          "type": [],
+          "user": []
+        },
+        "tool": "",
+        "tool_name": "",
+        "arguments": {},
+        "service_type": "",
+        "server_name": "",
+        "server_url": "",
+        "success": false,
+        "argument_keys": [],
+        "read_only": false,
+        "mcp_client_inferred_behavior": "",
+        "destructive": false,
+        "source": "",
+        "decision": "",
+        "permission_key": "",
+        "added_to_allow": [],
+        "connectors_enabled": [],
+        "connectors_disabled": [],
+        "uri": "",
+        "executor_id": "",
+        "skill_id": "",
+        "mcp_server_allowlist_domains": []
+      }
+    }
+  ]
+}

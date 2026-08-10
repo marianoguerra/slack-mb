@@ -1,0 +1,31 @@
+{
+  "ok": false,
+  "denied_requests": [
+    {
+      "invite_request": {
+        "id": "",
+        "email": "",
+        "date_created": 12345,
+        "requester_ids": [
+          "W00000000"
+        ],
+        "channel_ids": [
+          ""
+        ],
+        "invite_type": "",
+        "request_reason": ""
+      },
+      "denied_by": {
+        "actor_type": "",
+        "actor_id": "W00000000"
+      }
+    }
+  ],
+  "error": "",
+  "needed": "",
+  "provided": "",
+  "response_metadata": {
+    "next_cursor": ""
+  },
+  "warning": ""
+}

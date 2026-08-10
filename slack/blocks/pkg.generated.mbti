@@ -1,0 +1,579 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "marianoguerra/slack/blocks"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn actions(Array[BlockElement], block_id? : String) -> LayoutBlock
+
+pub fn blocks_to_json(Array[LayoutBlock]) -> Json
+
+pub fn button(String, action_id? : String, value? : String, url? : String, style? : String, confirm? : ConfirmationDialogObject, accessibility_label? : String) -> BlockElement
+
+pub fn channels_select(action_id? : String, placeholder? : TextObject, initial_channel? : String, response_url_enabled? : Bool) -> BlockElement
+
+pub fn checkboxes(Array[OptionObject], action_id? : String, initial_options? : Array[OptionObject]) -> BlockElement
+
+pub fn confirm(title? : String, text? : String, confirm_label? : String, deny_label? : String, style? : String) -> ConfirmationDialogObject
+
+pub fn context(Array[BlockElement], block_id? : String) -> LayoutBlock
+
+pub fn context_text(String) -> BlockElement
+
+pub fn conversations_select(action_id? : String, placeholder? : TextObject, initial_conversation? : String, default_to_current_conversation? : Bool, filter? : ConversationFilterObject, response_url_enabled? : Bool) -> BlockElement
+
+pub fn datepicker(action_id? : String, placeholder? : TextObject, initial_date? : String) -> BlockElement
+
+pub fn datetimepicker(action_id? : String, initial_date_time? : Int) -> BlockElement
+
+pub fn divider(block_id? : String) -> LayoutBlock
+
+pub fn external_select(action_id? : String, placeholder? : TextObject, min_query_length? : Int, initial_option? : OptionObject) -> BlockElement
+
+pub fn header(String, block_id? : String) -> LayoutBlock
+
+pub fn image(String, String, title? : TextObject, block_id? : String) -> LayoutBlock
+
+pub fn image_element(String, String) -> BlockElement
+
+pub fn input(TextObject, BlockElement, hint? : TextObject, optional? : Bool, dispatch_action? : Bool, block_id? : String) -> LayoutBlock
+
+pub let known_block_types : Array[String]
+
+pub let known_element_types : Array[String]
+
+pub fn markdown(String, block_id? : String) -> LayoutBlock
+
+pub fn multi_conversations_select(action_id? : String, placeholder? : TextObject, initial_conversations? : Array[String], default_to_current_conversation? : Bool, filter? : ConversationFilterObject, max_selected_items? : Int) -> BlockElement
+
+pub fn multi_static_select(Array[OptionObject], action_id? : String, placeholder? : TextObject, initial_options? : Array[OptionObject], max_selected_items? : Int) -> BlockElement
+
+pub fn multi_users_select(action_id? : String, placeholder? : TextObject, initial_users? : Array[String], max_selected_items? : Int) -> BlockElement
+
+pub fn overflow(Array[OptionObject], action_id? : String, confirm? : ConfirmationDialogObject) -> BlockElement
+
+pub fn parse_blocks(Json, policy? : UnknownPolicy) -> Array[LayoutBlock]? raise BlockParseError
+
+pub fn parse_message_blocks(Json, policy? : UnknownPolicy) -> Array[LayoutBlock]? raise BlockParseError
+
+pub fn plain_text_input(action_id? : String, placeholder? : TextObject, initial_value? : String, multiline? : Bool, min_length? : Int, max_length? : Int) -> BlockElement
+
+pub fn radio_buttons(Array[OptionObject], action_id? : String, initial_option? : OptionObject) -> BlockElement
+
+pub fn rich_text(Array[RichTextBlockElement], block_id? : String) -> LayoutBlock
+
+pub fn rich_text_emoji(String, unicode? : String) -> RichTextItem
+
+pub fn rich_text_link(String, text? : String, style? : RichTextStyle) -> RichTextItem
+
+pub fn rich_text_section(Array[RichTextItem]) -> RichTextBlockElement
+
+pub fn rich_text_style(bold? : Bool, italic? : Bool, strike? : Bool, code? : Bool) -> RichTextStyle
+
+pub fn rich_text_text(String, style? : RichTextStyle) -> RichTextItem
+
+pub fn rich_text_user(String) -> RichTextItem
+
+pub fn section(text? : TextObject, fields? : Array[TextObject], accessory? : BlockElement, block_id? : String, expand? : Bool) -> LayoutBlock
+
+pub fn section_text(String, block_id? : String) -> LayoutBlock
+
+pub fn static_select(Array[OptionObject], action_id? : String, placeholder? : TextObject, initial_option? : OptionObject, confirm? : ConfirmationDialogObject) -> BlockElement
+
+pub fn timepicker(action_id? : String, placeholder? : TextObject, initial_time? : String, timezone? : String) -> BlockElement
+
+pub fn users_select(action_id? : String, placeholder? : TextObject, initial_user? : String) -> BlockElement
+
+pub fn validate_blocks(Array[LayoutBlock]) -> Unit raise BlockParseError
+
+// Errors
+pub(all) suberror BlockParseError {
+  UnsupportedLayoutBlock(String)
+  UnknownBlockElement(String)
+  UnknownContextBlockElement(String)
+  UnknownTextObject(String)
+  UnknownRichTextElement(String)
+} derive(Eq, @debug.Debug)
+pub fn BlockParseError::describe_error(Self) -> String
+pub impl Show for BlockParseError
+
+// Types and methods
+pub(all) struct ActionsBlock {
+  block_id : String?
+  elements : Array[BlockElement]?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+
+pub(all) struct AlertBlock {
+  block_id : String?
+  text : TextObject?
+  level : String?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+
+pub(all) enum BlockElement {
+  Button(ButtonElement)
+  WorkflowButton(WorkflowButtonElement)
+  Image(ImageElement)
+  Select(SelectElement)
+  Picker(PickerElement)
+  Options(OptionsElement)
+  PlainTextInput(PlainTextInputElement)
+  RichTextInput(RichTextInputElement)
+  Text(TextObject)
+  Unknown(type_~ : String, raw~ : Json)
+} derive(Eq, @debug.Debug)
+pub fn BlockElement::from_json(Json) -> Self
+pub fn BlockElement::to_json(Self) -> Json
+pub fn BlockElement::type_name(Self) -> String
+pub fn BlockElement::validate(Self, in_context? : Bool) -> Unit raise BlockParseError
+
+pub(all) struct ButtonElement {
+  text : TextObject?
+  action_id : String?
+  url : String?
+  value : String?
+  style : String?
+  confirm : ConfirmationDialogObject?
+  accessibility_label : String?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+pub fn ButtonElement::to_json(Self) -> Json
+
+pub(all) struct CallBlock {
+  block_id : String?
+  call_id : String?
+  call : Json?
+  api_decoration_available : Bool?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+
+pub(all) struct CardBlock {
+  block_id : String?
+  hero_image : BlockElement?
+  icon : BlockElement?
+  slack_icon : Json?
+  title : TextObject?
+  subtitle : TextObject?
+  body : TextObject?
+  subtext : TextObject?
+  actions : Array[BlockElement]?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+
+pub(all) struct CarouselBlock {
+  block_id : String?
+  elements : Array[LayoutBlock]?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ConfirmationDialogObject {
+  title : TextObject?
+  text : TextObject?
+  confirm : TextObject?
+  deny : TextObject?
+  style : String?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+pub fn ConfirmationDialogObject::from_json(Json) -> Self?
+pub fn ConfirmationDialogObject::to_json(Self) -> Json
+pub fn ConfirmationDialogObject::validate(Self) -> Unit raise BlockParseError
+
+pub(all) struct ContextActionsBlock {
+  block_id : String?
+  elements : Array[BlockElement]?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ContextBlock {
+  block_id : String?
+  elements : Array[BlockElement]?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ConversationFilterObject {
+  include_ : Array[String]?
+  exclude_external_shared_channels : Bool?
+  exclude_bot_users : Bool?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+pub fn ConversationFilterObject::from_json(Json) -> Self?
+pub fn ConversationFilterObject::new(include_? : Array[String], exclude_external_shared_channels? : Bool, exclude_bot_users? : Bool) -> Self
+pub fn ConversationFilterObject::to_json(Self) -> Json
+
+pub(all) struct DispatchActionConfigObject {
+  trigger_actions_on : Array[String]?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+pub fn DispatchActionConfigObject::from_json(Json) -> Self?
+pub fn DispatchActionConfigObject::to_json(Self) -> Json
+
+pub(all) struct DividerBlock {
+  block_id : String?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+
+pub(all) struct FileBlock {
+  block_id : String?
+  external_id : String?
+  source : String?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+
+pub(all) struct HeaderBlock {
+  block_id : String?
+  text : TextObject?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ImageBlock {
+  block_id : String?
+  image_url : String?
+  slack_file : SlackFileObject?
+  alt_text : String?
+  title : TextObject?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ImageElement {
+  image_url : String?
+  slack_file : SlackFileObject?
+  alt_text : String?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+pub fn ImageElement::to_json(Self) -> Json
+
+pub(all) struct InputBlock {
+  block_id : String?
+  label : TextObject?
+  element : BlockElement?
+  hint : TextObject?
+  optional : Bool?
+  dispatch_action : Bool?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+
+pub(all) enum LayoutBlock {
+  Section(SectionBlock)
+  Divider(DividerBlock)
+  Image(ImageBlock)
+  Actions(ActionsBlock)
+  Context(ContextBlock)
+  Input(InputBlock)
+  Header(HeaderBlock)
+  File(FileBlock)
+  Video(VideoBlock)
+  Markdown(MarkdownBlock)
+  RichText(RichTextBlock)
+  Call(CallBlock)
+  Alert(AlertBlock)
+  Card(CardBlock)
+  Carousel(CarouselBlock)
+  ContextActions(ContextActionsBlock)
+  Table(TableBlock)
+  TaskCard(TaskCardBlock)
+  ShareShortcut(ShareShortcutBlock)
+  Unknown(type_~ : String, raw~ : Json)
+} derive(Eq, @debug.Debug)
+pub fn LayoutBlock::block_id(Self) -> String?
+pub fn LayoutBlock::from_json(Json) -> Self
+pub fn LayoutBlock::to_json(Self) -> Json
+pub fn LayoutBlock::type_name(Self) -> String
+pub fn LayoutBlock::validate(Self) -> Unit raise BlockParseError
+
+pub(all) struct MarkdownBlock {
+  block_id : String?
+  text : String?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+
+pub(all) struct OptionGroupObject {
+  label : TextObject
+  options : Array[OptionObject]
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+pub fn OptionGroupObject::from_json(Json) -> Self?
+pub fn OptionGroupObject::new(TextObject, Array[OptionObject]) -> Self
+pub fn OptionGroupObject::to_json(Self) -> Json
+pub fn OptionGroupObject::validate(Self) -> Unit raise BlockParseError
+
+pub(all) struct OptionObject {
+  text : TextObject
+  value : String?
+  description : TextObject?
+  url : String?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+pub fn OptionObject::from_json(Json) -> Self?
+pub fn OptionObject::new(TextObject, value? : String, description? : TextObject, url? : String) -> Self
+pub fn OptionObject::plain(String, String) -> Self
+pub fn OptionObject::to_json(Self) -> Json
+pub fn OptionObject::validate(Self) -> Unit raise BlockParseError
+
+pub(all) struct OptionsElement {
+  kind : OptionsKind
+  action_id : String?
+  options : Array[OptionObject]?
+  initial_option : OptionObject?
+  initial_options : Array[OptionObject]?
+  confirm : ConfirmationDialogObject?
+  focus_on_load : Bool?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+pub fn OptionsElement::to_json(Self) -> Json
+
+pub(all) enum OptionsKind {
+  RadioButtons
+  Checkboxes
+  Overflow
+} derive(Eq, @debug.Debug)
+pub fn OptionsKind::of_name(String) -> Self?
+pub fn OptionsKind::type_name(Self) -> String
+
+pub(all) struct PickerElement {
+  kind : PickerKind
+  action_id : String?
+  placeholder : TextObject?
+  confirm : ConfirmationDialogObject?
+  focus_on_load : Bool?
+  initial_date : String?
+  initial_time : String?
+  initial_date_time : Int?
+  timezone : String?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+pub fn PickerElement::to_json(Self) -> Json
+
+pub(all) enum PickerKind {
+  Date
+  Time
+  DateTime
+} derive(Eq, @debug.Debug)
+pub fn PickerKind::of_name(String) -> Self?
+pub fn PickerKind::type_name(Self) -> String
+
+pub(all) struct PlainTextInputElement {
+  action_id : String?
+  placeholder : TextObject?
+  initial_value : String?
+  multiline : Bool?
+  min_length : Int?
+  max_length : Int?
+  dispatch_action_config : DispatchActionConfigObject?
+  focus_on_load : Bool?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+pub fn PlainTextInputElement::to_json(Self) -> Json
+
+pub(all) struct RichTextBlock {
+  block_id : String?
+  elements : Array[RichTextBlockElement]?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+
+pub(all) enum RichTextBlockElement {
+  Section(elements~ : Array[RichTextItem], extra~ : Map[String, Json])
+  List(style~ : String?, indent~ : Int?, offset~ : Int?, border~ : Int?, elements~ : Array[RichTextBlockElement], extra~ : Map[String, Json])
+  Preformatted(border~ : Int?, elements~ : Array[RichTextItem], extra~ : Map[String, Json])
+  Quote(border~ : Int?, elements~ : Array[RichTextItem], extra~ : Map[String, Json])
+  Unknown(type_~ : String, raw~ : Json)
+} derive(Eq, @debug.Debug)
+pub fn RichTextBlockElement::from_json(Json) -> Self
+pub fn RichTextBlockElement::to_json(Self) -> Json
+pub fn RichTextBlockElement::type_name(Self) -> String
+pub fn RichTextBlockElement::validate(Self) -> Unit raise BlockParseError
+
+pub(all) struct RichTextInputElement {
+  action_id : String?
+  placeholder : TextObject?
+  initial_value : Json?
+  dispatch_action_config : DispatchActionConfigObject?
+  focus_on_load : Bool?
+  min_lines : Int?
+  max_lines : Int?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+pub fn RichTextInputElement::to_json(Self) -> Json
+
+pub(all) enum RichTextItem {
+  Text(text~ : String?, style~ : RichTextStyle?, extra~ : Map[String, Json])
+  Link(url~ : String?, text~ : String?, unsafe_~ : Bool?, style~ : RichTextStyle?, extra~ : Map[String, Json])
+  Emoji(name~ : String?, unicode~ : String?, skin_tone~ : Int?, style~ : RichTextStyle?, extra~ : Map[String, Json])
+  User(user_id~ : String?, style~ : RichTextStyle?, extra~ : Map[String, Json])
+  UserGroup(usergroup_id~ : String?, style~ : RichTextStyle?, extra~ : Map[String, Json])
+  Channel(channel_id~ : String?, style~ : RichTextStyle?, extra~ : Map[String, Json])
+  Team(team_id~ : String?, style~ : RichTextStyle?, extra~ : Map[String, Json])
+  Broadcast(range~ : String?, style~ : RichTextStyle?, extra~ : Map[String, Json])
+  Color(value~ : String?, style~ : RichTextStyle?, extra~ : Map[String, Json])
+  Date(timestamp~ : Int?, format~ : String?, url~ : String?, fallback~ : String?, style~ : RichTextStyle?, extra~ : Map[String, Json])
+  Unknown(type_~ : String, raw~ : Json)
+} derive(Eq, @debug.Debug)
+pub fn RichTextItem::from_json(Json) -> Self
+pub fn RichTextItem::to_json(Self) -> Json
+pub fn RichTextItem::type_name(Self) -> String
+pub fn RichTextItem::validate(Self) -> Unit raise BlockParseError
+
+pub(all) struct RichTextStyle {
+  bold : Bool?
+  italic : Bool?
+  strike : Bool?
+  code : Bool?
+  highlight : Bool?
+  client_highlight : Bool?
+  unlink : Bool?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+pub fn RichTextStyle::from_json(Json) -> Self?
+pub fn RichTextStyle::to_json(Self) -> Json
+
+pub(all) struct SectionBlock {
+  block_id : String?
+  text : TextObject?
+  fields : Array[TextObject]?
+  accessory : BlockElement?
+  expand : Bool?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+
+pub(all) struct SelectElement {
+  kind : SelectKind
+  action_id : String?
+  placeholder : TextObject?
+  confirm : ConfirmationDialogObject?
+  focus_on_load : Bool?
+  options : Array[OptionObject]?
+  option_groups : Array[OptionGroupObject]?
+  initial_option : OptionObject?
+  initial_options : Array[OptionObject]?
+  initial_user : String?
+  initial_users : Array[String]?
+  initial_conversation : String?
+  initial_conversations : Array[String]?
+  initial_channel : String?
+  initial_channels : Array[String]?
+  min_query_length : Int?
+  max_selected_items : Int?
+  default_to_current_conversation : Bool?
+  response_url_enabled : Bool?
+  filter : ConversationFilterObject?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+pub fn SelectElement::to_json(Self) -> Json
+
+pub(all) enum SelectKind {
+  Static
+  MultiStatic
+  External
+  MultiExternal
+  Users
+  MultiUsers
+  Conversations
+  MultiConversations
+  Channels
+  MultiChannels
+} derive(Eq, @debug.Debug)
+pub fn SelectKind::of_name(String) -> Self?
+pub fn SelectKind::type_name(Self) -> String
+
+pub(all) struct ShareShortcutBlock {
+  block_id : String?
+  function_trigger_id : String?
+  app_id : String?
+  is_workflow_app : Bool?
+  sales_home_workflow_app_type : Int?
+  app_collaborators : Array[String]?
+  button_label : String?
+  title : String?
+  description : String?
+  bot_user_id : String?
+  url : String?
+  owning_team_id : String?
+  workflow_id : String?
+  developer_trace_id : String?
+  trigger_type : String?
+  trigger_subtype : String?
+  share_url : String?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+
+pub(all) struct SlackFileObject {
+  id : String?
+  url : String?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+pub fn SlackFileObject::from_json(Json) -> Self?
+pub fn SlackFileObject::to_json(Self) -> Json
+
+pub(all) struct TableBlock {
+  block_id : String?
+  column_settings : Json?
+  rows : Json?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+
+pub(all) struct TaskCardBlock {
+  block_id : String?
+  task_id : String?
+  title : String?
+  status : String?
+  output : Json?
+  sources : Json?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+
+pub(all) enum TextKind {
+  PlainText
+  Mrkdwn
+  Other(String)
+} derive(Eq, @debug.Debug)
+pub fn TextKind::of_name(String) -> Self
+pub fn TextKind::type_name(Self) -> String
+
+pub(all) struct TextObject {
+  kind : TextKind
+  text : String
+  emoji : Bool?
+  verbatim : Bool?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+pub fn TextObject::from_json(Json) -> Self?
+pub fn TextObject::mrkdwn(String, verbatim? : Bool) -> Self
+pub fn TextObject::plain(String, emoji? : Bool) -> Self
+pub fn TextObject::to_json(Self) -> Json
+pub fn TextObject::type_name(Self) -> String
+pub fn TextObject::validate(Self) -> Unit raise BlockParseError
+
+pub(all) enum UnknownPolicy {
+  Lenient
+  Strict
+} derive(Eq, @debug.Debug)
+
+pub(all) struct VideoBlock {
+  block_id : String?
+  video_url : String?
+  thumbnail_url : String?
+  alt_text : String?
+  title : TextObject?
+  title_url : String?
+  author_name : String?
+  provider_name : String?
+  provider_icon_url : String?
+  description : TextObject?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+
+pub(all) struct WorkflowButtonElement {
+  text : TextObject?
+  action_id : String?
+  style : String?
+  accessibility_label : String?
+  workflow : Json?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+pub fn WorkflowButtonElement::to_json(Self) -> Json
+
+// Type aliases
+
+// Traits

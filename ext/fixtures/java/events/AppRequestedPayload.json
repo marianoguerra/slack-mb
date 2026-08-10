@@ -1,0 +1,74 @@
+{
+  "token": "",
+  "enterprise_id": "",
+  "team_id": "",
+  "api_app_id": "",
+  "type": "",
+  "authed_users": [
+    ""
+  ],
+  "authed_teams": [
+    ""
+  ],
+  "authorizations": [
+    {
+      "enterprise_id": "",
+      "team_id": "",
+      "user_id": "",
+      "is_bot": false,
+      "is_enterprise_install": false
+    }
+  ],
+  "is_ext_shared_channel": false,
+  "event_id": "",
+  "event_time": 123,
+  "event_context": "",
+  "event": {
+    "type": "app_requested",
+    "app_request": {
+      "id": "",
+      "app": {
+        "id": "",
+        "name": "",
+        "description": "",
+        "help_url": "",
+        "privacy_policy_url": "",
+        "app_homepage_url": "",
+        "app_directory_url": "",
+        "is_app_directory_approved": false,
+        "is_internal": false,
+        "is_granular_bot_app": false,
+        "additional_info": "",
+        "icons": {
+          "image_32": "",
+          "image_36": "",
+          "image_48": "",
+          "image_64": "",
+          "image_72": "",
+          "image_96": "",
+          "image_128": "",
+          "image_192": "",
+          "image_512": "",
+          "image_1024": "",
+          "image_original": ""
+        }
+      },
+      "user": {
+        "id": "",
+        "name": "",
+        "email": ""
+      },
+      "team": {
+        "id": "",
+        "name": "",
+        "domain": ""
+      },
+      "previous_resolution": {
+        "status": ""
+      },
+      "is_user_app_collaborator": false,
+      "message": "",
+      "date_created": 123
+    }
+  }
+}

@@ -1,0 +1,34 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "marianoguerra/slack/crypto"
+
+// Values
+pub let block_size : Int
+
+pub fn constant_time_eq(BytesView, BytesView) -> Bool
+
+pub let digest_size : Int
+
+pub fn hmac_sha256(BytesView, BytesView) -> Bytes
+
+pub fn of_hex(String) -> Bytes?
+
+pub fn sha256(BytesView) -> Bytes
+
+pub fn to_hex(BytesView) -> String
+
+// Errors
+
+// Types and methods
+pub struct Sha256 {
+  state : FixedArray[UInt]
+  buf : FixedArray[Byte]
+  mut buf_len : Int
+  mut total : Int64
+}
+pub fn Sha256::finish(Self) -> Bytes
+pub fn Sha256::new() -> Self
+pub fn Sha256::update(Self, BytesView) -> Unit
+
+// Type aliases
+
+// Traits

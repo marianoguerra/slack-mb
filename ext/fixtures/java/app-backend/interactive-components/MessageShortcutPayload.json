@@ -1,0 +1,1620 @@
+{
+  "type": "message_action",
+  "callback_id": "",
+  "trigger_id": "",
+  "message_ts": "",
+  "response_url": "",
+  "message": {
+    "type": "",
+    "subtype": "",
+    "team": "",
+    "channel": "",
+    "user": "",
+    "username": "",
+    "text": "",
+    "blocks": [
+      {
+        "type": "actions",
+        "elements": [
+          {
+            "type": "button",
+            "text": {
+              "type": "plain_text",
+              "text": "",
+              "emoji": false
+            },
+            "action_id": "",
+            "url": "",
+            "value": "",
+            "style": "",
+            "confirm": {
+              "title": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "text": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "confirm": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "deny": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "style": ""
+            },
+            "accessibility_label": ""
+          },
+          {
+            "type": "channels_select",
+            "placeholder": {
+              "type": "plain_text",
+              "text": "",
+              "emoji": false
+            },
+            "action_id": "",
+            "initial_channel": "",
+            "confirm": {
+              "title": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "text": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "confirm": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "deny": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "style": ""
+            },
+            "response_url_enabled": false,
+            "focus_on_load": false
+          },
+          {
+            "type": "multi_channels_select",
+            "placeholder": {
+              "type": "plain_text",
+              "text": "",
+              "emoji": false
+            },
+            "action_id": "",
+            "confirm": {
+              "title": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "text": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "confirm": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "deny": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "style": ""
+            },
+            "max_selected_items": 123,
+            "focus_on_load": false
+          },
+          {
+            "type": "conversations_select",
+            "placeholder": {
+              "type": "plain_text",
+              "text": "",
+              "emoji": false
+            },
+            "action_id": "",
+            "initial_conversation": "",
+            "default_to_current_conversation": false,
+            "confirm": {
+              "title": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "text": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "confirm": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "deny": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "style": ""
+            },
+            "response_url_enabled": false,
+            "filter": {
+              "include": [
+                ""
+              ],
+              "exclude_external_shared_channels": false,
+              "exclude_bot_users": false
+            },
+            "focus_on_load": false
+          },
+          {
+            "type": "multi_conversations_select",
+            "placeholder": {
+              "type": "plain_text",
+              "text": "",
+              "emoji": false
+            },
+            "action_id": "",
+            "default_to_current_conversation": false,
+            "confirm": {
+              "title": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "text": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "confirm": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "deny": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "style": ""
+            },
+            "max_selected_items": 123,
+            "filter": {
+              "include": [
+                ""
+              ],
+              "exclude_external_shared_channels": false,
+              "exclude_bot_users": false
+            },
+            "focus_on_load": false
+          },
+          {
+            "type": "datepicker",
+            "action_id": "",
+            "placeholder": {
+              "type": "plain_text",
+              "text": "",
+              "emoji": false
+            },
+            "initial_date": "",
+            "confirm": {
+              "title": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "text": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "confirm": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "deny": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "style": ""
+            },
+            "focus_on_load": false
+          },
+          {
+            "type": "external_select",
+            "placeholder": {
+              "type": "plain_text",
+              "text": "",
+              "emoji": false
+            },
+            "action_id": "",
+            "initial_option": {
+              "text": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "value": "",
+              "description": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "url": ""
+            },
+            "min_query_length": 123,
+            "confirm": {
+              "title": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "text": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "confirm": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "deny": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "style": ""
+            },
+            "focus_on_load": false
+          },
+          {
+            "type": "multi_external_select",
+            "placeholder": {
+              "type": "plain_text",
+              "text": "",
+              "emoji": false
+            },
+            "action_id": "",
+            "min_query_length": 123,
+            "confirm": {
+              "title": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "text": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "confirm": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "deny": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "style": ""
+            },
+            "max_selected_items": 123,
+            "focus_on_load": false
+          },
+          {
+            "type": "image",
+            "image_url": "",
+            "alt_text": "",
+            "fallback": "",
+            "image_width": 123,
+            "image_height": 123,
+            "image_bytes": 123,
+            "slack_file": {
+              "id": "",
+              "url": ""
+            }
+          },
+          {
+            "type": "overflow",
+            "action_id": "",
+            "confirm": {
+              "title": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "text": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "confirm": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "deny": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "style": ""
+            }
+          },
+          {
+            "type": "static_select",
+            "placeholder": {
+              "type": "plain_text",
+              "text": "",
+              "emoji": false
+            },
+            "action_id": "",
+            "initial_option": {
+              "text": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "value": "",
+              "description": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "url": ""
+            },
+            "confirm": {
+              "title": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "text": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "confirm": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "deny": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "style": ""
+            },
+            "focus_on_load": false
+          },
+          {
+            "type": "multi_static_select",
+            "placeholder": {
+              "type": "plain_text",
+              "text": "",
+              "emoji": false
+            },
+            "action_id": "",
+            "confirm": {
+              "title": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "text": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "confirm": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "deny": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "style": ""
+            },
+            "max_selected_items": 123,
+            "focus_on_load": false
+          },
+          {
+            "type": "users_select",
+            "placeholder": {
+              "type": "plain_text",
+              "text": "",
+              "emoji": false
+            },
+            "action_id": "",
+            "initial_user": "",
+            "confirm": {
+              "title": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "text": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "confirm": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "deny": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "style": ""
+            },
+            "focus_on_load": false
+          },
+          {
+            "type": "multi_users_select",
+            "placeholder": {
+              "type": "plain_text",
+              "text": "",
+              "emoji": false
+            },
+            "action_id": "",
+            "confirm": {
+              "title": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "text": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "confirm": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "deny": {
+                "type": "plain_text",
+                "text": "",
+                "emoji": false
+              },
+              "style": ""
+            },
+            "max_selected_items": 123,
+            "focus_on_load": false
+          }
+        ],
+        "block_id": ""
+      },
+      {
+        "type": "context",
+        "elements": [
+          {
+            "type": "image",
+            "image_url": "",
+            "alt_text": "",
+            "fallback": "",
+            "image_width": 123,
+            "image_height": 123,
+            "image_bytes": 123,
+            "slack_file": {
+              "id": "",
+              "url": ""
+            }
+          }
+        ],
+        "block_id": ""
+      },
+      {
+        "type": "divider",
+        "block_id": ""
+      },
+      {
+        "type": "image",
+        "fallback": "",
+        "image_url": "",
+        "image_width": 123,
+        "image_height": 123,
+        "image_bytes": 123,
+        "is_animated": false,
+        "slack_file": {
+          "id": "",
+          "url": ""
+        },
+        "alt_text": "",
+        "title": {
+          "type": "plain_text",
+          "text": "",
+          "emoji": false
+        },
+        "block_id": ""
+      },
+      {
+        "type": "section",
+        "text": {
+          "type": "plain_text",
+          "text": "",
+          "emoji": false
+        },
+        "block_id": "",
+        "fields": [
+          {
+            "type": "plain_text",
+            "text": "",
+            "emoji": false
+          },
+          {
+            "type": "mrkdwn",
+            "text": "",
+            "verbatim": false
+          }
+        ],
+        "accessory": {
+          "type": "image",
+          "image_url": "",
+          "alt_text": "",
+          "fallback": "",
+          "image_width": 123,
+          "image_height": 123,
+          "image_bytes": 123,
+          "slack_file": {
+            "id": "",
+            "url": ""
+          }
+        }
+      }
+    ],
+    "attachments": [
+      {
+        "msg_subtype": "",
+        "fallback": "",
+        "callback_id": "",
+        "color": "",
+        "hide_color": false,
+        "pretext": "",
+        "service_url": "",
+        "service_name": "",
+        "service_icon": "",
+        "author_id": "",
+        "author_name": "",
+        "author_link": "",
+        "author_icon": "",
+        "from_url": "",
+        "original_url": "",
+        "author_subname": "",
+        "channel_id": "",
+        "channel_name": "",
+        "channel_team": "",
+        "id": 123,
+        "app_id": "",
+        "bot_id": "",
+        "indent": false,
+        "is_msg_unfurl": false,
+        "is_reply_unfurl": false,
+        "is_thread_root_unfurl": false,
+        "is_app_unfurl": false,
+        "app_unfurl_url": "",
+        "title": "",
+        "title_link": "",
+        "text": "",
+        "fields": [
+          {
+            "title": "",
+            "value": "",
+            "short": false
+          }
+        ],
+        "image_url": "",
+        "image_width": 123,
+        "image_height": 123,
+        "image_bytes": 123,
+        "thumb_url": "",
+        "thumb_width": 123,
+        "thumb_height": 123,
+        "video_url": "",
+        "video_html": "",
+        "video_html_width": 12.3,
+        "video_html_height": 12.3,
+        "footer": "",
+        "footer_icon": "",
+        "ts": "",
+        "mrkdwn_in": [
+          ""
+        ],
+        "actions": [
+          {
+            "id": "",
+            "name": "",
+            "text": "",
+            "style": "",
+            "type": "button",
+            "value": "",
+            "confirm": {
+              "title": "",
+              "text": "",
+              "ok_text": "",
+              "dismiss_text": ""
+            },
+            "options": [],
+            "selected_options": [],
+            "data_source": "",
+            "min_query_length": 123,
+            "url": ""
+          }
+        ],
+        "preview": {
+          "type": "",
+          "can_remove": false,
+          "title": {
+            "type": "plain_text",
+            "text": "",
+            "emoji": false
+          },
+          "subtitle": {
+            "type": "plain_text",
+            "text": "",
+            "emoji": false
+          },
+          "icon_url": ""
+        },
+        "file_id": "",
+        "list_record_id": "",
+        "list_record": {
+          "record": {
+            "record_id": ""
+          }
+        },
+        "hide_border": false,
+        "list_view_id": "",
+        "list": {
+          "id": "",
+          "created": 123,
+          "timestamp": 123,
+          "name": "",
+          "title": "",
+          "mimetype": "",
+          "filetype": "",
+          "external_type": "",
+          "pretty_type": "",
+          "user": "",
+          "user_team": "",
+          "editable": false,
+          "size": 123,
+          "mode": "",
+          "is_external": false,
+          "is_public": false,
+          "public_url_shared": false,
+          "display_as_bot": false,
+          "username": "",
+          "list_metadata": {
+            "icon": "",
+            "icon_url": "",
+            "icon_team_id": "",
+            "description": "",
+            "is_trial": false,
+            "creation_source": {
+              "type": "",
+              "reference_id": "",
+              "workflow_function_id": ""
+            }
+          },
+          "list_limits": {
+            "over_row_maximum": false,
+            "row_count_limit": 123,
+            "row_count": 123,
+            "over_column_maximum": false,
+            "column_count": 123,
+            "column_count_limit": 123,
+            "over_view_maximum": false,
+            "view_count": 123,
+            "view_count_limit": 123,
+            "max_attachments_per_cell": 123
+          },
+          "url_private": "",
+          "url_private_download": "",
+          "permalink": "",
+          "permalink_public": "",
+          "last_editor": "",
+          "updated": 123,
+          "comments_count": 123,
+          "shares": {},
+          "has_more_shares": false,
+          "private_channels_with_file_access_count": 123,
+          "private_file_with_access_count": 123,
+          "has_rich_preview": false,
+          "file_access": ""
+        },
+        "list_view": {
+          "id": "",
+          "name": "",
+          "type": "",
+          "is_locked": false,
+          "position": "",
+          "date_created": 123,
+          "created_by": "",
+          "stick_column_left": false,
+          "is_all_items_view": false,
+          "default_view_key": "",
+          "show_completed_items": false,
+          "grouping": {
+            "group_by": "",
+            "group_by_column_id": ""
+          }
+        },
+        "filename": "",
+        "size": 123,
+        "mimetype": "",
+        "url": "",
+        "metadata": {
+          "thumb_64": false,
+          "thumb_80": false,
+          "thumb_160": false,
+          "original_w": 123,
+          "original_h": 123,
+          "thumb_360_w": 123,
+          "thumb_360_h": 123,
+          "format": "",
+          "extension": "",
+          "rotation": 123,
+          "thumb_tiny": ""
+        },
+        "is_file_attachment": false
+      }
+    ],
+    "ts": "",
+    "thread_ts": "",
+    "is_intro": false,
+    "is_starred": false,
+    "wibblr": false,
+    "pinned_to": [
+      ""
+    ],
+    "reactions": [
+      {
+        "name": "",
+        "count": 123,
+        "url": ""
+      }
+    ],
+    "app_id": "",
+    "bot_id": "",
+    "bot_link": "",
+    "display_as_bot": false,
+    "bot_profile": {
+      "id": "",
+      "deleted": false,
+      "name": "",
+      "updated": 123,
+      "app_id": "",
+      "icons": {
+        "image_36": "",
+        "image_48": "",
+        "image_72": ""
+      },
+      "team_id": ""
+    },
+    "icons": {
+      "emoji": "",
+      "image_36": "",
+      "image_48": "",
+      "image_64": "",
+      "image_72": ""
+    },
+    "file": {
+      "id": "",
+      "created": 123,
+      "timestamp": 123,
+      "name": "",
+      "title": "",
+      "subject": "",
+      "mimetype": "",
+      "filetype": "",
+      "pretty_type": "",
+      "user": "",
+      "user_team": "",
+      "source_team": "",
+      "mode": "",
+      "editable": false,
+      "non_owner_editable": false,
+      "editor": "",
+      "last_editor": "",
+      "updated": 123,
+      "file_access": "",
+      "edit_timestamp": 123,
+      "alt_txt": "",
+      "subtype": "",
+      "transcription": {
+        "status": "",
+        "locale": "",
+        "preview": {
+          "content": "",
+          "has_more": false
+        }
+      },
+      "mp4": "",
+      "mp4_low": "",
+      "vtt": "",
+      "hls": "",
+      "hls_embed": "",
+      "duration_ms": 123,
+      "thumb_video_w": 123,
+      "thumb_video_h": 123,
+      "original_attachment_count": 123,
+      "is_external": false,
+      "external_type": "",
+      "external_id": "",
+      "external_url": "",
+      "username": "",
+      "size": 123,
+      "url_private": "",
+      "url_private_download": "",
+      "url_static_preview": "",
+      "app_id": "",
+      "app_name": "",
+      "thumb_64": "",
+      "thumb_64_gif": "",
+      "thumb_64_w": "",
+      "thumb_64_h": "",
+      "thumb_80": "",
+      "thumb_80_gif": "",
+      "thumb_80_w": "",
+      "thumb_80_h": "",
+      "thumb_160": "",
+      "thumb_160_gif": "",
+      "thumb_160_w": "",
+      "thumb_160_h": "",
+      "thumb_360": "",
+      "thumb_360_gif": "",
+      "thumb_360_w": "",
+      "thumb_360_h": "",
+      "thumb_480": "",
+      "thumb_480_gif": "",
+      "thumb_480_w": "",
+      "thumb_480_h": "",
+      "thumb_720": "",
+      "thumb_720_gif": "",
+      "thumb_720_w": "",
+      "thumb_720_h": "",
+      "thumb_800": "",
+      "thumb_800_gif": "",
+      "thumb_800_w": "",
+      "thumb_800_h": "",
+      "thumb_960": "",
+      "thumb_960_gif": "",
+      "thumb_960_w": "",
+      "thumb_960_h": "",
+      "thumb_1024": "",
+      "thumb_1024_gif": "",
+      "thumb_1024_w": "",
+      "thumb_1024_h": "",
+      "thumb_video": "",
+      "thumb_gif": "",
+      "thumb_pdf": "",
+      "thumb_pdf_w": "",
+      "thumb_pdf_h": "",
+      "thumb_tiny": "",
+      "converted_pdf": "",
+      "image_exif_rotation": 123,
+      "original_w": "",
+      "original_h": "",
+      "deanimate": "",
+      "deanimate_gif": "",
+      "pjpeg": "",
+      "permalink": "",
+      "permalink_public": "",
+      "edit_link": "",
+      "has_rich_preview": false,
+      "media_display_type": "",
+      "preview_is_truncated": false,
+      "preview": "",
+      "preview_highlight": "",
+      "plain_text": "",
+      "preview_plain_text": "",
+      "has_more": false,
+      "sent_to_self": false,
+      "lines": 123,
+      "lines_more": 123,
+      "is_public": false,
+      "public_url_shared": false,
+      "display_as_bot": false,
+      "shares": {
+        "public": {
+          "C03E94MKU": [
+            {
+              "share_user_id": "",
+              "reply_users": [
+                ""
+              ],
+              "reply_users_count": 123,
+              "reply_count": 123,
+              "ts": "",
+              "thread_ts": "",
+              "latest_reply": "",
+              "channel_name": "",
+              "team_id": "",
+              "access": "",
+              "source": "",
+              "date_last_shared": 123
+            }
+          ],
+          "C03E94MKU_": [
+            {
+              "share_user_id": "",
+              "reply_users": [
+                ""
+              ],
+              "reply_users_count": 123,
+              "reply_count": 123,
+              "ts": "",
+              "thread_ts": "",
+              "latest_reply": "",
+              "channel_name": "",
+              "team_id": "",
+              "access": "",
+              "source": "",
+              "date_last_shared": 123
+            }
+          ]
+        },
+        "private": {
+          "C03E94MKU": [
+            {
+              "share_user_id": "",
+              "reply_users": [
+                ""
+              ],
+              "reply_users_count": 123,
+              "reply_count": 123,
+              "ts": "",
+              "thread_ts": "",
+              "latest_reply": "",
+              "channel_name": "",
+              "team_id": "",
+              "access": "",
+              "source": "",
+              "date_last_shared": 123
+            }
+          ],
+          "C03E94MKU_": [
+            {
+              "share_user_id": "",
+              "reply_users": [
+                ""
+              ],
+              "reply_users_count": 123,
+              "reply_count": 123,
+              "ts": "",
+              "thread_ts": "",
+              "latest_reply": "",
+              "channel_name": "",
+              "team_id": "",
+              "access": "",
+              "source": "",
+              "date_last_shared": 123
+            }
+          ]
+        }
+      },
+      "has_more_shares": false,
+      "channel_actions_ts": "",
+      "channel_actions_count": 123,
+      "headers": {
+        "date": "",
+        "in_reply_to": "",
+        "reply_to": "",
+        "message_id": ""
+      },
+      "simplified_html": "",
+      "media_progress": {
+        "offset_ms": 123,
+        "max_offset_ms": 123,
+        "duration_ms": 123,
+        "media_watched": false
+      },
+      "saved": {
+        "is_archived": false,
+        "date_completed": 123,
+        "date_due": 123,
+        "state": ""
+      },
+      "quip_thread_id": "",
+      "is_channel_space": false,
+      "linked_channel_id": "",
+      "access": "",
+      "last_read": 123,
+      "private_channels_with_file_access_count": 123,
+      "private_file_with_access_count": 123,
+      "org_or_workspace_access": "",
+      "update_notification": 123,
+      "canvas_template_mode": "",
+      "template_conversion_ts": 123,
+      "template_name": "",
+      "template_title": "",
+      "template_description": "",
+      "template_icon": "",
+      "team_pref_version_history_enabled": false,
+      "show_badge": false,
+      "list_metadata": {
+        "icon": "",
+        "icon_url": "",
+        "icon_team_id": "",
+        "description": "",
+        "is_trial": false,
+        "creation_source": {
+          "type": "",
+          "reference_id": "",
+          "workflow_function_id": ""
+        }
+      },
+      "list_limits": {
+        "over_row_maximum": false,
+        "row_count_limit": 123,
+        "row_count": 123,
+        "over_column_maximum": false,
+        "column_count": 123,
+        "column_count_limit": 123,
+        "over_view_maximum": false,
+        "view_count": 123,
+        "view_count_limit": 123,
+        "max_attachments_per_cell": 123
+      },
+      "list_csv_download_url": "",
+      "can_toggle_canvas_lock": false,
+      "is_restricted_sharing_enabled": false,
+      "canvas_printing_enabled": false,
+      "bot_id": "",
+      "initial_comment": {
+        "id": "",
+        "created": 123,
+        "timestamp": 123,
+        "user": "",
+        "comment": "",
+        "channel": "",
+        "is_intro": false
+      },
+      "num_stars": 123,
+      "is_starred": false,
+      "comments_count": 123
+    },
+    "files": [
+      {
+        "id": "",
+        "created": 123,
+        "timestamp": 123,
+        "name": "",
+        "title": "",
+        "subject": "",
+        "mimetype": "",
+        "filetype": "",
+        "pretty_type": "",
+        "user": "",
+        "user_team": "",
+        "source_team": "",
+        "mode": "",
+        "editable": false,
+        "non_owner_editable": false,
+        "editor": "",
+        "last_editor": "",
+        "updated": 123,
+        "file_access": "",
+        "edit_timestamp": 123,
+        "alt_txt": "",
+        "subtype": "",
+        "transcription": {
+          "status": "",
+          "locale": "",
+          "preview": {
+            "content": "",
+            "has_more": false
+          }
+        },
+        "mp4": "",
+        "mp4_low": "",
+        "vtt": "",
+        "hls": "",
+        "hls_embed": "",
+        "duration_ms": 123,
+        "thumb_video_w": 123,
+        "thumb_video_h": 123,
+        "original_attachment_count": 123,
+        "is_external": false,
+        "external_type": "",
+        "external_id": "",
+        "external_url": "",
+        "username": "",
+        "size": 123,
+        "url_private": "",
+        "url_private_download": "",
+        "url_static_preview": "",
+        "app_id": "",
+        "app_name": "",
+        "thumb_64": "",
+        "thumb_64_gif": "",
+        "thumb_64_w": "",
+        "thumb_64_h": "",
+        "thumb_80": "",
+        "thumb_80_gif": "",
+        "thumb_80_w": "",
+        "thumb_80_h": "",
+        "thumb_160": "",
+        "thumb_160_gif": "",
+        "thumb_160_w": "",
+        "thumb_160_h": "",
+        "thumb_360": "",
+        "thumb_360_gif": "",
+        "thumb_360_w": "",
+        "thumb_360_h": "",
+        "thumb_480": "",
+        "thumb_480_gif": "",
+        "thumb_480_w": "",
+        "thumb_480_h": "",
+        "thumb_720": "",
+        "thumb_720_gif": "",
+        "thumb_720_w": "",
+        "thumb_720_h": "",
+        "thumb_800": "",
+        "thumb_800_gif": "",
+        "thumb_800_w": "",
+        "thumb_800_h": "",
+        "thumb_960": "",
+        "thumb_960_gif": "",
+        "thumb_960_w": "",
+        "thumb_960_h": "",
+        "thumb_1024": "",
+        "thumb_1024_gif": "",
+        "thumb_1024_w": "",
+        "thumb_1024_h": "",
+        "thumb_video": "",
+        "thumb_gif": "",
+        "thumb_pdf": "",
+        "thumb_pdf_w": "",
+        "thumb_pdf_h": "",
+        "thumb_tiny": "",
+        "converted_pdf": "",
+        "image_exif_rotation": 123,
+        "original_w": "",
+        "original_h": "",
+        "deanimate": "",
+        "deanimate_gif": "",
+        "pjpeg": "",
+        "permalink": "",
+        "permalink_public": "",
+        "edit_link": "",
+        "has_rich_preview": false,
+        "media_display_type": "",
+        "preview_is_truncated": false,
+        "preview": "",
+        "preview_highlight": "",
+        "plain_text": "",
+        "preview_plain_text": "",
+        "has_more": false,
+        "sent_to_self": false,
+        "lines": 123,
+        "lines_more": 123,
+        "is_public": false,
+        "public_url_shared": false,
+        "display_as_bot": false,
+        "shares": {
+          "public": {
+            "C03E94MKU": [
+              {
+                "share_user_id": "",
+                "reply_users": [
+                  ""
+                ],
+                "reply_users_count": 123,
+                "reply_count": 123,
+                "ts": "",
+                "thread_ts": "",
+                "latest_reply": "",
+                "channel_name": "",
+                "team_id": "",
+                "access": "",
+                "source": "",
+                "date_last_shared": 123
+              }
+            ],
+            "C03E94MKU_": [
+              {
+                "share_user_id": "",
+                "reply_users": [
+                  ""
+                ],
+                "reply_users_count": 123,
+                "reply_count": 123,
+                "ts": "",
+                "thread_ts": "",
+                "latest_reply": "",
+                "channel_name": "",
+                "team_id": "",
+                "access": "",
+                "source": "",
+                "date_last_shared": 123
+              }
+            ]
+          },
+          "private": {
+            "C03E94MKU": [
+              {
+                "share_user_id": "",
+                "reply_users": [
+                  ""
+                ],
+                "reply_users_count": 123,
+                "reply_count": 123,
+                "ts": "",
+                "thread_ts": "",
+                "latest_reply": "",
+                "channel_name": "",
+                "team_id": "",
+                "access": "",
+                "source": "",
+                "date_last_shared": 123
+              }
+            ],
+            "C03E94MKU_": [
+              {
+                "share_user_id": "",
+                "reply_users": [
+                  ""
+                ],
+                "reply_users_count": 123,
+                "reply_count": 123,
+                "ts": "",
+                "thread_ts": "",
+                "latest_reply": "",
+                "channel_name": "",
+                "team_id": "",
+                "access": "",
+                "source": "",
+                "date_last_shared": 123
+              }
+            ]
+          }
+        },
+        "has_more_shares": false,
+        "channel_actions_ts": "",
+        "channel_actions_count": 123,
+        "headers": {
+          "date": "",
+          "in_reply_to": "",
+          "reply_to": "",
+          "message_id": ""
+        },
+        "simplified_html": "",
+        "media_progress": {
+          "offset_ms": 123,
+          "max_offset_ms": 123,
+          "duration_ms": 123,
+          "media_watched": false
+        },
+        "saved": {
+          "is_archived": false,
+          "date_completed": 123,
+          "date_due": 123,
+          "state": ""
+        },
+        "quip_thread_id": "",
+        "is_channel_space": false,
+        "linked_channel_id": "",
+        "access": "",
+        "last_read": 123,
+        "private_channels_with_file_access_count": 123,
+        "private_file_with_access_count": 123,
+        "org_or_workspace_access": "",
+        "update_notification": 123,
+        "canvas_template_mode": "",
+        "template_conversion_ts": 123,
+        "template_name": "",
+        "template_title": "",
+        "template_description": "",
+        "template_icon": "",
+        "team_pref_version_history_enabled": false,
+        "show_badge": false,
+        "list_metadata": {
+          "icon": "",
+          "icon_url": "",
+          "icon_team_id": "",
+          "description": "",
+          "is_trial": false,
+          "creation_source": {
+            "type": "",
+            "reference_id": "",
+            "workflow_function_id": ""
+          }
+        },
+        "list_limits": {
+          "over_row_maximum": false,
+          "row_count_limit": 123,
+          "row_count": 123,
+          "over_column_maximum": false,
+          "column_count": 123,
+          "column_count_limit": 123,
+          "over_view_maximum": false,
+          "view_count": 123,
+          "view_count_limit": 123,
+          "max_attachments_per_cell": 123
+        },
+        "list_csv_download_url": "",
+        "can_toggle_canvas_lock": false,
+        "is_restricted_sharing_enabled": false,
+        "canvas_printing_enabled": false,
+        "bot_id": "",
+        "initial_comment": {
+          "id": "",
+          "created": 123,
+          "timestamp": 123,
+          "user": "",
+          "comment": "",
+          "channel": "",
+          "is_intro": false
+        },
+        "num_stars": 123,
+        "is_starred": false,
+        "comments_count": 123
+      }
+    ],
+    "upload": false,
+    "parent_user_id": "",
+    "inviter": "",
+    "client_msg_id": "",
+    "comment": {
+      "id": "",
+      "name": "",
+      "title": "",
+      "created": "",
+      "timestamp": "",
+      "user": "",
+      "username": "",
+      "is_intro": false,
+      "is_public": false,
+      "is_starred": false,
+      "public_url_shared": false,
+      "url_private": "",
+      "url_private_download": false,
+      "permalink": "",
+      "permalink_public": false,
+      "edit_link": "",
+      "preview": "",
+      "preview_highlight": "",
+      "lines": 123,
+      "lines_more": 123,
+      "preview_is_truncated": false,
+      "has_rich_preview": false,
+      "media_display_type": "",
+      "mimetype": "",
+      "filetype": "",
+      "pretty_type": "",
+      "is_external": false,
+      "external_type": "",
+      "editable": false,
+      "display_as_bot": false,
+      "size": 123,
+      "mode": "",
+      "comment": ""
+    },
+    "topic": "",
+    "purpose": "",
+    "edited": {
+      "user": "",
+      "ts": ""
+    },
+    "unfurl_links": false,
+    "unfurl_media": false,
+    "is_thread_broadcast": false,
+    "is_locked": false,
+    "reply_count": 123,
+    "reply_users": [
+      ""
+    ],
+    "reply_users_count": 123,
+    "latest_reply": "",
+    "subscribed": false,
+    "hidden": false,
+    "last_read": "",
+    "root": {
+      "text": "",
+      "user": "",
+      "parent_user_id": "",
+      "username": "",
+      "team": "",
+      "bot_id": "",
+      "mrkdwn": false,
+      "type": "",
+      "subtype": "",
+      "thread_ts": "",
+      "icons": {
+        "emoji": "",
+        "image_36": "",
+        "image_48": "",
+        "image_64": "",
+        "image_72": ""
+      },
+      "bot_profile": {
+        "id": "",
+        "deleted": false,
+        "name": "",
+        "updated": 123,
+        "app_id": "",
+        "icons": {
+          "image_36": "",
+          "image_48": "",
+          "image_72": ""
+        },
+        "team_id": ""
+      },
+      "edited": {
+        "user": "",
+        "ts": ""
+      },
+      "reply_count": 123,
+      "reply_users_count": 123,
+      "latest_reply": "",
+      "subscribed": false,
+      "last_read": "",
+      "unread_count": 123,
+      "ts": "",
+      "room": {
+        "id": "",
+        "name": "",
+        "media_server": "",
+        "created_by": "",
+        "date_start": 123,
+        "date_end": 123,
+        "canvas_thread_ts": "",
+        "thread_root_ts": "",
+        "is_dm_call": false,
+        "was_rejected": false,
+        "was_missed": false,
+        "was_accepted": false,
+        "has_ended": false,
+        "background_id": "",
+        "canvas_background": "",
+        "is_prewarmed": false,
+        "is_scheduled": false,
+        "media_backend_type": "",
+        "display_id": "",
+        "external_unique_id": "",
+        "app_id": "",
+        "call_family": "",
+        "recording": {
+          "transcript": false,
+          "summary": false,
+          "notetaking": false,
+          "summary_status": "",
+          "can_record_summary": ""
+        },
+        "huddle_link": ""
+      },
+      "no_notifications": false
+    },
+    "item_type": "",
+    "item": {
+      "id": "",
+      "name": "",
+      "title": "",
+      "created": "",
+      "timestamp": "",
+      "user": "",
+      "username": "",
+      "is_intro": false,
+      "is_public": false,
+      "is_starred": false,
+      "public_url_shared": false,
+      "url_private": "",
+      "url_private_download": false,
+      "permalink": "",
+      "permalink_public": false,
+      "edit_link": "",
+      "preview": "",
+      "preview_highlight": "",
+      "lines": 123,
+      "lines_more": 123,
+      "preview_is_truncated": false,
+      "has_rich_preview": false,
+      "media_display_type": "",
+      "mimetype": "",
+      "filetype": "",
+      "pretty_type": "",
+      "is_external": false,
+      "external_type": "",
+      "editable": false,
+      "display_as_bot": false,
+      "size": 123,
+      "mode": "",
+      "comment": ""
+    },
+    "metadata": {
+      "event_type": "",
+      "event_payload": {}
+    },
+    "room": {
+      "id": "",
+      "name": "",
+      "media_server": "",
+      "created_by": "",
+      "date_start": 123,
+      "date_end": 123,
+      "canvas_thread_ts": "",
+      "thread_root_ts": "",
+      "is_dm_call": false,
+      "was_rejected": false,
+      "was_missed": false,
+      "was_accepted": false,
+      "has_ended": false,
+      "background_id": "",
+      "canvas_background": "",
+      "is_prewarmed": false,
+      "is_scheduled": false,
+      "media_backend_type": "",
+      "display_id": "",
+      "external_unique_id": "",
+      "app_id": "",
+      "call_family": "",
+      "recording": {
+        "transcript": false,
+        "summary": false,
+        "notetaking": false,
+        "summary_status": "",
+        "can_record_summary": ""
+      },
+      "huddle_link": ""
+    },
+    "no_notifications": false,
+    "assistant_app_thread": {
+      "title": "",
+      "first_user_thread_reply": ""
+    }
+  },
+  "enterprise": {
+    "id": "",
+    "name": ""
+  },
+  "team": {
+    "id": "",
+    "domain": "",
+    "enterprise_id": "",
+    "enterprise_name": ""
+  },
+  "user": {
+    "id": "",
+    "name": "",
+    "team_id": ""
+  },
+  "channel": {
+    "id": "",
+    "name": ""
+  },
+  "token": "",
+  "action_ts": "",
+  "is_enterprise_install": false
+}

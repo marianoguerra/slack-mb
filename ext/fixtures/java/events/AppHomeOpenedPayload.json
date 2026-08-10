@@ -1,0 +1,66 @@
+{
+  "token": "",
+  "enterprise_id": "",
+  "team_id": "",
+  "api_app_id": "",
+  "type": "",
+  "authed_users": [
+    ""
+  ],
+  "authed_teams": [
+    ""
+  ],
+  "authorizations": [
+    {
+      "enterprise_id": "",
+      "team_id": "",
+      "user_id": "",
+      "is_bot": false,
+      "is_enterprise_install": false
+    }
+  ],
+  "is_ext_shared_channel": false,
+  "event_id": "",
+  "event_time": 123,
+  "event_context": "",
+  "event": {
+    "type": "app_home_opened",
+    "user": "",
+    "channel": "",
+    "tab": "",
+    "event_ts": "",
+    "view": {
+      "id": "",
+      "team_id": "",
+      "type": "",
+      "title": {
+        "type": "",
+        "text": "",
+        "emoji": false
+      },
+      "submit": {
+        "type": "",
+        "text": "",
+        "emoji": false
+      },
+      "close": {
+        "type": "",
+        "text": "",
+        "emoji": false
+      },
+      "private_metadata": "",
+      "callback_id": "",
+      "external_id": "",
+      "state": {},
+      "hash": "",
+      "clear_on_close": false,
+      "notify_on_close": false,
+      "submit_disabled": false,
+      "root_view_id": "",
+      "previous_view_id": "",
+      "app_id": "",
+      "app_installed_team_id": "",
+      "bot_id": ""
+    }
+  }
+}

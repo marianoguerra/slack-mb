@@ -1,0 +1,60 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "marianoguerra/slack"
+
+import {
+  "marianoguerra/slack/api",
+  "marianoguerra/slack/blocks",
+  "marianoguerra/slack/client",
+  "marianoguerra/slack/methods",
+}
+
+// Values
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+pub using @api {type ApiResponse}
+
+pub using @blocks {type BlockElement}
+
+pub using @blocks {type BlockParseError}
+
+pub using @api {type BoolStyle}
+
+pub using @client {type Client}
+
+pub using @api {type HttpRequest}
+
+pub using @api {type HttpResponse}
+
+pub using @blocks {type LayoutBlock}
+
+pub using @client {type Paginator}
+
+pub using @api {type ParamValue}
+
+pub using @api {type Params}
+
+pub using @methods {type RateLimitTier}
+
+pub using @api {type ResponseMetadata}
+
+pub using @blocks {type RichTextBlockElement}
+
+pub using @blocks {type RichTextItem}
+
+pub using @api {type Severity}
+
+pub using @api {type SlackError}
+
+pub using @blocks {type TextKind}
+
+pub using @blocks {type TextObject}
+
+pub using @blocks {type UnknownPolicy}
+
+pub using @api {trait Transport}
+
+// Traits

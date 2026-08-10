@@ -1,0 +1,12 @@
+// generated_methods.mbt is produced by ext/tools/gen_methods from
+// ext/metadata/rate_limit_tiers.json. Regenerate with `just gen`; CI fails on
+// drift. Nothing is imported so a stale generated file can never be blamed on a
+// dependency.
+import {
+}
+
+// `lexical_compare` on String: the sortedness test needs dictionary order, and
+// MoonBit's `Compare` for String is shortlex.
+import {
+  "moonbitlang/core/string",
+} for "test"

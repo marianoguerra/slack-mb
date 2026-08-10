@@ -1,0 +1,14 @@
+// Walks the 548 vendored reference fixtures under fixtures/ (~5 MB) and asserts
+// the parser survives all of them and round-trips every Block Kit payload it
+// finds. This is the acceptance gate for the whole model: it is the only test
+// written against payloads nobody hand-picked.
+import {
+}
+
+import {
+  "marianoguerra/slack/api",
+  "marianoguerra/slack/blocks",
+  "marianoguerra/slack-ext/test/fixtures",
+  "moonbitlang/core/json",
+  "moonbitlang/core/string",
+} for "test"

@@ -1,0 +1,23 @@
+// A thin facade over the packages that do the work.
+//
+// MoonBit re-exports types and traits but NOT enum constructors, so this is for
+// spelling `@slack.Client` or `@slack.LayoutBlock` in a signature. To BUILD a
+// block you still import `marianoguerra/slack/blocks` and say
+// `@blocks.section_text(...)` -- which is the honest shape of it, and why the
+// README's examples import the packages directly.
+//
+// The README's runnable examples live in this package, which is why its
+// test-import block is wider than its source one.
+import {
+  "marianoguerra/slack/api",
+  "marianoguerra/slack/blocks",
+  "marianoguerra/slack/client",
+  "marianoguerra/slack/methods",
+}
+
+import {
+  "marianoguerra/slack/ratectl",
+  "marianoguerra/slack/signature",
+  "marianoguerra/slack/testing",
+  "moonbitlang/core/json",
+} for "test"

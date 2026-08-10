@@ -1,0 +1,12 @@
+{
+  "type": "channel_rename",
+  "channel": {
+    "id": "",
+    "name": "",
+    "name_normalized": "",
+    "is_channel": false,
+    "is_mpim": false,
+    "created": 123
+  },
+  "event_ts": ""
+}

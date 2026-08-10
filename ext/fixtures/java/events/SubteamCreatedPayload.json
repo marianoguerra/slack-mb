@@ -1,0 +1,55 @@
+{
+  "token": "",
+  "team_id": "",
+  "enterprise_id": "",
+  "api_app_id": "",
+  "event": {
+    "type": "subteam_created",
+    "subteam": {
+      "id": "",
+      "team_id": "",
+      "is_usergroup": false,
+      "is_subteam": false,
+      "name": "",
+      "description": "",
+      "handle": "",
+      "is_external": false,
+      "date_create": 12345,
+      "date_update": 12345,
+      "date_delete": 12345,
+      "auto_provision": false,
+      "enterprise_subteam_id": "",
+      "created_by": "",
+      "updated_by": "",
+      "prefs": {
+        "channels": [
+          ""
+        ],
+        "groups": [
+          ""
+        ]
+      },
+      "users": [
+        ""
+      ],
+      "user_count": 12345,
+      "channel_count": 12345,
+      "is_section": false
+    },
+    "event_ts": "0000000000.000000"
+  },
+  "type": "event_callback",
+  "event_id": "",
+  "event_time": 12345,
+  "authorizations": [
+    {
+      "enterprise_id": "",
+      "team_id": "",
+      "user_id": "",
+      "is_bot": false,
+      "is_enterprise_install": false
+    }
+  ],
+  "is_ext_shared_channel": false,
+  "event_context": ""
+}

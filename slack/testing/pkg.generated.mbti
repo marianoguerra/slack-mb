@@ -1,0 +1,37 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "marianoguerra/slack/testing"
+
+import {
+  "marianoguerra/slack/api",
+}
+
+// Values
+pub fn json_response(String, headers? : Array[(String, String)]) -> @api.HttpResponse
+
+pub fn page(String, Array[Json], next_cursor? : String) -> @api.HttpResponse
+
+pub fn rate_limited(Int) -> @api.HttpResponse
+
+pub fn response(Int, String, headers? : Array[(String, String)]) -> @api.HttpResponse
+
+// Errors
+
+// Types and methods
+pub struct FakeTransport {
+  responses : Array[@api.HttpResponse]
+  sent : Array[@api.HttpRequest]
+  mut index : Int
+  description : String
+}
+pub fn FakeTransport::body_of(Self, Int) -> String
+pub fn FakeTransport::last_request(Self) -> @api.HttpRequest?
+pub fn FakeTransport::method_of(Self, Int) -> String
+pub fn FakeTransport::new(Array[@api.HttpResponse], description? : String) -> Self
+pub fn FakeTransport::ok(Array[String]) -> Self
+pub fn FakeTransport::request(Self, Int) -> @api.HttpRequest
+pub fn FakeTransport::sent_count(Self) -> Int
+pub impl @api.Transport for FakeTransport
+
+// Type aliases
+
+// Traits

@@ -1,0 +1,11 @@
+// Time is an `Int64` of milliseconds passed in by the caller, never read here.
+// morphism's three ThrottlingCounter tests only work because the counter is
+// persistent and the clock is injected -- and this package has to build on
+// wasm, which has no clock to read anyway.
+import {
+  "marianoguerra/slack/methods",
+}
+
+import {
+  "marianoguerra/slack/methods",
+} for "test"

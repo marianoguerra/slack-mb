@@ -1,0 +1,18 @@
+{
+  "ok": false,
+  "url": "",
+  "team": {
+    "id": "T00000000",
+    "name": "",
+    "domain": ""
+  },
+  "self": {
+    "id": "U00000000",
+    "name": ""
+  },
+  "error": "",
+  "needed": "",
+  "provided": "",
+  "context": "",
+  "warning": ""
+}

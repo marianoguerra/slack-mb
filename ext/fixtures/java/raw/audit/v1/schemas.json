@@ -1,0 +1,200 @@
+{
+  "schemas": [
+    {
+      "type": "workspace",
+      "workspace": {
+        "id": "string",
+        "name": "string",
+        "domain": "string"
+      }
+    },
+    {
+      "type": "enterprise",
+      "enterprise": {
+        "id": "string",
+        "name": "string",
+        "domain": "string"
+      }
+    },
+    {
+      "type": "user",
+      "user": {
+        "id": "string",
+        "name": "string",
+        "email": "string",
+        "team": "string"
+      }
+    },
+    {
+      "type": "file",
+      "file": {
+        "id": "string",
+        "name": "string",
+        "filetype": "string",
+        "title": "string"
+      }
+    },
+    {
+      "type": "channel",
+      "channel": {
+        "id": "string",
+        "name": "string",
+        "privacy": "string",
+        "is_shared": "bool",
+        "is_org_shared": "bool",
+        "teams_shared_with": "Optional: vec\u003cstring\u003e"
+      }
+    },
+    {
+      "type": "app",
+      "app": {
+        "id": "string",
+        "name": "string",
+        "is_distributed": "bool",
+        "is_directory_approved": "bool",
+        "is_workflow_app": "bool",
+        "scopes": "array"
+      }
+    },
+    {
+      "type": "workflow",
+      "workflow": {
+        "id": "string",
+        "name": "string"
+      }
+    },
+    {
+      "type": "barrier",
+      "barrier": {
+        "id": "string",
+        "primary_usergroup": "string",
+        "barriered_from_usergroup": "string"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "team": "string",
+        "channel": "string",
+        "timestamp": "string"
+      }
+    },
+    {
+      "type": "usergroup",
+      "usergroup": {
+        "id": "string",
+        "name": "string"
+      }
+    },
+    {
+      "type": "role",
+      "role": {
+        "id": "string",
+        "name": "string",
+        "type": "string"
+      }
+    },
+    {
+      "type": "account_type_role",
+      "account_type_role": {
+        "id": "string",
+        "name": "string"
+      }
+    },
+    {
+      "type": "canvas",
+      "canvas": {
+        "id": "string",
+        "filetype": "string",
+        "title": "string"
+      }
+    },
+    {
+      "type": "workflow_v2",
+      "workflow_v2": {
+        "id": "string",
+        "app_id": "string",
+        "date_updated": "int",
+        "callback_id": "string",
+        "name": "string",
+        "updated_by": "string",
+        "step_configuration": "vec\u003cdict\u003cstring, mixed\u003e\u003e"
+      }
+    },
+    {
+      "type": "app",
+      "app": {
+        "id": "string",
+        "app_id": "string",
+        "distribution_type": "string",
+        "user_ids": "array"
+      }
+    },
+    {
+      "type": "workflow_v2",
+      "workflow_v2": {
+        "id": "string",
+        "app_id": "string",
+        "date_updated": "int",
+        "callback_id": "string",
+        "name": "string",
+        "updated_by": "string",
+        "template_id": "string",
+        "step_configuration": "vec\u003cdict\u003cstring, mixed\u003e\u003e"
+      }
+    },
+    {
+      "type": "template",
+      "template": {
+        "id": "string",
+        "template_name": "string"
+      }
+    },
+    {
+      "type": "workflow_v2",
+      "workflow_v2": {
+        "id": "string",
+        "app_id": "string",
+        "date_updated": "int",
+        "callback_id": "string",
+        "name": "string",
+        "updated_by": "string",
+        "template_id": "string",
+        "step_configuration": "vec\u003cdict\u003cstring, mixed\u003e\u003e",
+        "suspicious_keywords": "vec\u003cstring\u003e",
+        "trigger_name": "string",
+        "trigger_channels": "vec\u003cstring\u003e",
+        "trigger_configuration": "dict\u003cstring, mixed\u003e"
+      }
+    },
+    {
+      "type": "user",
+      "user": {
+        "id": "string",
+        "name": "string",
+        "email": "string",
+        "team": "string",
+        "account_type": "string"
+      }
+    },
+    {
+      "type": "legal_hold_policy",
+      "legal_hold_policy": {
+        "id": "string",
+        "name": "string"
+      }
+    },
+    {
+      "type": "app",
+      "app": {
+        "id": "string",
+        "name": "string",
+        "is_distributed": "bool",
+        "is_directory_approved": "bool",
+        "is_workflow_app": "bool",
+        "scopes": "array",
+        "bot_scopes": "array"
+      }
+    }
+  ]
+}

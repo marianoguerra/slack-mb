@@ -1,0 +1,12 @@
+// A scripted Transport.
+//
+// marianoguerra/mcp deliberately has no mock transport -- it keeps its logic
+// pure and fakes the byte source instead -- and this module follows that rule
+// everywhere it can: the form encoder, the envelope, the paginator and all of
+// Block Kit are pure and tested without a transport. This package exists for
+// the last mile (the `Client::call` glue) and, more importantly, for consumers
+// testing their own Slack app.
+import {
+  "marianoguerra/slack/api",
+  "moonbitlang/core/json",
+}

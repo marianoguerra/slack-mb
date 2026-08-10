@@ -1,0 +1,17 @@
+// SHA-256 and HMAC-SHA256 in pure MoonBit, because neither exists in
+// moonbitlang/core and Slack's request signature needs both. An FFI binding
+// would have made this package native-only, which would in turn have pushed
+// signature verification out of reach of a wasm-hosted Slack app.
+//
+// Bytes in, bytes out, no imports: text encoding is the caller's problem
+// (@signature does it with moonbitlang/core/encoding/utf8), which keeps this
+// package a straight port of RFC 6234 and RFC 4231 with their vectors as tests.
+import {
+}
+
+// The RFC vectors are given as ASCII strings and as byte counts; utf8 is how
+// the tests turn the former into the latter without assuming MoonBit's UTF-16
+// string representation.
+import {
+  "moonbitlang/core/encoding/utf8",
+} for "test"

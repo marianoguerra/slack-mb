@@ -1,0 +1,28 @@
+{
+  "ok": false,
+  "invite_requests": [
+    {
+      "id": "",
+      "email": "",
+      "date_created": 12345,
+      "requester_ids": [
+        "W00000000",
+        "U00000000"
+      ],
+      "channel_ids": [
+        "",
+        "C00000000"
+      ],
+      "invite_type": "",
+      "request_reason": "",
+      "date_expire": 12345
+    }
+  ],
+  "error": "",
+  "needed": "",
+  "provided": "",
+  "response_metadata": {
+    "next_cursor": ""
+  },
+  "warning": ""
+}

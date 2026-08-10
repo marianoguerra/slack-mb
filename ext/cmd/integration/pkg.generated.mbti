@@ -1,0 +1,17 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "marianoguerra/slack-ext/cmd/integration"
+
+// Values
+
+// Errors
+type Failed
+pub impl Show for Failed
+
+// Types and methods
+type Outcome
+
+type Report
+
+// Type aliases
+
+// Traits

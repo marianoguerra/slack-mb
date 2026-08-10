@@ -1,0 +1,65 @@
+{
+  "ok": false,
+  "warning": "",
+  "error": "",
+  "needed": "",
+  "provided": "",
+  "app_requests": [
+    {
+      "id": "",
+      "app": {
+        "id": "",
+        "name": "",
+        "description": "",
+        "help_url": "",
+        "privacy_policy_url": "",
+        "app_homepage_url": "",
+        "app_directory_url": "",
+        "is_app_directory_approved": false,
+        "is_internal": false,
+        "is_granular_bot_app": false,
+        "additional_info": "",
+        "icons": {
+          "image_32": "",
+          "image_36": "",
+          "image_48": "",
+          "image_64": "",
+          "image_72": "",
+          "image_96": "",
+          "image_128": "",
+          "image_192": "",
+          "image_512": "",
+          "image_1024": "",
+          "image_original": ""
+        }
+      },
+      "user": {
+        "id": "",
+        "name": "",
+        "email": ""
+      },
+      "team": {
+        "id": "",
+        "name": "",
+        "domain": ""
+      },
+      "scopes": [],
+      "previous_resolution": {
+        "status": "",
+        "scopes": []
+      },
+      "is_user_app_collaborator": false,
+      "message": "",
+      "date_created": 123
+    }
+  ],
+  "response_metadata": {
+    "next_cursor": "",
+    "messages": [
+      ""
+    ],
+    "warnings": [
+      ""
+    ]
+  }
+}

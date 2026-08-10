@@ -1,0 +1,11 @@
+// The port of java-slack-sdk's MethodsTest#verifyTheCoverage. It reads the
+// three files in metadata/ rather than hard-coding the 308 documented names, so
+// refreshing the doc scrape is a one-file edit and the test names what drifted.
+import {
+}
+
+import {
+  "marianoguerra/slack/methods",
+  "moonbitlang/x/fs",
+  "moonbitlang/core/string",
+} for "test"

@@ -1,0 +1,27 @@
+// The async half of the client's tests.
+//
+// The directory is `calls` and not `client` because a package's own name is in
+// scope as an alias: `ext/test/client` would shadow `@client` and make the
+// library's own package unreachable from its tests.
+//
+// They live here rather than beside the code because an `async test` block
+// requires moonbitlang/async to be imported, and the whole point of
+// marianoguerra/slack is that it does not depend on it. Everything that can be
+// tested synchronously already is, next to the code: the form encoder, the
+// response envelope, the paginator state machine and all of Block Kit. What is
+// left is the glue -- Client::call and Client::paginate -- and that is what
+// these cover.
+import {
+}
+
+import {
+  "moonbitlang/async",
+  "marianoguerra/slack/api",
+  "marianoguerra/slack/blocks",
+  "marianoguerra/slack/client",
+  "marianoguerra/slack/methods",
+  "marianoguerra/slack/testing",
+  "moonbitlang/core/json",
+} for "test"
+
+supported_targets = "+native"

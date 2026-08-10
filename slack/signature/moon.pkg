@@ -1,0 +1,11 @@
+// Slack request-signature verification.
+//
+// No clock. `verify_at_time(.., now)` takes the current epoch second as an
+// argument, so every expiry test is deterministic -- and so this package still
+// builds on wasm, where there is no wall clock to read. Reading the clock is
+// the caller's job, and it is one line.
+import {
+  "marianoguerra/slack/crypto",
+  "moonbitlang/core/encoding/utf8",
+  "moonbitlang/core/string",
+}

@@ -1,0 +1,12 @@
+// Reads metadata/rate_limit_tiers.json and prints ../slack/methods/generated_methods.mbt
+// to stdout. Written in MoonBit rather than a script so CI needs no second
+// toolchain and the generator dogfoods this library's own JSON handling.
+import {
+  "moonbitlang/x/fs",
+  "moonbitlang/core/json",
+  "moonbitlang/core/string",
+}
+
+supported_targets = "+native"
+
+pkgtype(kind: "executable")

@@ -1,0 +1,22 @@
+{
+  "ok": false,
+  "emoji": {
+    "333": {
+      "url": "",
+      "date_created": 12345,
+      "uploaded_by": ""
+    },
+    "444": {
+      "url": "",
+      "date_created": 12345,
+      "uploaded_by": ""
+    }
+  },
+  "response_metadata": {
+    "next_cursor": ""
+  },
+  "error": "",
+  "needed": "",
+  "provided": "",
+  "warning": ""
+}

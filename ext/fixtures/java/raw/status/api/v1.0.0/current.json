@@ -1,0 +1,927 @@
+{
+  "status": "ok",
+  "date_created": "2019-08-26T15:32:23-07:00",
+  "date_updated": "2019-08-26T15:32:23-07:00",
+  "id": 760,
+  "title": "Some customers cannot create channels that contain a dash or an underscore in the name",
+  "type": "incident",
+  "url": "https://status.slack.com/2019-08/37d6093783d8527d",
+  "services": [
+    "Messaging",
+    "Connections",
+    "Posts/Files",
+    "Notifications",
+    "Login/SSO",
+    "Workspace/Org Administration",
+    "Link Previews",
+    "Apps/Integrations/APIs",
+    "Search",
+    "Calls"
+  ],
+  "notes": [
+    {
+      "date_created": "2019-08-29T22:06:31-07:00",
+      "body": "Issue Summary:\r\n\r\nOn August 28, 2019 at 10:01 a.m. PDT a change was released which unexpectedly prevented some customers from being able to create channels. Specifically, if the channel name included a hyphen or underscore.\r\n\r\nAn update was made to ensure channel names with such characters were validated correctly, and by August 29 at 12:33 p.m. PDT channel creation was functioning as expected once again."
+    },
+    {
+      "date_created": "2019-08-29T16:01:10-07:00",
+      "body": "We’re happy to report that you should now be able to create channels that contain a hyphen or underscore in the name without any trouble! We apologize for the disruption."
+    },
+    {
+      "date_created": "2019-08-29T12:21:12-07:00",
+      "body": "We are still looking into channel name issues with channel creation but we hope we are nearing a fix. Thanks for your patience!"
+    },
+    {
+      "date_created": "2019-08-29T11:46:36-07:00",
+      "body": "We\u0027re seeing report of users having intermittent trouble with creating channel names. We\u0027re investigating and will follow up when we know more."
+    },
+    {
+      "date_created": "2019-09-02T16:49:35-07:00",
+      "body": "Issue Summary: \r\n\r\nOn August 30, 2019, beginning at 3:04 p.m. PDT, we received reports that some Enterprise Grid customers were unable to connect to Slack. Upon investigation, we identified that a large spike in requests was causing the symptoms of degraded access and degraded search in Slack. To fix the issue, we rolled back recent updates causing the increased load. The issue was fully resolved at 4:29 p.m. PDT."
+    },
+    {
+      "date_created": "2019-08-30T16:32:16-07:00",
+      "body": "We\u0027ve got good news: we\u0027re in the clear and everyone should be able to connect again. We\u0027re sorry for any trouble this caused. Thanks for sticking with us."
+    },
+    {
+      "date_created": "2019-08-30T15:45:39-07:00",
+      "body": "We\u0027re seeing some positive signs and people should be able to connect again. However, if you\u0027re still having issues, please let us know at feedback@slack.com."
+    },
+    {
+      "date_created": "2019-08-30T15:30:40-07:00",
+      "body": "We’ve heard reports that some people are experiencing degraded service or have trouble connecting to Slack. We\u0027re sorry for any disruption this has caused to your day."
+    },
+    {
+      "date_created": "2019-08-30T15:24:21-07:00",
+      "body": "Some people may be having an issue with Slack. We’re currently investigating and will have more information shortly. Thank you for your patience."
+    },
+    {
+      "date_created": "2019-10-07T22:48:57-07:00",
+      "body": "Issue Summary:\r\n\r\nOn October 7, 2019 at 6:36 p.m. PDT, we identified a change that inadvertently impacted the posts feature. As a result, customers were unable to open or create new posts in Slack. After reverting these changes, full functionality was restored to posts and the issue was resolved at 9:56 p.m. PDT."
+    },
+    {
+      "date_created": "2019-10-07T21:56:30-07:00",
+      "body": "We’ve restored the functionality to posts and things are back to normal. Sorry for the trouble, and thank you for your patience with us."
+    },
+    {
+      "date_created": "2019-10-07T21:46:30-07:00",
+      "body": "We’ve started to see improvements when creating and opening posts, but we’re still monitoring this closely. We’ll let you know when this feature has been completely restored."
+    },
+    {
+      "date_created": "2019-10-07T21:10:35-07:00",
+      "body": "We’re still looking into the issue with posts — we’ll provide new information as soon as it’s available. Thanks for bearing with us."
+    },
+    {
+      "date_created": "2019-10-07T20:24:12-07:00",
+      "body": "Some people are having trouble creating and opening posts. We’re currently investigating and will share more information as soon as we have an update. We\u0027re sorry for the disruption."
+    },
+    {
+      "date_created": "2019-11-11T15:45:09-08:00",
+      "body": "We are aware of an issue with Brazilian time zone settings that are affecting notifications, reminders, time stamps and other elements in Slack. Our engineers are coordinating to solve the issue. Thank you for your patience as we investigate!"
+    },
+    {
+      "date_created": "2019-11-19T18:40:31-08:00",
+      "body": "Some of our Enterprise Grid customers are having trouble accessing Slack workspaces in our desktop apps. We\u0027re currently looking into the cause, and we\u0027ll keep you posted as soon as we have more information. For those affected, access to Slack is still available through a web browser. We\u0027re sorry for the disruption to your day."
+    },
+    {
+      "date_created": "2019-12-03T18:45:29-08:00",
+      "body": "We\u0027re looking into reports of issues with creating posts for some Enterprise Grid customers. Thanks for your patience as we look into this."
+    },
+    {
+      "date_created": "2019-12-09T16:49:34-08:00",
+      "body": "Some customers may be experiencing server errors or messages failing to send in the desktop app. We\u0027re very sorry for the trouble and we\u0027re working to get things back to normal."
+    },
+    {
+      "date_created": "2019-12-09T16:34:53-08:00",
+      "body": "Some people may be having an issue with Slack. We’re currently investigating and will have more information shortly. Thank you for your patience."
+    },
+    {
+      "date_created": "2019-12-09T21:47:58-08:00",
+      "body": "Some customers may be experiencing issues configuring SAML SSO. We are investigating and we\u0027re very sorry for the disruption."
+    },
+    {
+      "date_created": "2020-01-28T17:58:58-08:00",
+      "body": "Some of our customers are having trouble inviting Guest accounts. In particular, this appears to be affecting our Enterprise Grid customers. We\u0027re currently investigating the cause and we\u0027ll keep you updated on new information. We\u0027re sorry for the disruption."
+    },
+    {
+      "date_created": "2020-02-12T17:39:32-08:00",
+      "body": "Google Drive thumbnails for new and recently uploaded files are now visible in Slack. We\u0027ll be back with an update on the thumbnails that are still missing. Thanks for your patience."
+    },
+    {
+      "date_created": "2020-02-12T14:26:29-08:00",
+      "body": "Google Drive thumbnails aren\u0027t displaying in Slack. We\u0027re sorry for the trouble, and we\u0027ll keep you posted here."
+    },
+    {
+      "date_created": "2020-03-06T15:11:57-08:00",
+      "body": "We’re glad to report all issues with the Admin stats page and Workspace Directory have been resolved. Apologies for the disruption we caused, and thank you for your patience."
+    },
+    {
+      "date_created": "2020-03-06T14:48:11-08:00",
+      "body": "We’re investigating issues with the Admin stats page and Workspace Directory for Grid customers. We’re looking into the cause and will provide new information as soon as it’s available."
+    },
+    {
+      "date_created": "2020-03-06T14:40:45-08:00",
+      "body": "Some people may be having an issue with Slack. We’re currently investigating and will have more information shortly. Thank you for your patience."
+    },
+    {
+      "date_created": "2020-03-12T22:17:04-07:00",
+      "body": "We are working hard to identify the cause of the issue. We will be back with more information in 30 minutes."
+    },
+    {
+      "date_created": "2020-03-12T21:46:04-07:00",
+      "body": "Some customers may be having trouble loading Slack or parts of the Slack interface. We\u0027re very sorry for the disruption and we have all hands on deck as we investigate. Thank you for bearing with us."
+    },
+    {
+      "date_created": "2020-03-13T15:58:47-07:00",
+      "body": "We’ve resolved the issue with some features failing to load and Slack is back to full functionality. We’re sorry for the disruption this has caused."
+    },
+    {
+      "date_created": "2020-03-13T12:51:28-07:00",
+      "body": "Our team continues to work to get full functionality restored as soon as possible. No additional information to share just yet, but we’ll keep you posted as soon we have an update."
+    },
+    {
+      "date_created": "2020-03-13T11:49:20-07:00",
+      "body": "We\u0027re continuing to look into this issue and work towards a fix. Thank you again for bearing with us in the meantime."
+    },
+    {
+      "date_created": "2020-03-13T10:47:30-07:00",
+      "body": "Upon further investigation, we\u0027ve also found that this issue may be causing issues with installing apps or integrations in Slack. We\u0027ll continue to keep you in the loop as more information becomes available."
+    },
+    {
+      "date_created": "2020-03-13T10:07:34-07:00",
+      "body": "We\u0027re still hard at work investigating a fix for this issue. We\u0027re sorry about the continued trouble and we\u0027ll let you know once we have more information to share."
+    },
+    {
+      "date_created": "2020-03-13T09:34:42-07:00",
+      "body": "Some users may be experiencing issues with various features in Slack, including app, channel, and user names not displaying as expected. We\u0027re aware of the source of the issue, and we have a team of engineers dedicated to fixing this as soon as possible. We\u0027ll keep you posted as we make progress towards a fix."
+    },
+    {
+      "date_created": "2020-03-13T09:07:32-07:00",
+      "body": "Some people may be having an issue with Slack. We’re currently investigating and will have more information shortly. Thank you for your patience."
+    },
+    {
+      "date_created": "2020-03-24T17:18:02-07:00",
+      "body": "We\u0027re looking into reports of access issues for some people using web browsers. Please hold tight. In the meantime, using a different type of web browser or the desktop app will hopefully get you back into your workspace."
+    },
+    {
+      "date_created": "2020-03-30T19:11:11-07:00",
+      "body": "Issue Summary: \r\n\r\nOn March 30, 2020 from 3:20 p.m. to 6:26 p.m. PDT, some customers may have experienced elevated API response times or timeouts. This was caused by an issue with a third-party provider. Once they resolved the issue, Slack API response times returned to normal."
+    },
+    {
+      "date_created": "2020-03-30T18:36:12-07:00",
+      "body": "Customers should no longer be experiencing elevated API response times or timeouts. Thank you for being patient with us, we appreciate it. \r\n\r\nIf you have any further issues, please reach out to us at feedback@slack.com."
+    },
+    {
+      "date_created": "2020-03-30T17:38:55-07:00",
+      "body": "Issues with a third-party provider are causing elevated response times in the API, leading to potential timeouts. We are monitoring the situation and working to mitigate this from our end as best we can. We apologize for the disruption."
+    },
+    {
+      "date_created": "2020-04-02T18:24:03-07:00",
+      "body": "We’re still investigating the issue with these delayed or failed actions, and we\u0027ve discovered that this may be affecting searching in Slack as well. We\u0027ll confirm as soon as things are working as they should be."
+    },
+    {
+      "date_created": "2020-04-02T17:49:13-07:00",
+      "body": "Some of our customers are having trouble completing certain user-related actions, such as when deactivating members. We\u0027re currently investigating the cause of these delays, and we\u0027ll keep you posted as soon as we have more information. We\u0027re sorry for the disruption."
+    },
+    {
+      "date_created": "2020-04-14T17:50:51-07:00",
+      "body": "We\u0027ve been seeing improvements to the performance of accounts with Enterprise Key Management enabled though we are still investigating the root cause. Thank you for your patience as we get to the bottom of this."
+    },
+    {
+      "date_created": "2020-04-14T16:30:09-07:00",
+      "body": "Some customers with Enterprise Key Management enabled may be experiencing issues when trying to read or write messages. We’re looking into it and will provide another update as soon as it’s available."
+    },
+    {
+      "date_created": "2020-04-14T16:20:31-07:00",
+      "body": "Some people may be having an issue with Slack. We’re currently investigating and will have more information shortly. Thank you for your patience."
+    },
+    {
+      "date_created": "2020-04-24T17:56:21-07:00",
+      "body": "We have resolved the issue and everyone should be able to connect to Slack once more. We\u0027re very sorry for the disruption and we appreciate you bearing with us."
+    },
+    {
+      "date_created": "2020-04-24T16:42:42-07:00",
+      "body": "Users should start to see improvements and be able to connect again. We will provide another update as soon as the issue is fully resolved. Thank you for your patience."
+    },
+    {
+      "date_created": "2020-04-24T15:36:33-07:00",
+      "body": "Upon further investigation this issue is not exclusive to Android devices. Some users are unable to automatically receive new messages and may notice a grey banner on desktop. We’ll provide an update as soon as it’s available."
+    },
+    {
+      "date_created": "2020-04-24T15:06:02-07:00",
+      "body": "Some Android users have reported difficulty logging into Slack. We are investigating and will provide an update as soon as we know more."
+    },
+    {
+      "date_created": "2020-04-24T14:59:53-07:00",
+      "body": "Some people may be having an issue with Slack. We’re currently investigating and will have more information shortly. Thank you for your patience."
+    },
+    {
+      "date_created": "2020-04-30T10:49:51-07:00",
+      "body": "Information on the Analytics dashboard (https://my.slack.com/stats) is not up to date. We are currently investigating this issue and will be back as soon as we have more news to share. We\u0027re sorry for any inconvenience caused in the meantime."
+    },
+    {
+      "date_created": "2020-05-26T14:20:09-07:00",
+      "body": "We\u0027re still working towards a solution for this issue. We\u0027ll return back here with an update when we have more news to share on a fix."
+    },
+    {
+      "date_created": "2020-05-26T12:49:00-07:00",
+      "body": "We\u0027ve identified the likely cause of this issue and we\u0027re now exploring possible fixes. Thank you for your continued patience as we work to get things fixed up."
+    },
+    {
+      "date_created": "2020-05-26T11:49:48-07:00",
+      "body": "We\u0027re continuing to look into the issue causing custom emoji to not appear for some customers. We\u0027re sorry for the trouble and will continue to keep you posted."
+    },
+    {
+      "date_created": "2020-05-26T11:19:03-07:00",
+      "body": "Our team is investigating an issue that is causing custom emoji to go missing from some workspaces. We\u0027ll keep you updated as soon as we have more information."
+    },
+    {
+      "date_created": "2020-06-01T11:23:40-07:00",
+      "body": "Some Android users may notice that new messages are not showing up in channels and DMs immediately. We\u0027re actively investigating this issue and will keep you posted as more information becomes available. For now, quitting and reopening the Slack app should allow new messages to load. We\u0027re sorry for any disruption this brings to your day."
+    },
+    {
+      "date_created": "2020-06-11T05:55:18-07:00",
+      "body": "We\u0027re investigating problems with search indexing. In the meantime, people might notice some messages and files not showing up in search results. We apologize for the inconvenience."
+    },
+    {
+      "date_created": "2020-07-30T15:12:34-07:00",
+      "body": "Some users might notice that their notifications settings for mobile are not being respected. We are taking a look and hope to have more news soon."
+    },
+    {
+      "date_created": "2020-07-24T10:45:08-07:00",
+      "body": "We\u0027re currently aware of some intermittent latency and timeouts with image attachments, certain API methods (including users.setPhoto, chat.postMessage and chat.update, views.*), and apps which use these features. We are currently investigating and will update when we believe these issues have been resolved. Sorry for the inconvenience."
+    },
+    {
+      "date_created": "2020-08-06T14:52:25-07:00",
+      "body": "Some users and app developers are currently seeing \"Request failed with status code 400\" errors when apps submit requests.  We are looking into this and will post when we have more information."
+    },
+    {
+      "date_created": "2020-08-07T15:34:00-07:00",
+      "body": "We\u0027ve determined this issue is only impacting confirmation emails sent after clicking an invite link to join a workspace, while other emails are working as intended. We\u0027ll continue to keep you posted as we work towards a fix. \r\n\r\nFor now, we recommend sending invitations directly via email, rather than sharing invite links with invitees."
+    },
+    {
+      "date_created": "2020-08-07T15:04:31-07:00",
+      "body": "Some customers may be unable to receive emails from Slack. We\u0027re currently investigating this issue, and we\u0027ll let you know as soon as we have more information. We apologize for the inconvenience in the meantime."
+    },
+    {
+      "date_created": "2020-08-20T10:50:22-07:00",
+      "body": "We\u0027ve received some reports of folks being suddenly signed out of Slack on desktop, and we\u0027re investigating this issue further. We apologize for any disruption this may have caused and will let you know once we have more details."
+    },
+    {
+      "date_created": "2020-09-09T14:23:48-07:00",
+      "body": "Some users are unable to sign in to Slack using Google SSO. This issue appears to be isolated to desktop at this time. We\u0027re working to get things back to normal as quickly as possible, and we apologize for the disruption."
+    },
+    {
+      "date_created": "2020-09-10T16:47:57-07:00",
+      "body": "Issue Summary:\r\nFrom September 8, 2020 at 7:33 p.m. PDT until September 10, 2020 at 11:59 p.m. PDT, some customers saw a “Page not available” error message when trying to sign into Slack using Google Auth SSO.\r\n\r\nUpon investigation, we identified an error in an update we made to how we handle SSO authentication errors. We reverted the change which resolved the issue for all affected users."
+    },
+    {
+      "date_created": "2020-09-10T15:23:49-07:00",
+      "body": "We\u0027ve restored full functionality so that anyone using Google SSO to login to Slack should now be able to successfully access their Slack workspace(s). If you continue to have issues signing in with Google SSO, please let us know at feedback@slack.com. \r\n\r\nWe appreciate you bearing with us and our sincere apologies for any inconvenience this caused."
+    },
+    {
+      "date_created": "2020-09-09T19:03:10-07:00",
+      "body": "We\u0027ve identified the problem and made a fix that we expect to resolve this issue. We are seeing steady improvements, but we\u0027re continuing to monitor this closely as a small number of customers may still be encountering trouble signing in to Slack using Google SSO at the moment.\r\n\r\nWe\u0027ll be back with an update once we can confirm the issue is fully resolved."
+    },
+    {
+      "date_created": "2020-09-15T01:39:42-07:00",
+      "body": "Some users have reported issues with imports and exports failing to complete at this time. We\u0027re working to resolve the issue and will share more information as soon as it’s available. Thank you for your patience."
+    },
+    {
+      "date_created": "2020-09-18T14:13:11-07:00",
+      "body": "We\u0027ve confirmed the issue with Org Owners and Admins being unable to edit user profiles is now fixed. Please refresh with Ctrl/Cmd + Shift + R, and let us know if anything seems unresolved.\r\n\r\nApologies for any disruptions to your work. We\u0027ll report back with a summary shortly."
+    },
+    {
+      "date_created": "2020-09-18T11:58:55-07:00",
+      "body": "We’re still investigating the issue, however we\u0027ve encountered a delay in reaching a possible solution. We’ll provide another update as soon as we have news."
+    },
+    {
+      "date_created": "2020-09-18T10:22:28-07:00",
+      "body": "We’ve identified a potential cause of the issue and we’re working on getting a fix out as soon as possible. We’ll be back with another update."
+    },
+    {
+      "date_created": "2020-09-18T09:51:40-07:00",
+      "body": "Some Org Owners and Admins on Enterprise Grid might have trouble editing user profiles through the Admin dashboard. We\u0027re investigating the issue, and we believe that this is a result of a recent change made on our end. If this is the case, we\u0027ll be reverting the change shortly. We\u0027ll follow up when we know more."
+    },
+    {
+      "date_created": "2020-09-24T15:10:00-07:00",
+      "body": "The fix has been fully released and all images should now display correctly after reloading Slack via Ctrl/Command+Shift+O. Our sincere thanks for bearing with us and we\u0027re very sorry for any disruption this may have caused."
+    },
+    {
+      "date_created": "2020-09-24T14:46:16-07:00",
+      "body": "We\u0027re making progress towards a total fix, but new image uploads going forward should render as expected. Work is ongoing to fix the images that were affected during this incident.\r\n\r\nYou\u0027re welcome to re-upload images that were previously affected if you need them before the complete fix is ready."
+    },
+    {
+      "date_created": "2020-09-24T14:16:16-07:00",
+      "body": "No additional news to share just yet, but we\u0027re working as quickly as possible to identify and fix the issue of recently uploaded images not displaying properly on desktop. We appreciate your continued patience."
+    },
+    {
+      "date_created": "2020-09-24T13:46:16-07:00",
+      "body": "Newly uploaded images should display correctly on mobile devices, but we\u0027re still digging into why they\u0027re not rendering correctly on the desktop application. Thanks for bearing with us."
+    },
+    {
+      "date_created": "2020-09-24T13:16:16-07:00",
+      "body": "Some customers may see broken or empty placeholder images after they try to upload an image to a channel. We\u0027re looking into it and shall provide an update as we know more. Our apologies for the disruption."
+    },
+    {
+      "date_created": "2020-10-05T20:27:42-07:00",
+      "body": "We don\u0027t have any new information to share at the moment. We\u0027ll be back with an update as soon as we do. Thank you for your patience."
+    },
+    {
+      "date_created": "2020-10-05T19:56:48-07:00",
+      "body": "Our investigation of the RTM API issue is still ongoing. We will provide another update in 30 minutes."
+    },
+    {
+      "date_created": "2020-10-05T19:26:33-07:00",
+      "body": "No additional news to share at this stage, but we’re focused on getting things back to normal as quickly as possible. We’ll be back with another update in 30 minutes."
+    },
+    {
+      "date_created": "2020-10-05T18:56:21-07:00",
+      "body": "Some customers may be experiencing trouble processing messages with the RTM API, including issues interacting with apps and bots. We apologise for the disruption. We are investigating and will work to resolve this as fast as we can."
+    },
+    {
+      "date_created": "2020-10-23T17:02:48-07:00",
+      "body": "Issue summary:\r\nOn May 11, 2020, we began investigating cases of Android users missing new messages in the mobile app. After more reports trickled in, we escalated the issue further on our side on June 1, 2020.\r\n\r\nWe pushed out several changes to the mobile app to help mitigate the issue; however, these changes may not resolve the trouble for all affected users. We\u0027ll continue investigating any reports of users not seeing new messages in the mobile app."
+    },
+    {
+      "date_created": "2020-06-17T23:23:15-07:00",
+      "body": "Our engineers have narrowed down the issues that are causing some new messages to not appear in our Android app. While these issues are not fully resolved yet, going forward we\u0027ll continue working on this as a bug that we\u0027ll track internally. If you\u0027re still experiencing this behaviour, please reach out to us at feedback@slack.com."
+    },
+    {
+      "date_created": "2020-11-02T13:50:47-08:00",
+      "body": "While affected users should still be able to search in Slack, recent updates, such as new messages, may not immediately appear in the results. We\u0027ll let you know once the issue is resolved, and we\u0027ll follow-up if the situation changes."
+    },
+    {
+      "date_created": "2020-11-02T13:02:09-08:00",
+      "body": "Affected users should be able to search and see the most optimal results. However, we\u0027re still working on this issue. We\u0027ll let you know if the situation changes, and we\u0027ll follow-up once this issue is resolved."
+    },
+    {
+      "date_created": "2020-11-02T12:16:02-08:00",
+      "body": "The majority of affected users should be able to search in Slack. Some users may not see the most optimal search results, and some users may see a \"Something went wrong\" error when searching for files. We\u0027ll continue to work to resolve this trouble.\r\n\r\nNote: We updated this note to mention some users could\u0027ve encountered a \"Something went wrong\" error when searching for files, so all affected users weren\u0027t able to search in Slack at this time."
+    },
+    {
+      "date_created": "2020-11-02T11:43:05-08:00",
+      "body": "At this time, some users may be unable to search for messages and files specifically. We\u0027re working to resolve this issue, and we appreciate your patience."
+    },
+    {
+      "date_created": "2020-11-02T11:13:11-08:00",
+      "body": "Some users are unable to search in Slack. We\u0027re investigating, and we\u0027ll follow-up here once we know more. We\u0027re sorry for the trouble."
+    },
+    {
+      "date_created": "2021-02-02T17:52:55-08:00",
+      "body": "We\u0027re still investigating issues with editing user groups and transferring workspace ownership in a browser. No additional information to share just yet, but we\u0027ll keep you posted as soon as we have a further update."
+    },
+    {
+      "date_created": "2021-02-02T16:55:34-08:00",
+      "body": "We have confirmed that this issue specifically affects Slack in a web browser, and we\u0027re working to resolve this. \r\n\r\nIn the meantime, you should be able to edit user group names from within the desktop app. You can download our desktop clients here: https://slack.com/downloads\r\n\r\nWe\u0027re sorry for the disruption."
+    },
+    {
+      "date_created": "2021-02-16T14:51:58-08:00",
+      "body": "Some people may be having an issue importing files from Google Drive. Our team is looking into this and will share more details as they are uncovered."
+    },
+    {
+      "date_created": "2021-03-25T14:51:04-07:00",
+      "body": "Our investigation of the email verification sign in glitch is still ongoing at this time. We’ll be back with another update as soon as we have news."
+    },
+    {
+      "date_created": "2021-03-25T14:21:19-07:00",
+      "body": "Some SSO users may be running into a \"There\u0027s been a glitch\" error screen when logging in using the email verification sign in method. In the meantime, manually entering the workspace URL in your browser address bar and then signing in should work as normal. Our team are investigating, and will share updates as soon as they are available."
+    },
+    {
+      "date_created": "2021-04-12T09:53:44-07:00",
+      "body": "Some customers using the latest version of our iOS app are seeing their messages remain marked as unread and the channels bolded even after reading the channel and navigating away. Our team are currently investigating and we\u0027ll be back with any updates as they happen."
+    },
+    {
+      "date_created": "2021-04-22T14:43:50-07:00",
+      "body": "Thank you for your patience while we looked into this. The issue with calls, Workflow Builder, and Block Kit should now be resolved.\r\n \r\nPlease perform a hard refresh by hitting Command + Shift + R (Mac) / Ctrl + Shift + R (Windows) to apply the fix. \r\n\r\nWe apologize for any inconvenience caused by this issue. Please let us know if you have any further problems we can help with, or if you have any other questions or concerns."
+    },
+    {
+      "date_created": "2021-04-22T14:16:25-07:00",
+      "body": "Some users may be having trouble with calls, using Workflow builder, and using Block Kit. Our team is currently investigating and we\u0027ll be back with any updates as they happen."
+    },
+    {
+      "date_created": "2021-04-26T18:28:14-07:00",
+      "body": "We\u0027ve deployed a fix and we believe this issue should now be resolved. Please reach out to us at feedback@slack.com if you have any further trouble.\r\n\r\nThank you for bearing with us. We\u0027ll be back with an issue summary soon."
+    },
+    {
+      "date_created": "2021-04-26T17:55:29-07:00",
+      "body": "Some customers may be experiencing errors when searching for or listing files via Slack or the API. We\u0027re very sorry for the disruption, and we\u0027re working to resolve this."
+    },
+    {
+      "date_created": "2021-05-12T18:49:51-07:00",
+      "body": "Issue summary:\r\nOn May 11, 2021 around 10:56 a.m. to 11:41 a.m. PDT, some users were unable to connect entirely or experienced degraded performance, such as channel history failing to load. Some apps making API requests may have also encountered failures, such as messages failing to send in Slack.\r\n\r\nA hardware issue caused a problem for some of our infrastructure. The automated process that should\u0027ve resolved this encountered a bug, which prevented a quick resolution. We manually replaced the failed hardware to resolve the trouble.\r\n\r\nNote: We\u0027ve updated the title to reflect the trouble affected users may have encountered. On the side of this page, we\u0027ve also added additional services that may have been impacted."
+    },
+    {
+      "date_created": "2021-05-11T12:31:33-07:00",
+      "body": "We\u0027re happy to report that this issue should now be resolved. We apologize for keeping you away from your work and causing this disruption. We\u0027ll report back with an Issue Summary shortly."
+    },
+    {
+      "date_created": "2021-05-11T12:18:52-07:00",
+      "body": "We\u0027re starting to see some steady improvements and most users should be able to connect to Slack again. We\u0027ll confirm as soon as things are working as they should."
+    },
+    {
+      "date_created": "2021-05-11T11:40:28-07:00",
+      "body": "We\u0027re aware of an issue where some users may be encountering connection errors or degraded performance. Some users will be unable to connect, and some apps making API requests may encounter failures.\r\n\r\nWe\u0027re working to resolve this and will reach back out when we have more information to share.\r\n\r\nNote: We\u0027ve updated this message to clarify what affected users may have encountered and that apps making API requests may have encountered failures."
+    },
+    {
+      "date_created": "2021-07-07T09:04:30-07:00",
+      "body": "Upon further investigation we\u0027ve learned that this issue is not fully resolved. We\u0027re continuing to investigate this and we will provide an update as soon as we have more information.\r\n\r\nThank you for your ongoing patience and apologies for the confusion."
+    },
+    {
+      "date_created": "2021-07-07T07:05:30-07:00",
+      "body": "We believe the issue should now be resolved. Users should no longer have trouble using certain apps and integrations in Slack. We\u0027ll post the summary of this issue as soon as possible."
+    },
+    {
+      "date_created": "2021-07-07T05:34:25-07:00",
+      "body": "We\u0027re still investigating the issue around using certain apps and integrations in Slack. No additional news to share just yet, but we’ll provide new information as soon as it’s available."
+    },
+    {
+      "date_created": "2021-07-07T05:04:30-07:00",
+      "body": "Our investigation is still ongoing at this time and we don’t have any new information to share just yet. We’ll be back with another update in 30 minutes."
+    },
+    {
+      "date_created": "2021-07-07T03:58:20-07:00",
+      "body": "Some customers may be experiencing issues using certain apps and integrations in Slack. Workflow Builder and other apps may be impacted. Our team is currently investigating and we\u0027ll keep you posted as soon as we have more information. We\u0027re sorry for the disruption."
+    },
+    {
+      "date_created": "2021-07-29T11:56:50-07:00",
+      "body": "Some customers may be experiencing issues with the \"Slack for Gmail\" add-on not being visible in Gmail. We\u0027re currently investigating and we\u0027ll provide another update as soon as we have more information to share."
+    },
+    {
+      "date_created": "2021-09-21T15:23:00-07:00",
+      "body": "We\u0027re seeing signs of improvement and continuing to evaluate. We will provide another update as soon as we have more information to share."
+    },
+    {
+      "date_created": "2021-09-21T14:51:54-07:00",
+      "body": "We are continuing to look into this issue. We\u0027ll provide another status update in 30 minutes."
+    },
+    {
+      "date_created": "2021-09-21T14:07:17-07:00",
+      "body": "We previously stated that this was only impacting Android users, but have now determined that this is occurring on both the Android and iOS mobile apps.  \r\n\r\nOur team is working hard to resolve this issue, and we\u0027ll be in touch once we have more information to share."
+    },
+    {
+      "date_created": "2021-09-21T13:31:23-07:00",
+      "body": "We\u0027re still investigating the issue, but we don\u0027t have additional information just yet. We\u0027ll be back in 30 minutes with another update."
+    },
+    {
+      "date_created": "2021-09-21T12:58:42-07:00",
+      "body": "Some customers may be experiencing an issue where they\u0027re being logged out of Slack on their Android mobile device. We\u0027re currently investigating and will be back with an update shortly."
+    },
+    {
+      "date_created": "2021-09-30T14:30:57-07:00",
+      "body": "We\u0027re seeing some signs of improvement, and reloading Slack (Ctrl/Command + R) may allow Slack to load again. The issue is not resolved for everyone, however, and we\u0027ll be back again once we have another update to share.\r\n\r\nNote: We\u0027ve edited the title of this incident to accurately reflect the scope of this issue."
+    },
+    {
+      "date_created": "2021-09-30T13:34:54-07:00",
+      "body": "Thank you all for your patience today as we work on resolving this connection issue. We will be back with a final update once the issues have been resolved."
+    },
+    {
+      "date_created": "2021-09-30T12:50:49-07:00",
+      "body": "We are aware of connectivity issues related to DNS that are impacting a small subset of users. This issue was caused by our own change and not related to any third-party DNS software and services. In order to resolve this faster, your ISP (Internet Service Provider) will need to flush their DNS record for slack.com. Please reach out to your networking team to provide them with this information.\r\nWe expect all customers’ connectivity issues to be resolved within the next 24 hours. We know how important it is for people to stay connected and we apologize for this disruption."
+    },
+    {
+      "date_created": "2021-09-30T12:19:00-07:00",
+      "body": "Our investigation of this connection issue is still ongoing at this time. We’ll be back with another update and apologize for this disruption. Thank you for your continued patience here!"
+    },
+    {
+      "date_created": "2021-09-30T11:17:00-07:00",
+      "body": "We are continuing to investigate the connection issue and will keep you posted as soon as we have more information available. We apologize for any disruption this has caused and thank you for your continued patience."
+    },
+    {
+      "date_created": "2021-09-30T10:46:08-07:00",
+      "body": "We are still digging in to this connection issue and we will keep you up to date as more information becomes available. Thank you for your patience today."
+    },
+    {
+      "date_created": "2021-09-30T10:05:17-07:00",
+      "body": "We continue to investigate this connection issue and we’ll continue to keep you posted as soon as we have more information. Thanks for your patience and we apologize for any disruption this may have caused."
+    },
+    {
+      "date_created": "2021-09-30T09:30:07-07:00",
+      "body": "We’re currently investigating this connection issue and we’ll keep you posted as soon as we have more information. Thanks for your patience and we apologize for the disruption."
+    },
+    {
+      "date_created": "2021-10-27T16:06:44-07:00",
+      "body": "Issue summary:\r\nOn October 27, 2021 from around 5:47 a.m. to 2:24 p.m. PDT, some users may have experienced difficulties receiving two-factor authentication (2FA) codes from our SMS service provider, preventing them from signing into Slack.\r\n\r\nWe monitored the situation until the problem was resolved and the affected users were able to receive the codes again."
+    },
+    {
+      "date_created": "2021-10-27T15:26:49-07:00",
+      "body": "The issue is now be resolved and customers should receive 2FA codes normally."
+    },
+    {
+      "date_created": "2021-10-27T10:31:44-07:00",
+      "body": "Our SMS service provider is currently experiencing high filtering on SMS towards the AT\u0026T network in the United States. We recommend using your backup codes, switching to an Authentication app, or reaching out to your Admins to temporarily disable 2FA for you."
+    },
+    {
+      "date_created": "2021-11-01T17:02:51-07:00",
+      "body": "We\u0027re still investigating, but don\u0027t have any new information yet. We\u0027ll provide another update once we have more to share."
+    },
+    {
+      "date_created": "2021-11-01T12:51:01-07:00",
+      "body": "Some Enterprise Grid customers are seeing messages temporarily disappear. Refreshing (Ctrl / Command + Shift + R) may resurface the messages, but affected users may need to refresh more than once during the day. \r\n\r\nWe\u0027re sorry for the trouble. We\u0027re investigating, and we\u0027ll report back once we have next steps."
+    },
+    {
+      "date_created": "2021-11-04T17:45:29-07:00",
+      "body": "Thank you for your patience. The issue has been resolved. Customers should no longer have any trouble signing in on the desktop app. We’re sorry for any inconvenience this may have caused."
+    },
+    {
+      "date_created": "2021-11-04T16:37:38-07:00",
+      "body": "Some users are unable to sign in on the desktop app. We\u0027re investigating and will have more information to share in 30 minutes. Our apologies for the disruption."
+    },
+    {
+      "date_created": "2021-11-09T18:00:04-08:00",
+      "body": "We\u0027re still monitoring the situation and will post updates as they become available."
+    },
+    {
+      "date_created": "2021-11-09T17:29:26-08:00",
+      "body": "Thanks again for your patience as we continue to investigate outbound email and file download failures."
+    },
+    {
+      "date_created": "2021-11-09T16:52:29-08:00",
+      "body": "Our investigation is ongoing. We\u0027ll be back with another update in 30 minutes."
+    },
+    {
+      "date_created": "2021-11-09T16:22:58-08:00",
+      "body": "We appreciate your patience while we continue to address these issues.\r\n\r\nWe\u0027re also continuing to investigate file download failures, although this is only expected to impact a small number of users."
+    },
+    {
+      "date_created": "2021-11-09T15:50:36-08:00",
+      "body": "We are still working to address the issues with outbound email failures.\r\nA small number of file downloads may be failing, this remains part of our investigation."
+    },
+    {
+      "date_created": "2021-11-09T15:21:14-08:00",
+      "body": "We are continuing to look into reports of outbound email failures. If you\u0027re awaiting a confirmation code for login, manually signing in with email address and password will work in the interim. \r\n\r\nWe\u0027re also monitoring issues with downloading files."
+    },
+    {
+      "date_created": "2021-11-09T14:51:32-08:00",
+      "body": "We\u0027re investigating failures in sending outbound emails including invitations, confirmation codes for workspace creation, email notifications."
+    },
+    {
+      "date_created": "2021-11-18T16:13:07-08:00",
+      "body": "We\u0027ve identified the source of the issue and we\u0027re working on a fix. Refreshing the page continues to help as a temporary workaround. \r\n\r\nThank you very much for bearing with us"
+    },
+    {
+      "date_created": "2021-11-18T15:41:18-08:00",
+      "body": "We\u0027re investigating reports that Slack sign up/join redirect may not be working for some users. A temporary workaround is to refresh either of those pages and on the second time, it will load. \r\n\r\nWe\u0027re investigating now and will be back with more information as soon as it\u0027s available, or in 30 minutes."
+    },
+    {
+      "date_created": "2021-12-08T18:14:59-08:00",
+      "body": "We are continuing to investigate issues with receiving 2FA codes when the language is set to Korean. Customers using English should be receiving 2FA codes correctly. Our apologies for the disruption."
+    },
+    {
+      "date_created": "2021-12-08T17:46:27-08:00",
+      "body": "Some customers in Korea aren\u0027t receiving 2FA codes set to Korean, or they may be receiving 2FA codes with garbled text.\r\n\r\nWe\u0027re investigating now and will be back with more information as soon as it\u0027s available, or in 30 minutes."
+    },
+    {
+      "date_created": "2021-12-09T08:01:03-08:00",
+      "body": "While we have deployed a fix, some customers may continue to appear in a huddle once a huddle has ended.  We are continuing to investigate this issue and will keep you updated."
+    },
+    {
+      "date_created": "2021-12-08T22:28:54-08:00",
+      "body": "We\u0027ve deployed a fix, and customers should no longer be experiencing this issue. If you continue to have any trouble, please let us know via feedback@slack.com"
+    },
+    {
+      "date_created": "2021-12-08T10:28:23-08:00",
+      "body": "We are still investigating the huddles issue that\u0027s causing the huddles status to remain as well as the inability to join new huddles."
+    },
+    {
+      "date_created": "2021-12-08T09:21:36-08:00",
+      "body": "Some users may be unable to initiate new huddles in addition to appearing on previous huddles after they have left. We\u0027re investigating this issue and we thank you for your continued patience."
+    },
+    {
+      "date_created": "2021-12-08T08:11:30-08:00",
+      "body": "Some users may appear to still be on a huddle once the huddle has ended. We’re investigating the issue and will be back with an update shortly. Thank you for your patience."
+    },
+    {
+      "date_created": "2021-12-10T15:36:37-08:00",
+      "body": "We’re continuing to work towards resolving this issue for the very small number of users who are still impacted. We appreciate your continued patience, and will let you know as soon as we have another update to share."
+    },
+    {
+      "date_created": "2022-01-05T17:29:38-08:00",
+      "body": "Most users should now be seeing signs of improvement, but we\u0027re still working towards a full resolution. We\u0027ll be back with another update as soon as the issue is resolved. Thanks for bearing with us."
+    },
+    {
+      "date_created": "2022-01-04T16:02:09-08:00",
+      "body": "Some teams that have recently initiated a free trial are experiencing delays in accessing the full suite of benefits included in a trial of our paid plans. We are working on getting this resolved as soon as possible."
+    },
+    {
+      "date_created": "2022-01-07T12:56:31-08:00",
+      "body": "We continue to work on releasing a fix and we\u0027ll share an update as soon as it\u0027s available. Thank you for your patience."
+    },
+    {
+      "date_created": "2022-01-07T11:40:00-08:00",
+      "body": "We’ve identified the cause of this bug and we’re working on getting a fix out as soon as possible. We’ll be back with another update in 30 minutes. As a workaround, you can continue to sign in manually using URL/email/password."
+    },
+    {
+      "date_created": "2022-01-07T11:02:02-08:00",
+      "body": "A bug is impacting some Android users on version 22.01.10 who try to use a magic link to sign in. Engineers have identified the issue and are working on a fix. As a workaround, you can sign in manually using URL/email/password."
+    },
+    {
+      "date_created": "2022-01-18T14:11:49-08:00",
+      "body": "This issue should now be resolved and we are currently working with customers who have reported that their channels did not automatically reconnect after re-upgrading to a paid plan to re-establish those connections. \r\n\r\nIf your team recently downgraded to a free plan, then resubscribed to a paid tier and observed Slack Connect channels not reconnecting, you can choose to manually reconnect those channels or reach out to our support team at feedback@slack.com for assistance."
+    },
+    {
+      "date_created": "2022-01-18T12:06:02-08:00",
+      "body": "We\u0027ve identified the root cause behind the issue and are working on getting things back to normal. We\u0027ll have another update as soon as we have any further information to share."
+    },
+    {
+      "date_created": "2022-01-18T11:32:02-08:00",
+      "body": "We are continuing to dig into this issue with Slack Connect channels not connecting properly. We apologize for the inconvenience in the meantime."
+    },
+    {
+      "date_created": "2022-01-18T10:35:23-08:00",
+      "body": "We are still investigating why some Slack Connect channels are having trouble reconnecting after an upgrade. Thank you for bearing with us."
+    },
+    {
+      "date_created": "2022-01-18T10:03:11-08:00",
+      "body": "Some workspaces are having trouble reconnecting their Slack Connect channels immediately after upgrading their plan. We\u0027re investigating and will let you know as soon as we know more."
+    },
+    {
+      "date_created": "2022-01-27T11:45:01-08:00",
+      "body": "As we continue to investigate this issue we wanted to quickly note that toggling the \"Notify me about replies to threads I\u0027m following\" in your \"Notifications\" settings should help as a workaround. Thank you for your patience as we work through this one!"
+    },
+    {
+      "date_created": "2022-01-27T10:19:04-08:00",
+      "body": "Some users are unexpectedly receiving banner notifications for replies in threads they\u0027re following when the preference to receive them was not previously enabled. We\u0027re investigating and will let you know as soon as we know more."
+    },
+    {
+      "date_created": "2022-01-28T14:43:00-08:00",
+      "body": "We have resolved the underlying issue for this incident and no further users will be impacted going forward.\r\n\r\nUsers previously impacted by this issue may still find the \"Notify me about replies to threads I\u0027m following\" preference changed from what was previously selected. To remedy this, please go to Preferences \u003e Notifications and update this preference if needed."
+    },
+    {
+      "date_created": "2022-01-27T16:31:29-08:00",
+      "body": "Some users have been unexpectedly receiving banner notifications for replies in threads they\u0027re following when the preference to receive them was not previously enabled. We\u0027ve released a change, and believe that no additional users will be impacted by this issue. However, we are continuing to monitor the situation and will report back once we have another update.\r\n\r\nPlease be aware that users previously impacted by this issue may find their \"Notify me about replies to threads I\u0027m following\" preference changed from what was selected previously. We recommend heading to Preferences \u003e Notifications and toggling this preference if needed."
+    },
+    {
+      "date_created": "2022-02-02T13:34:15-08:00",
+      "body": "Issue summary: \r\nFrom 7:15 AM PST until 9:15 AM PST on February 2, 2022, some users were unable to use the post feature. \r\n\r\nThis was caused by a code change. We reverted this change, restoring post functionality."
+    },
+    {
+      "date_created": "2022-02-02T10:17:59-08:00",
+      "body": "This has now been resolved and posts should be loading as expected. Please reload Slack using Cmd/Ctrl + Shift + R in order for the fix to be reflected on your end. We apologize for the inconvenience."
+    },
+    {
+      "date_created": "2022-02-02T09:07:27-08:00",
+      "body": "Users may still experience posts not loading or loading in a loop. Our team is continuing to look into this and we’ll share more information soon."
+    },
+    {
+      "date_created": "2022-02-02T08:40:44-08:00",
+      "body": "Some users may experience posts not loading or loading in a continuous loop. Our team is looking into this now and we’ll share more information soon."
+    },
+    {
+      "date_created": "2022-02-03T11:48:58-08:00",
+      "body": "Some customers may be experiencing issues using slash commands. We have identified the cause, and are working on a fix."
+    },
+    {
+      "date_created": "2022-02-04T14:04:54-08:00",
+      "body": "We\u0027ve resolved the issue related to sending/composing messages in Safari. Safari users may need to reload any active Slack tabs (Cmd/Ctrl + Shift + R) or quit and relaunch their browser for the fix to come into effect. \r\n\r\nThanks for bearing with us and we apologize for the disruption."
+    },
+    {
+      "date_created": "2022-02-04T09:05:51-08:00",
+      "body": "We are continuing to look into this issue when sending/composing messages on Safari. We apologize for the inconvenience and will provide more updates as new information becomes available."
+    },
+    {
+      "date_created": "2022-02-04T04:23:51-08:00",
+      "body": "We\u0027re continuing to investigate the errors when sending/composing messages on Safari.\r\n\r\nWe\u0027ll be back with an update as soon as possible and we apologize for the disruption. This error does not impact other browsers nor our desktop and mobile applications."
+    },
+    {
+      "date_created": "2022-02-04T02:33:03-08:00",
+      "body": "Some users on Safari may be hitting an error when composing/sending messages."
+    },
+    {
+      "date_created": "2022-02-07T15:27:07-08:00",
+      "body": "Issue summary: \r\nFrom 10:37 AM PST on February 2, 2022 until 1:37 PM PST on February 4, 2022, some users were encountering an error when trying to compose or send messages in web browsers. \r\n\r\nWe found that a variable object in the message composer code was attempting to call an action that was not defined. We resolved the issue by adding a check to the code to prevent the error state from happening. \r\n\r\nNote: We previously indicated this issue was limited to Safari. After further investigation, we\u0027ve determined other web browsers may have been impacted as well."
+    },
+    {
+      "date_created": "2022-02-14T15:18:44-08:00",
+      "body": "We are currently investigating an issue where profile information may be failing to load for some users, resulting in blank profile pictures and missing details, such as display names. \r\n\r\nGiven the nature of the connectivity issue, search and emoji may also be impacted. Please stay tuned for status updates as we work to resolve this."
+    },
+    {
+      "date_created": "2022-02-23T09:44:31-08:00",
+      "body": "Less than 1% of users are having trouble receiving reminders. We are continuing to look into this and will provide an update as soon as there’s news to share."
+    },
+    {
+      "date_created": "2022-02-23T07:50:36-08:00",
+      "body": "We\u0027re still investigating the reports about using reminders. We do apologize for any disruption."
+    },
+    {
+      "date_created": "2022-02-22T23:07:43-08:00",
+      "body": "We’re receiving reports around trouble using reminders. We’re on the case and will provide another update once we have more details to share. We’re sorry for the inconvenience."
+    },
+    {
+      "date_created": "2022-03-22T17:03:04-07:00",
+      "body": "Some users whose teams leverage Slack for Intune Mobile App Management (MAM) are repeatedly getting logged out of the iOS app. We apologize for the inconvenience and will keep you posted as we continue to investigate the issue."
+    },
+    {
+      "date_created": "2022-03-23T15:14:57-07:00",
+      "body": "We continue to investigate this issue, but don’t have new information to share just yet. Thanks for your patience as we work towards a fix."
+    },
+    {
+      "date_created": "2022-04-19T19:48:20-07:00",
+      "body": "From April 19, 2022 at 1:16 p.m. PDT until April 19, 2022 at 4:13 p.m PDT, some Enterprise customers may have experienced delays related to reminders, notifications and other task-related features. These issues were a caused when the Primary Owner\u0027s email address of a large load-test org was updated, which resulted in the delayed processing of Enterprise job queues.\r\n\r\nAfter identifying the issue, we released a fix to resolved the job queue delays and return Enterprise job processing to normal."
+    },
+    {
+      "date_created": "2022-04-19T16:53:05-07:00",
+      "body": "We\u0027ve traced the performance issues back to a job that had backed up the queue responsible for handling actions taken by users and administrators in Enterprise Grid organizations. \r\n\r\nThe backlog of tasks have completed and all features should be working as expected, though we recommend reloading the Slack app (Cmd/Ctrl + Shift + R) just in case. Thank you for your patience."
+    },
+    {
+      "date_created": "2022-04-19T14:57:41-07:00",
+      "body": "Enterprise Grid customers may be experiencing trouble using certain features in Slack. This may include setting custom statuses and creating channels, and we’ll continue to provide updates as we learn more."
+    },
+    {
+      "date_created": "2022-04-20T16:48:29-07:00",
+      "body": "Issue summary:\r\nFrom April 19, 2022 at 4:38 PM PDT to April 20, 2022 at 12:36 AM PDT, our SCIM endpoint began deactivating some users. \r\n\r\nThis was the result of a code change in a recent patch to fix a bug affecting the way SCIM handled user profile updates. \r\n\r\nWe reverted this code change to prevent new deactivations. We then restored affected user accounts, group memberships, and integrations to their prior states."
+    },
+    {
+      "date_created": "2022-04-20T12:59:53-07:00",
+      "body": "The SCIM issue has been resolved and all affected users have been reactivated. We apologize for the disruption to your day."
+    },
+    {
+      "date_created": "2022-04-20T09:48:27-07:00",
+      "body": "We are continuing to monitor the situation and verify that all affected users are reactivated. We\u0027re working on restoring group membership and impacted integrations. We\u0027ll be back once we have another update to share."
+    },
+    {
+      "date_created": "2022-04-20T08:46:16-07:00",
+      "body": "The team is still ensuring that all affected users are reactivated. While we are continuing to work on restoring group membership and impacted integrations, we appreciate your patience."
+    },
+    {
+      "date_created": "2022-04-20T07:43:55-07:00",
+      "body": "We are verifying that all affected users are now reactivated. Our team will now begin work on restoring group membership and impacted integrations. We appreciate your patience while we work to get this resolved."
+    },
+    {
+      "date_created": "2022-04-20T04:44:40-07:00",
+      "body": "We\u0027re still doing our best to restore all affected users and will share new updates here as soon as we have them.\r\n\r\nWe appreciate your continued patience while we work to get this resolved."
+    },
+    {
+      "date_created": "2022-04-19T23:59:21-07:00",
+      "body": "We appreciate your patience as our team continues to work to restore all affected users.\r\n\r\nWe will keep you posted as soon as we have further updates to share."
+    },
+    {
+      "date_created": "2022-04-19T23:47:14-07:00",
+      "body": "Our team is currently working on restoring all affected users.\r\n\r\nWe’ll be back once we have another update to share. Thank you for your patience as we continue to work towards a fix."
+    },
+    {
+      "date_created": "2022-04-19T22:34:31-07:00",
+      "body": "Our team have now identified all affected users and workspaces. We\u0027re still monitoring the situation, and we\u0027ll report back with more information in 30 minutes. Thank you for holding tight while we work on this."
+    },
+    {
+      "date_created": "2022-04-19T21:51:28-07:00",
+      "body": "We\u0027ve identified the root cause of this issue, and SCIM events should now be working as expected. We are actively investigating remediation for affected customers. \r\n\r\nThank you for your patience while we look into this. We\u0027ll share another update in 30 minutes."
+    },
+    {
+      "date_created": "2022-04-19T20:46:43-07:00",
+      "body": "We’re investigating an issue with SCIM deactivating users, and SCIM updates not working as expected. We’re looking into the cause and will provide more information as soon as it\u0027s available."
+    },
+    {
+      "date_created": "2022-04-21T14:38:16-07:00",
+      "body": "We\u0027re seeing noticeable signs of improvement, but are continuing to monitor. We’ll provide new information as soon as it’s available."
+    },
+    {
+      "date_created": "2022-04-21T07:35:00-07:00",
+      "body": "We continue to investigate an issue where some Android users are unable to receive notifications, and will report back once we have more news to share."
+    },
+    {
+      "date_created": "2022-04-21T00:17:20-07:00",
+      "body": "We are investigating an issue where some Android users are unable to receive notifications, and will report back once we have more news to share."
+    },
+    {
+      "date_created": "2022-04-28T13:35:48-07:00",
+      "body": "Customers should no longer be experiencing any trouble using workflows. We appreciate your patience while we sorted this one out."
+    },
+    {
+      "date_created": "2022-04-28T12:07:36-07:00",
+      "body": "We’ve identified the root cause of this issue with workflows and users should be seeing signs of recovery. We’re working on getting a fix out as soon as possible — we’ll be back once we have another update to share."
+    },
+    {
+      "date_created": "2022-04-28T11:28:33-07:00",
+      "body": "We’re looking into an issue impacting workflows and we’ll let you know as we learn more. Thank you for bearing with us in the meantime."
+    },
+    {
+      "date_created": "2022-05-17T18:04:32-07:00",
+      "body": "From 13:46 PM PDT on May 16, 2022 until 12:55 PM PDT on May 17, 2022, some customers may have experienced problems with autocompletion in searches and the \u0027Jump to\u0027 modal, as well as issues with channel and profile information.\r\n\r\nWe determined that a recent code change increased the load on the infrastructure that serves this information. We reverted the change and implemented load mitigation measures, restoring functionality for all affected customers."
+    },
+    {
+      "date_created": "2022-05-17T15:10:23-07:00",
+      "body": "We\u0027ve rolled out a fix and things should be working as expected. Please reload Slack using Command + Shift + R (Mac) or Ctrl + Shift + R (Windows/Linux). Thank you for your patience while we sorted out this issue."
+    },
+    {
+      "date_created": "2022-05-17T14:37:04-07:00",
+      "body": "Some users may be seeing signs of improvement, but we’re still working towards a full resolution. We’ll be back with another update!"
+    },
+    {
+      "date_created": "2022-05-17T14:01:58-07:00",
+      "body": "We’re starting to see improvements, but still have some work to do. We’ll return with another update shortly."
+    },
+    {
+      "date_created": "2022-05-17T13:39:34-07:00",
+      "body": "We’re seeing signs of improvement, but we’re still monitoring the situation. We’ll confirm once the issue is fully resolved or we have another update to share."
+    },
+    {
+      "date_created": "2022-05-17T13:05:22-07:00",
+      "body": "At this time, some people may also be encountering trouble setting or clearing their user status in Slack, as well as issues related to:\r\n\r\n• Autocomplete in message input\r\n• Workspace Directory\r\n• Quick Switcher\r\n• Channel membership and Channel status\r\n• Apps lists in channels\r\n• User profile details\r\n• Integrations/API messaging\r\n\r\nWe\u0027re observing signs of recovery, and are continuing to monitor the situation. We\u0027ll be back with another update in 30 minutes."
+    },
+    {
+      "date_created": "2022-05-17T12:27:31-07:00",
+      "body": "We’re continuing to look into this, and we’ll report back with an update in 30 minutes."
+    },
+    {
+      "date_created": "2022-05-17T11:57:35-07:00",
+      "body": "We’re still actively investigating this issue, but we don’t have any new information to share at this time. Thanks for your patience as we continue to work towards a fix."
+    },
+    {
+      "date_created": "2022-05-17T11:28:56-07:00",
+      "body": "Some users may be experiencing issues with using the search function in Slack. \r\n \r\nWe\u0027re currently investigating the issue and will provide a status update once we have more information."
+    },
+    {
+      "date_created": "2022-06-07T14:30:17-07:00",
+      "body": "No additional news to share just yet, but we’re focused on getting things back to normal as quickly as we can. We apologize for the continued trouble."
+    },
+    {
+      "date_created": "2022-06-07T14:05:12-07:00",
+      "body": "We don’t have any new updates to share at this time. Thanks for standing by while we continue to investigate."
+    },
+    {
+      "date_created": "2022-06-07T13:26:02-07:00",
+      "body": "We’re still actively investigating this issue, but we don’t have any new information to share at this time. Thanks for sticking with us as we continue to work towards a fix."
+    },
+    {
+      "date_created": "2022-06-07T12:52:43-07:00",
+      "body": "We’re still actively investigating this issue. We’ve found that the cause of the problem stems from incorrectly showing desired invited users as not belonging to the same workspace as the channel. The users in fact do belong to the right workspace. We’ll provide another update as soon as we have more information to share."
+    },
+    {
+      "date_created": "2022-06-07T12:17:36-07:00",
+      "body": "Some users on Enterprise Grid may be running into trouble inviting existing workspace users to private channels. We will let you know as soon as we know more. We appreciate your patience in the meantime."
+    },
+    {
+      "date_created": "2022-06-15T14:19:07-07:00",
+      "body": "Some users may be experiencing trouble with viewing files in Slack. We\u0027re working hard to resolve this issue as quickly as possible, and we\u0027ll share updates as soon as we can. We apologize for any inconvenience this may be causing."
+    },
+    {
+      "date_created": "2022-06-23T14:04:17-07:00",
+      "body": "We\u0027ve identified the cause of this issue and we\u0027re working on getting a fix out as soon as possible. We\u0027ll be back once we have another update to share. Thank you for your continued patience."
+    },
+    {
+      "date_created": "2022-06-23T13:25:18-07:00",
+      "body": "Some customers are unable to edit workflows. We\u0027re actively investigating the issue and will provide new information as soon as it\u0027s available."
+    },
+    {
+      "date_created": "2022-06-30T14:15:26-07:00",
+      "body": "We’re receiving reports around trouble with typing in Japanese or Korean. We’re on the case and will provide another update once we have more details to share. We’re sorry for the disruption."
+    },
+    {
+      "date_created": "2022-07-05T12:15:00-07:00",
+      "body": "We identified the issue and have deployed a fix. Any impacted users should no longer have trouble loading threads."
+    },
+    {
+      "date_created": "2022-07-04T05:07:50-07:00",
+      "body": "We\u0027re still investigating this issue, but we don\u0027t have additional information just yet. We\u0027ll continue to keep you informed here."
+    },
+    {
+      "date_created": "2022-07-04T03:44:28-07:00",
+      "body": "We’re investigating a problem with threads failing to load. We’ll be back with another update as soon as we have more information to share, we’re sorry for the disruption."
+    },
+    {
+      "date_created": "2022-08-01T15:03:50-07:00",
+      "body": "We\u0027ve resolved the issue: impacted users should be able to connect to third party apps and integrations, and use workflows once more.\r\n\r\nIf you\u0027re still encountering trouble, please reload Slack, by pressing Command/Control + Shift + R.\r\n\r\nWe apologize for any disruption to your work day."
+    },
+    {
+      "date_created": "2022-08-01T14:26:40-07:00",
+      "body": "We’ve begun rolling out a fix. We’ll return with another update once rollout has concluded — thanks for your continued patience."
+    },
+    {
+      "date_created": "2022-08-01T13:22:58-07:00",
+      "body": "While investigating we found Workflows are also impacted. The good news is we’ve identified a potential fix which will be rolled out soon."
+    },
+    {
+      "date_created": "2022-08-01T12:47:07-07:00",
+      "body": "We’ve received reports of users running into `invalid_auth` when using apps/integrations. We’re investigating and will let you know as soon as we have further information to share. We appreciate your patience in the meantime."
+    },
+    {
+      "date_created": "2022-09-05T08:09:43-07:00",
+      "body": "Users on the Windows Store desktop app version 4.28.171 may experience issues with the app crashing. To determine which version you are on, click the ☰ three lines icon in the top left of the Slack app \u003e Help \u003e About Slack.\r\n\r\nWe’re actively looking into this, and we’ll report back as more information becomes available. In the meantime, you may access Slack via browser at https://my.slack.com, or via mobile."
+    },
+    {
+      "date_created": "2022-09-05T08:09:43-07:00",
+      "body": "Users on the Windows Store desktop app version 4.28.171 may experience issues with the app not opening and receive a connection error message stating -2:ERR_FAILED or Slack cannot connect. To determine which version you are on, click the ☰ three lines icon in the top left of the Slack app \u003e Help \u003e About Slack.\r\n\r\nWe’re actively looking into this, and we’ll report back as more information becomes available. In the meantime, you may access Slack via browser at https://my.slack.com, or via mobile."
+    },
+    {
+      "date_created": "2022-09-07T12:01:04-07:00",
+      "body": "To clear the \"Slack cannot connect\" message, users should try clearing cache by going to \"Help\" \u003e \"Troubleshooting\" \u003e \"Clear Cache and Restart\".\r\n\r\nIf the issue persists after or if you\u0027re unable to open the desktop app, please uninstall the Windows Store version and reinstall the Direct Download version by following these instructions:\r\n\r\n1. Quit Slack (Ctrl + Q) and make sure there are no Slack.exe or Update.exe processes running in Task Manager.\r\n2. On Windows 10, open the Start menu and head to Settings \u003e Apps \u0026 features. Find Slack in the list that appears and click the option to Uninstall.\r\n3. Open a Run dialog (Windows Key + R).\r\n4. Enter the following path: C:\\Users\\%USERNAME%\\AppData\\Local\\Packages\\91750D7E.Slack_8she8kybcnzg4\\LocalCache\\Roaming\r\n5. Delete the Slack folder from the directory that launches.\r\n6. Reinstall Slack from our website: https://slack.com/downloads/windows"
+    },
+    {
+      "date_created": "2022-09-07T07:21:46-07:00",
+      "body": "Users on the Windows Store desktop app version 4.28.171 may still be experiencing issues with the app not opening and receiving a connection error message stating -2:ERR_FAILED or \"Slack cannot connect\". \r\n\r\nWe\u0027re actively looking into this, and we\u0027ll post updates as soon as we have more information. In the meantime, you may access Slack via browser at https://my.slack.com, or via mobile.\r\n\r\nIf you need help to determine which version you are on, click the ☰ three lines icon in the top left of the Slack app \u003e Help \u003e About Slack."
+    },
+    {
+      "date_created": "2022-09-12T14:24:40-07:00",
+      "body": "Some users may be experiencing long delays when creating and editing posts. \r\n\r\nWe\u0027re actively looking into this, and we\u0027ll report back as more information becomes available. We apologize for the disruption."
+    },
+    {
+      "date_created": "2022-09-13T16:15:14-07:00",
+      "body": "We\u0027re still investigating this issue impacting creating and editing posts. We appreciate your continued patience as we work towards a solution."
+    },
+    {
+      "date_created": "2022-09-13T01:46:34-07:00",
+      "body": "We are continuing to investigate this issue. Apologies for any disruption caused by this - we\u0027ll let you know as soon as we find out more."
+    }
+  ]
+}

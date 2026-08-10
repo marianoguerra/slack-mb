@@ -1,0 +1,109 @@
+{
+  "schemas": [
+    {
+      "type": "",
+      "workspace": {
+        "id": "",
+        "name": "",
+        "domain": ""
+      },
+      "enterprise": {
+        "id": "",
+        "name": "",
+        "domain": ""
+      },
+      "user": {
+        "id": "",
+        "name": "",
+        "email": "",
+        "team": "",
+        "account_type": ""
+      },
+      "file": {
+        "id": "string",
+        "name": "string",
+        "filetype": "string",
+        "title": "string"
+      },
+      "channel": {
+        "id": "",
+        "name": "",
+        "privacy": "",
+        "is_shared": "",
+        "is_org_shared": "",
+        "teams_shared_with": ""
+      },
+      "app": {
+        "id": "",
+        "name": "",
+        "is_distributed": "",
+        "is_directory_approved": "",
+        "is_workflow_app": "",
+        "scopes": "",
+        "app_id": "",
+        "distribution_type": "",
+        "user_ids": "",
+        "bot_scopes": ""
+      },
+      "workflow": {
+        "id": "",
+        "name": ""
+      },
+      "barrier": {
+        "id": "",
+        "primary_usergroup": "",
+        "barriered_from_usergroup": ""
+      },
+      "message": {
+        "team": "",
+        "channel": "",
+        "timestamp": ""
+      },
+      "usergroup": {
+        "id": "",
+        "name": ""
+      },
+      "role": {
+        "id": "",
+        "name": "",
+        "type": ""
+      },
+      "account_type_role": {
+        "id": "",
+        "name": ""
+      },
+      "canvas": {
+        "id": "",
+        "filetype": "",
+        "title": ""
+      },
+      "workflow_v2": {
+        "id": "",
+        "app_id": "",
+        "date_updated": "",
+        "callback_id": "",
+        "name": "",
+        "updated_by": "",
+        "step_configuration": "",
+        "template_id": "",
+        "suspicious_keywords": "",
+        "trigger_name": "",
+        "trigger_channels": "",
+        "trigger_configuration": ""
+      },
+      "template": {
+        "id": "",
+        "template_name": ""
+      },
+      "legal_hold_policy": {
+        "id": "",
+        "name": ""
+      }
+    }
+  ],
+  "ok": false,
+  "error": "",
+  "needed": "",
+  "provided": "",
+  "warning": ""
+}

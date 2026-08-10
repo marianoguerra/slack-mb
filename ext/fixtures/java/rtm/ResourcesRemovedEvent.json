@@ -1,0 +1,17 @@
+{
+  "type": "resources_removed",
+  "resources": [
+    {
+      "resource": {
+        "type": "",
+        "grant": {
+          "type": "",
+          "resource_id": ""
+        }
+      },
+      "scopes": [
+        ""
+      ]
+    }
+  ]
+}

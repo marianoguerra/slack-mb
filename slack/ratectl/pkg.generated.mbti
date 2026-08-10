@@ -1,0 +1,49 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "marianoguerra/slack/ratectl"
+
+import {
+  "marianoguerra/slack/methods",
+  "moonbitlang/core/debug",
+}
+
+// Values
+
+// Errors
+
+// Types and methods
+pub(all) struct Limit {
+  value : Int
+  per_millis : Int64
+} derive(Eq, @debug.Debug)
+pub fn Limit::capacity(Self) -> Int
+pub fn Limit::counter(Self, Int64) -> ThrottlingCounter
+pub fn Limit::new(Int, Int64) -> Self
+pub fn Limit::of_method(String) -> Self
+pub fn Limit::of_tier(@methods.RateLimitTier) -> Self
+pub fn Limit::rate_limit_in_millis(Self) -> Int64
+
+pub struct Throttler {
+  buckets : Map[String, ThrottlingCounter]
+  team_id : String
+}
+pub fn Throttler::acquire(Self, String, Int64, scope? : String) -> Int64
+pub fn Throttler::delay_millis(Self, String, scope? : String) -> Int64
+pub fn Throttler::new(team_id? : String) -> Self
+pub fn Throttler::note_retry_after(Self, String, Int, Int64, scope? : String) -> Unit
+pub fn Throttler::throttling_key(Self, String, scope? : String) -> String
+
+pub(all) struct ThrottlingCounter {
+  capacity : Int64
+  max_capacity : Int
+  last_arrived : Int64
+  last_updated : Int64
+  rate_limit_in_millis : Int64
+  delay_millis : Int64
+} derive(Eq, @debug.Debug)
+pub fn ThrottlingCounter::new(Int, Int64, Int64) -> Self
+pub fn ThrottlingCounter::update(Self, Int64) -> Self
+pub fn ThrottlingCounter::with_retry_after(Self, Int) -> Self
+
+// Type aliases
+
+// Traits
