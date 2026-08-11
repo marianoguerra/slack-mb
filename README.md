@@ -55,7 +55,7 @@ is not published at all.
 | `ext/cmd/integration` | The scenario against a real workspace; needs a token |
 | `ext/tools/gen_methods` | Generates `slack/methods/generated_methods.mbt` |
 | `ext/tools/gen_model` | Generates `slack/model/generated_model.mbt` |
-| `ext/test/*` | Conformance tests over the vendored corpus, the mock, the model and the async client tests |
+| `ext/test/*` | Conformance tests over the vendored corpus, the mock, the model, the version sites and the async client tests |
 
 ## Working on it
 
@@ -74,7 +74,7 @@ most of it. `moon test`, on the other hand, covers the whole workspace from
 wherever it was invoked, which is why the tests that read files probe for their
 fixtures rather than assuming a working directory.
 
-306 tests: 251 on wasm and 55 more on native (the async client tests, the
+309 tests: 252 on wasm and 57 more on native (the async client tests, the
 scenario against the mock, everything that reads the corpus off disk, and
 anything else that needs a runtime).
 
@@ -330,8 +330,10 @@ moon package
 moon publish
 ```
 
-The version lives in **six** places, and only the first is obvious. Grep the
-old string rather than trusting this list:
+The version lives in **six** places, and only the first is obvious.
+`ext/test/version` checks the other five against `slack/moon.mod` and fails
+naming whichever went stale, so this table is documentation rather than the
+thing standing between you and a bad release. Grep anyway:
 
 ```sh
 grep -rn "$OLD_VERSION" --include="*.mod" --include="*.mbt" slack http ext
@@ -340,7 +342,7 @@ grep -rn "$OLD_VERSION" --include="*.mod" --include="*.mbt" slack http ext
 | where | what |
 | --- | --- |
 | `slack/moon.mod` | `version` |
-| `slack/api/request.mbt` | `user_agent` hardcodes it, and nothing fails if it goes stale — the test only asserts the string *contains* `marianoguerra/slack` |
+| `slack/api/request.mbt` | `user_agent` hardcodes it. The one site nothing resolves against, so a stale value ships silently — which it did through 0.1.0 and 0.2.0. Now gated |
 | `http/moon.mod` | `version`, and the `marianoguerra/slack@` import constraint |
 | `ext/moon.mod` | `version`, and both import constraints — or the workspace stops resolving |
 

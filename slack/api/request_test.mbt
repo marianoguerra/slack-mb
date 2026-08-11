@@ -80,8 +80,40 @@ test "the standard headers are set" {
     Some("application/x-www-form-urlencoded"),
   )
   assert_eq(r.headers.get("accept"), Some("application/json"))
-  assert_true(r.headers.get("user-agent") is Some(_))
-  assert_true(@api.user_agent.contains("marianoguerra/slack"))
+  assert_eq(r.headers.get("user-agent"), Some(@api.user_agent))
+  assert_true(
+    @api.user_agent.has_prefix("MoonBit-Slack-SDK; marianoguerra/slack/"),
+  )
+}
+
+///|
+/// The user agent's version, which is hand-maintained and therefore the field
+/// most able to go stale unnoticed.
+///
+/// What this package can check is the SHAPE: three dot-separated numbers, so a
+/// bump that mangles the string fails here. Whether those numbers match
+/// `slack/moon.mod` is a different question and cannot be asked from inside
+/// the module -- it needs to read a file, which is what `ext/test/version`
+/// does. Both halves are needed: this one alone would pass on
+/// `.../marianoguerra/slack/0.1.0` forever.
+test "the user agent carries a version-shaped version" {
+  let version = @api.user_agent["MoonBit-Slack-SDK; marianoguerra/slack/".length():].to_owned()
+  let parts = version.split(".").collect()
+  assert_eq(
+    parts.length(),
+    3,
+    msg="not three dot-separated parts: '\{version}'",
+  )
+  for part in parts {
+    let part = part.to_owned()
+    assert_true(part.length() > 0, msg="an empty part in '\{version}'")
+    for c in part {
+      assert_true(
+        c >= '0' && c <= '9',
+        msg="'\{version}' has a non-digit in '\{part}'",
+      )
+    }
+  }
 }
 
 ///|

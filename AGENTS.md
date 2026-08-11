@@ -96,6 +96,11 @@ You can browse and install extra skills here:
   `client` would shadow `@client`. `ext/test/calls` and `ext/test/highlevel`
   are named that way for this reason.
 
+- **The version lives in six places** — `slack/moon.mod` decides, and
+  `slack/api/request.mbt`, `http/moon.mod` and `ext/moon.mod` must agree.
+  `ext/test/version` is the gate. Bumping is `sed -i 's/OLD/NEW/g'` over those
+  four files; README's "Releasing" section has the table and the publish order.
+
 - **`@typed` is a layer and nothing else.** A method there is its `@client`
   counterpart, unchanged in name and arguments, plus the key its payload
   arrives under. Extraction is per method and never generic — `channel` is an

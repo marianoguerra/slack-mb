@@ -1,0 +1,15 @@
+// The six places the version lives, against the one that decides it.
+//
+// Here rather than beside the code because it reads files, and
+// `marianoguerra/slack` has no filesystem -- the same reason ext/test/coverage
+// and ext/test/mockshape are here.
+import {
+}
+
+import {
+  "marianoguerra/slack/api",
+  "moonbitlang/core/string",
+  "moonbitlang/x/fs",
+} for "test"
+
+supported_targets = "+native"

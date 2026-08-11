@@ -1,5 +1,18 @@
 # Changelog
 
+## Unreleased
+
+### Verification
+
+- **`ext/test/version`** — the six places the version lives, checked against
+  `slack/moon.mod`, which is the one mooncakes publishes under. Five of them
+  are import constraints, where disagreeing breaks resolution loudly. The
+  sixth is `@api.user_agent`, which hardcodes the version in a string that
+  nothing resolves against: a release that forgets it ships a library telling
+  Slack it is a version it is not, and nothing anywhere notices. It went
+  unnoticed through 0.1.0 and 0.2.0 for that reason. The failure names the
+  file that went stale.
+
 ## 0.3.0
 
 ### Added
