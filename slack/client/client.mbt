@@ -3,7 +3,7 @@
 // It composes @api (bytes in, bytes out), @blocks (the message model) and
 // @methods (the name and tier table), and it holds a `&Transport` rather than a
 // socket -- so a browser host supplies `fetch`, a native host supplies
-// marianoguerra/slack-ext/transport_http, and a test supplies
+// marianoguerra/slack-http, and a test supplies
 // @testing.FakeTransport.
 //
 // What it deliberately does NOT do is throttle or retry. Both need to sleep,

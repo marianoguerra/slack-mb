@@ -1,0 +1,25 @@
+// The high-level client: the same calls as @client, answering domain types.
+//
+// Strictly a layer. Every method here is its @client counterpart plus one
+// extraction step, and `Api::client` hands the low-level client back for
+// everything this package does not wrap -- the 260-odd methods with no typed
+// call at all, a field @model does not carry, the raw JSON.
+//
+// A wrapper struct rather than more methods on `Client`, for two reasons.
+// MoonBit only allows a method in the package that defines its type, so this
+// could not extend `Client` from here even if it wanted to. And keeping them
+// apart lets a method here take the SAME name and arguments as the one it
+// wraps, differing only in what it answers -- `client.users_info(...)` gives
+// you an `ApiResponse`, `api.users_info(...)` gives you a `User`.
+import {
+  "marianoguerra/slack/api",
+  "marianoguerra/slack/blocks",
+  "marianoguerra/slack/client",
+  "marianoguerra/slack/model",
+  "moonbitlang/core/json",
+}
+
+// No test block: every method here is `async`, an `async test` needs
+// moonbitlang/async, and this module does not have it. They live in
+// ext/test/highlevel, against @mock -- which is the right place anyway, since
+// what is worth testing is a whole call and not an extraction step.

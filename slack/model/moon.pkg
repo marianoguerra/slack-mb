@@ -1,0 +1,24 @@
+// The Slack domain model: the entities a response carries, as MoonBit types.
+//
+// Read-only, and separate from @client on purpose. @client's methods answer an
+// `ApiResponse` whose payload is `Json`, because 326 methods cannot have 326
+// response types and because a field Slack added last Tuesday must not break a
+// bot. This package is the other half of that bargain: the dozen entities that
+// recur across those methods, modelled, with everything else still reachable
+// through `extra`.
+//
+// It imports @blocks because a message's `blocks` are already modelled there --
+// which is the reason to have this package at all rather than a pile of
+// accessors. Nothing here needs a socket, a clock or a filesystem, so it stays
+// on every backend like the rest of the library.
+import {
+  "marianoguerra/slack/blocks",
+  "marianoguerra/slack/internal/jsonx",
+  "moonbitlang/core/debug",
+  "moonbitlang/core/json",
+}
+
+import {
+  "moonbitlang/core/test",
+  "moonbitlang/core/json",
+} for "test"

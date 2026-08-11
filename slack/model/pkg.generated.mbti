@@ -1,0 +1,430 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "marianoguerra/slack/model"
+
+import {
+  "marianoguerra/slack/blocks",
+  "moonbitlang/core/debug",
+}
+
+// Values
+
+// Errors
+
+// Types and methods
+pub(all) struct BotProfile {
+  app_id : String?
+  bot_access_token : String?
+  bot_user_id : String?
+  deleted : Bool?
+  id : String?
+  is_workflow_bot : Bool?
+  name : String?
+  team_id : String?
+  updated : Int64?
+  user_id : String?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+pub fn BotProfile::from_json(Json) -> Self?
+pub fn BotProfile::to_json(Self) -> Json
+
+pub(all) struct Channel {
+  id : String
+  channel_manager_count : Int?
+  connected_limited_team_ids : Array[String]?
+  connected_team_ids : Array[String]?
+  context_team_id : String?
+  conversation_host_id : String?
+  created : Int64?
+  creator : String?
+  creator_id : String?
+  date_connected : Int64?
+  enterprise_id : String?
+  external_user_count : Int?
+  has_pins : Bool?
+  internal_team_ids : Array[String]?
+  internal_team_ids_count : Int?
+  internal_team_ids_sample_team : String?
+  is_archived : Bool?
+  is_channel : Bool?
+  is_disconnect_in_progress : Bool?
+  is_ext_shared : Bool?
+  is_frozen : Bool?
+  is_general : Bool?
+  is_global_shared : Bool?
+  is_group : Bool?
+  is_im : Bool?
+  is_member : Bool?
+  is_moved : Int?
+  is_mpim : Bool?
+  is_non_threadable : Bool?
+  is_open : Bool?
+  is_org_default : Bool?
+  is_org_mandatory : Bool?
+  is_org_shared : Bool?
+  is_pending_ext_shared : Bool?
+  is_private : Bool?
+  is_read_only : Bool?
+  is_shared : Bool?
+  is_starred : Bool?
+  is_thread_only : Bool?
+  is_user_deleted : Bool?
+  last_activity_ts : Int64?
+  last_read : String?
+  latest : Message?
+  locale : String?
+  member_count : Int?
+  members : Array[String]?
+  name : String?
+  name_normalized : String?
+  num_members : Int?
+  parent_conversation : String?
+  parent_group : String?
+  pending_connected_team_ids : Array[String]?
+  pending_shared : Array[String]?
+  previous_names : Array[String]?
+  priority : Int?
+  shared_team_ids : Array[String]?
+  topic : ChannelText?
+  unlinked : Int?
+  unread_count : Int?
+  unread_count_display : Int?
+  updated : Int64?
+  user : String?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+pub fn Channel::display(Self) -> String
+pub fn Channel::from_json(Json) -> Self?
+pub fn Channel::to_json(Self) -> Json
+
+pub(all) struct ChannelText {
+  creator : String?
+  last_set : Int64?
+  value : String?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+pub fn ChannelText::from_json(Json) -> Self?
+pub fn ChannelText::text(Self) -> String
+pub fn ChannelText::to_json(Self) -> Json
+
+pub(all) struct Edited {
+  ts : String?
+  user : String?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+pub fn Edited::from_json(Json) -> Self?
+pub fn Edited::to_json(Self) -> Json
+
+pub(all) struct File {
+  id : String
+  access : String?
+  alt_txt : String?
+  app_id : String?
+  app_name : String?
+  blocks : Array[@blocks.LayoutBlock]?
+  bot_id : String?
+  channels : Array[String]?
+  comments_count : Int?
+  converted_pdf : String?
+  created : Int64?
+  deanimate_gif : String?
+  display_as_bot : Bool?
+  duration_ms : Int?
+  editable : Bool?
+  editor : String?
+  external_id : String?
+  external_type : String?
+  external_url : String?
+  file_access : String?
+  filetype : String?
+  groups : Array[String]?
+  has_rich_preview : Bool?
+  hls : String?
+  ims : Array[String]?
+  is_external : Bool?
+  is_modified_by_ai : Bool?
+  is_public : Bool?
+  is_starred : Bool?
+  last_editor : String?
+  lines : Int?
+  media_display_type : String?
+  mimetype : String?
+  mode : String?
+  mp4 : String?
+  name : String?
+  num_stars : Int?
+  original_attachment_count : Int?
+  permalink : String?
+  permalink_public : String?
+  pinned_to : Array[String]?
+  plain_text : String?
+  pretty_type : String?
+  preview : String?
+  preview_is_truncated : Bool?
+  public_url_shared : Bool?
+  reactions : Array[Reaction]?
+  size : Int?
+  source_team : String?
+  subtype : String?
+  timestamp : Int64?
+  title : String?
+  title_blocks : Array[@blocks.LayoutBlock]?
+  url_private : String?
+  url_private_download : String?
+  user : String?
+  user_team : String?
+  username : String?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+pub fn File::from_json(Json) -> Self?
+pub fn File::to_json(Self) -> Json
+
+pub(all) struct Message {
+  app_id : String?
+  blocks : Array[@blocks.LayoutBlock]?
+  bot_id : String?
+  bot_profile : BotProfile?
+  client_msg_id : String?
+  display_as_bot : Bool?
+  edited : Edited?
+  files : Array[File]?
+  iid : String?
+  inviter : String?
+  is_locked : Bool?
+  is_mpim : Bool?
+  is_starred : Bool?
+  last_read : String?
+  latest_reply : String?
+  no_notifications : Bool?
+  no_reactions : Bool?
+  parent_user_id : String?
+  permalink : String?
+  purpose : String?
+  reactions : Array[Reaction]?
+  reply_count : Int?
+  reply_users : Array[String]?
+  reply_users_count : Int?
+  root : Message?
+  score : Int?
+  subscribed : Bool?
+  subtype : String?
+  team : String?
+  text : String?
+  thread_ts : String?
+  topic : String?
+  ts : String?
+  type_ : String?
+  upload : Bool?
+  user : String?
+  username : String?
+  x_files : Array[String]?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+pub fn Message::from_json(Json) -> Self?
+pub fn Message::is_thread_reply(Self) -> Bool
+pub fn Message::thread_root(Self) -> String?
+pub fn Message::to_json(Self) -> Json
+
+pub(all) struct Profile {
+  always_active : Bool?
+  api_app_id : String?
+  avatar_hash : String?
+  bot_id : String?
+  display_name : String?
+  display_name_normalized : String?
+  email : String?
+  first_name : String?
+  guest_invited_by : String?
+  huddle_state : String?
+  huddle_state_expiration_ts : Int64?
+  image_1024 : String?
+  image_192 : String?
+  image_24 : String?
+  image_32 : String?
+  image_48 : String?
+  image_512 : String?
+  image_72 : String?
+  image_original : String?
+  is_custom_image : Bool?
+  last_name : String?
+  phone : String?
+  pronouns : String?
+  real_name : String?
+  real_name_normalized : String?
+  skype : String?
+  start_date : String?
+  status_clear_on_focus_end : Bool?
+  status_emoji : String?
+  status_emoji_url : String?
+  status_expiration : Int64?
+  status_text : String?
+  status_text_canonical : String?
+  team : String?
+  title : String?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+pub fn Profile::from_json(Json) -> Self?
+pub fn Profile::to_json(Self) -> Json
+
+pub(all) struct Reaction {
+  count : Int?
+  name : String?
+  url : String?
+  users : Array[String]?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+pub fn Reaction::from_json(Json) -> Self?
+pub fn Reaction::to_json(Self) -> Json
+
+pub(all) struct Team {
+  id : String
+  avatar_base_url : String?
+  date_create : Int64?
+  default_channels : Array[String]?
+  discoverability : String?
+  discoverable : String?
+  domain : String?
+  email_domain : String?
+  enterprise_domain : String?
+  enterprise_id : String?
+  enterprise_name : String?
+  is_sfdc_auto_slack : Bool?
+  is_verified : Bool?
+  limit_ts : Int64?
+  lob_sales_home_enabled : Bool?
+  locale : String?
+  messages_count : Int?
+  msg_edit_window_mins : Int?
+  name : String?
+  onboarding_channel_id : String?
+  over_storage_limit : Bool?
+  pay_prod_cur : String?
+  plan : String?
+  team_url : String?
+  url : String?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+pub fn Team::from_json(Json) -> Self?
+pub fn Team::to_json(Self) -> Json
+
+pub(all) struct User {
+  id : String
+  color : String?
+  created : Int64?
+  date_created : Int64?
+  deleted : Bool?
+  email : String?
+  enterprise_id : String?
+  enterprise_name : String?
+  error : String?
+  expiration_ts : Int64?
+  first_login : Int64?
+  full_name : String?
+  has_2fa : Bool?
+  has_sso : Bool?
+  image_192 : String?
+  image_24 : String?
+  image_32 : String?
+  image_48 : String?
+  image_512 : String?
+  image_72 : String?
+  is_active : Bool?
+  is_admin : Bool?
+  is_app_user : Bool?
+  is_bot : Bool?
+  is_connector_bot : Bool?
+  is_email_confirmed : Bool?
+  is_invited_user : Bool?
+  is_owner : Bool?
+  is_primary_owner : Bool?
+  is_restricted : Bool?
+  is_stranger : Bool?
+  is_ultra_restricted : Bool?
+  is_workflow_bot : Bool?
+  last_active_ts : Int64?
+  locale : String?
+  manual_presence : String?
+  name : String?
+  presence : String?
+  profile : Profile?
+  real_name : String?
+  roles : Array[String]?
+  team_id : String?
+  teams : Array[String]?
+  two_factor_type : String?
+  tz : String?
+  tz_label : String?
+  tz_offset : Int?
+  updated : Int64?
+  username : String?
+  who_can_share_contact_card : String?
+  workspaces : Array[String]?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+pub fn User::display(Self) -> String
+pub fn User::from_json(Json) -> Self?
+pub fn User::to_json(Self) -> Json
+
+pub(all) struct Usergroup {
+  id : String
+  auto_provision : Bool?
+  channel_count : Int?
+  created_by : String?
+  date_create : Int64?
+  date_delete : Int64?
+  date_update : Int64?
+  deleted_by : String?
+  description : String?
+  enterprise_subteam_id : String?
+  handle : String?
+  is_editing_restricted : Bool?
+  is_external : Bool?
+  is_idp_group : Bool?
+  is_membership_locked : Bool?
+  is_org_level : Bool?
+  is_section : Bool?
+  is_subteam : Bool?
+  is_usergroup : Bool?
+  is_visible : Bool?
+  name : String?
+  team_id : String?
+  updated_by : String?
+  user_count : Int?
+  users : Array[String]?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+pub fn Usergroup::from_json(Json) -> Self?
+pub fn Usergroup::to_json(Self) -> Json
+
+pub(all) struct View {
+  id : String
+  app_id : String?
+  app_installed_team_id : String?
+  app_unfurl_url : String?
+  blocks : Array[@blocks.LayoutBlock]?
+  bot_id : String?
+  callback_id : String?
+  channel : String?
+  clear_on_close : Bool?
+  close : @blocks.TextObject?
+  entity_url : String?
+  external_id : String?
+  hash : String?
+  message_ts : String?
+  notify_on_close : Bool?
+  previous_view_id : String?
+  private_metadata : String?
+  root_view_id : String?
+  submit : @blocks.TextObject?
+  submit_disabled : Bool?
+  team_id : String?
+  thread_ts : String?
+  title : @blocks.TextObject?
+  type_ : String?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+pub fn View::from_json(Json) -> Self?
+pub fn View::to_json(Self) -> Json
+
+// Type aliases
+
+// Traits

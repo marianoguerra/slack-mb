@@ -15,14 +15,16 @@ A Slack Web API client for MoonBit.
   MoonBit's standard library has neither.
 
 Bringing the network is your job: the library hands you a request and reads the
-response, and a `Transport` trait sits between. `marianoguerra/slack-ext` has a
-native one over `moonbitlang/async`; a browser host implements it over `fetch`
-in about fifteen lines.
+response, and a `Transport` trait sits between. `marianoguerra/slack-http` is a
+native one over `moonbitlang/async`, published separately so that this module
+stays dependency-free; a browser host implements the trait over `fetch` in
+about fifteen lines.
 
 ## Install
 
 ```sh
 moon add marianoguerra/slack
+moon add marianoguerra/slack-http   # optional: the native transport
 ```
 
 Then import the packages you need, per package:
@@ -32,6 +34,9 @@ import {
   "marianoguerra/slack/api",
   "marianoguerra/slack/blocks",
   "marianoguerra/slack/client",
+  "marianoguerra/slack/model",
+  "marianoguerra/slack/typed",
+  "marianoguerra/slack-http/transport",
 }
 ```
 
@@ -120,6 +125,137 @@ test {
   }
 }
 ```
+
+## Reading a response
+
+`Client`'s methods answer an `ApiResponse` whose payload is `Json` — 326 methods
+cannot have 326 response types, and a field Slack shipped last Tuesday must not
+break your bot. `@model` is the other half of that bargain: the twelve entities
+that recur across those methods, as structs.
+
+```mbt check
+///|
+test {
+  let response = @api.ApiResponse::of_json({
+    "ok": true,
+    "user": {
+      "id": "U0123456789",
+      "name": "alice",
+      "tz": "Europe/Madrid",
+      "profile": { "display_name": "Al", "real_name": "Alice Alvarez" },
+      "a_field_from_next_tuesday": ["kept", "verbatim"],
+    },
+  })
+  guard @model.User::from_json(response.get("user").unwrap()) is Some(user) else {
+    fail("expected a user")
+  }
+  assert_eq(user.id, "U0123456789")
+  assert_eq(user.tz, Some("Europe/Madrid"))
+
+  // display_name, then real_name, then name, then the id -- the order Slack's
+  // own clients fall back in. `name` is the handle, which for most workspaces
+  // stopped being the thing anyone recognises years ago.
+  assert_eq(user.display(), "Al")
+
+  // Nothing is dropped: what this version does not model is in `extra`, and
+  // `to_json` puts it back exactly where it was.
+  assert_eq(
+    user.extra.get("a_field_from_next_tuesday"),
+    Some(["kept", "verbatim"]),
+  )
+}
+```
+
+Every field but `id` is optional, and absent is `None` rather than `""` — Slack
+sends `""` for a display name nobody set and omits the field entirely when it is
+outside your scopes, and a model that defaulted would erase the difference.
+
+A message's `blocks` come back as the same `LayoutBlock` values you send:
+
+```mbt check
+///|
+test {
+  guard @model.Message::from_json({
+      "type": "message",
+      "ts": "1700000000.000100",
+      "text": "Deploy finished",
+      "blocks": [
+        {
+          "type": "section",
+          "text": { "type": "mrkdwn", "text": "*Deploy* finished" },
+        },
+      ],
+      "reactions": [{ "name": "tada", "count": 2, "users": ["U1", "U2"] }],
+    })
+    is Some(message) else {
+    fail("expected a message")
+  }
+  assert_true(message.blocks.unwrap()[0] is Section(_))
+  assert_eq(message.reactions.unwrap()[0].count, Some(2))
+
+  // `thread_ts` on a reply, `ts` on anything else -- including the message that
+  // started a thread, which carries both and whose two values are equal.
+  assert_eq(message.thread_root(), Some("1700000000.000100"))
+}
+```
+
+### The same calls, one level up
+
+`@typed.Api` wraps a `Client` and offers 31 of its calls under the same names
+and the same arguments, differing only in what they answer. `Api::client()`
+hands the low-level client back for everything else, which is 295 more methods
+and every field of every response.
+
+```mbt nocheck
+// nocheck: needs a transport and a real token.
+
+///|
+let api = @typed.Api::of(client)
+
+///|
+async fn who_said_what(channel : String) -> Unit {
+  // A Page[Message], with the cursor normalised: Slack ends a walk with an
+  // EMPTY next_cursor rather than by omitting it, and `cursor` is None there.
+  let page = api.conversations_history(channel~, limit=50)
+  for message in page.items {
+    if message.user is Some(id) {
+      let user = api.users_info(user=id)
+      println("\{user.display()}: \{message.text.unwrap_or("")}")
+    }
+  }
+
+  // Not modelled, so it goes through the client -- same function, same
+  // connection.
+  api.client().bookmarks_list(channel_id=channel) |> ignore
+}
+```
+
+A typed call fails with `TypedError`: `Slack(e)` for everything `Client` could
+already fail with, `ResponseShapeError` for the case where Slack answered `ok:
+true` and the payload was not what this version models. `slack()` reaches the
+wrapped error in one step, because a rate limit is the case that happens.
+
+```mbt check
+///|
+test {
+  let shape = @typed.ResponseShapeError(api_method="users.info", key="user")
+  assert_eq(shape.code(), "slack_response_shape_error")
+  assert_true(shape.slack() is None)
+  let refused = @typed.Slack(@api.RateLimitedError(retry_after=30))
+  assert_eq(refused.code(), "slack_webapi_rate_limited_error")
+  assert_true(refused.slack() is Some(RateLimitedError(retry_after=30)))
+}
+```
+
+Which fields exist, and at which type, is a fact about the 565 recorded
+responses in `ext/fixtures/java` rather than a reading of Slack's
+documentation — see "Provenance". Getting at anything not modelled never needs
+this package: `response.get("user")` is still there, and so is `user.extra`.
+
+There is deliberately no generic extractor. `channel` is an object on
+`conversations.info` and a *string* on `chat.postMessage`; `members` is a list
+of users on `users.list` and a list of ids on `conversations.members`. Only the
+method knows, so only the caller can say.
 
 ## Verifying requests from Slack
 
@@ -373,6 +509,10 @@ repository README.
 
 ## Writing a transport
 
+Only if you want to. `marianoguerra/slack-http` is the native one, ready to
+use. Write your own when your host already has an HTTP client, or when it has
+no sockets at all and `fetch` is what there is.
+
 ```mbt nocheck
 // nocheck: sketch.
 
@@ -409,8 +549,10 @@ accented character in it will otherwise declare fewer bytes than it sends.
 | `marianoguerra/slack/signature` | Request-signature verification |
 | `marianoguerra/slack/methods` | 326 method names and their rate-limit tiers |
 | `marianoguerra/slack/ratectl` | Leaky-bucket throttling, with an injected clock |
-| `marianoguerra/slack/testing` | `FakeTransport`: a scripted transport |
+| `marianoguerra/slack/model` | The domain model: `User`, `Channel`, `Message` and nine more |
+| `marianoguerra/slack/typed` | `Api`: the same calls, answering domain types |\n| `marianoguerra/slack/testing` | `FakeTransport`: a scripted transport |
 | `marianoguerra/slack/mock` | An in-memory Slack workspace, and a transport over it |
+| `marianoguerra/slack-http/transport` | The native transport, over `moonbitlang/async`. A separate module, and optional |
 
 ## Not included
 

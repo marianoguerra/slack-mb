@@ -25,6 +25,10 @@ jobs:
         run: moon check --deny-warn
         working-directory: slack
 
+      - name: check (transport)
+        run: moon check --deny-warn --target native
+        working-directory: http
+
       - name: check (ext)
         run: moon check --deny-warn --target native
         working-directory: ext

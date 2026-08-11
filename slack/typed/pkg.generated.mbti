@@ -1,0 +1,79 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "marianoguerra/slack/typed"
+
+import {
+  "marianoguerra/slack/api",
+  "marianoguerra/slack/blocks",
+  "marianoguerra/slack/client",
+  "marianoguerra/slack/model",
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn to_typed_error(Error) -> TypedError
+
+// Errors
+pub(all) suberror TypedError {
+  Slack(@api.SlackError)
+  ResponseShapeError(api_method~ : String, key~ : String)
+} derive(@debug.Debug)
+pub fn TypedError::code(Self) -> String
+pub fn TypedError::describe_error(Self) -> String
+pub fn TypedError::slack(Self) -> @api.SlackError?
+pub impl Show for TypedError
+
+// Types and methods
+pub struct Api {
+  client : @client.Client
+}
+pub async fn Api::chat_post_message(Self, channel~ : String, text? : String, blocks? : Array[@blocks.LayoutBlock], attachments? : Json, thread_ts? : String, reply_broadcast? : Bool, unfurl_links? : Bool, unfurl_media? : Bool, mrkdwn? : Bool, parse? : String, link_names? : Bool, username? : String, icon_emoji? : String, icon_url? : String, metadata? : Json, markdown_text? : String) -> Posted raise TypedError
+pub async fn Api::chat_update(Self, channel~ : String, ts~ : String, text? : String, blocks? : Array[@blocks.LayoutBlock], attachments? : Json, link_names? : Bool, parse? : String, metadata? : Json, markdown_text? : String) -> Posted raise TypedError
+pub fn Api::client(Self) -> @client.Client
+pub async fn Api::conversations_create(Self, name~ : String, is_private? : Bool) -> @model.Channel raise TypedError
+pub async fn Api::conversations_history(Self, channel~ : String, cursor? : String, limit? : Int, latest? : String, oldest? : String, inclusive? : Bool, include_all_metadata? : Bool) -> Page[@model.Message] raise TypedError
+pub async fn Api::conversations_history_all(Self, channel~ : String, latest? : String, oldest? : String, page_size? : Int, max_pages? : Int) -> Array[@model.Message] raise TypedError
+pub async fn Api::conversations_info(Self, channel~ : String, include_locale? : Bool, include_num_members? : Bool) -> @model.Channel raise TypedError
+pub async fn Api::conversations_list(Self, types? : Array[String], exclude_archived? : Bool, limit? : Int, cursor? : String) -> Page[@model.Channel] raise TypedError
+pub async fn Api::conversations_list_all(Self, types? : Array[String], exclude_archived? : Bool, page_size? : Int, max_pages? : Int) -> Array[@model.Channel] raise TypedError
+pub async fn Api::conversations_members(Self, channel~ : String, cursor? : String, limit? : Int) -> Page[String] raise TypedError
+pub async fn Api::conversations_members_all(Self, channel~ : String, page_size? : Int, max_pages? : Int) -> Array[String] raise TypedError
+pub async fn Api::conversations_open(Self, channel? : String, users? : Array[String], return_im? : Bool, prevent_creation? : Bool) -> @model.Channel raise TypedError
+pub async fn Api::conversations_replies(Self, channel~ : String, ts~ : String, cursor? : String, limit? : Int, latest? : String, oldest? : String, inclusive? : Bool) -> Page[@model.Message] raise TypedError
+pub async fn Api::conversations_set_purpose(Self, channel~ : String, purpose~ : String) -> @model.Channel raise TypedError
+pub async fn Api::conversations_set_topic(Self, channel~ : String, topic~ : String) -> @model.Channel raise TypedError
+pub async fn Api::files_info(Self, file~ : String, cursor? : String, limit? : Int) -> @model.File raise TypedError
+pub async fn Api::files_list(Self, channel? : String, user? : String, types? : Array[String], ts_from? : String, ts_to? : String, count? : Int, page? : Int) -> Array[@model.File] raise TypedError
+pub fn Api::new(&@api.Transport, String, base_url? : String, bool_style? : @api.BoolStyle, extra_headers? : Map[String, String], team_id? : String) -> Self
+pub fn Api::of(@client.Client) -> Self
+pub async fn Api::team_info(Self, team? : String, domain? : String) -> @model.Team raise TypedError
+pub async fn Api::usergroups_create(Self, name~ : String, handle? : String, description? : String, channels? : Array[String], include_count? : Bool) -> @model.Usergroup raise TypedError
+pub async fn Api::usergroups_list(Self, include_disabled? : Bool, include_count? : Bool, include_users? : Bool) -> Array[@model.Usergroup] raise TypedError
+pub async fn Api::usergroups_users_list(Self, usergroup~ : String, include_disabled? : Bool) -> Array[String] raise TypedError
+pub async fn Api::users_conversations(Self, user? : String, types? : Array[String], exclude_archived? : Bool, cursor? : String, limit? : Int) -> Page[@model.Channel] raise TypedError
+pub async fn Api::users_info(Self, user~ : String, include_locale? : Bool) -> @model.User raise TypedError
+pub async fn Api::users_list(Self, cursor? : String, limit? : Int, include_locale? : Bool) -> Page[@model.User] raise TypedError
+pub async fn Api::users_list_all(Self, include_locale? : Bool, page_size? : Int, max_pages? : Int) -> Array[@model.User] raise TypedError
+pub async fn Api::users_lookup_by_email(Self, email~ : String) -> @model.User raise TypedError
+pub async fn Api::users_profile_get(Self, user? : String, include_labels? : Bool) -> @model.Profile raise TypedError
+pub async fn Api::users_profile_set(Self, user? : String, profile? : Json, name? : String, value? : String) -> @model.Profile raise TypedError
+pub async fn Api::views_open(Self, trigger_id~ : String, view~ : Json) -> @model.View raise TypedError
+pub async fn Api::views_publish(Self, user_id~ : String, view~ : Json, hash? : String) -> @model.View raise TypedError
+pub async fn Api::views_push(Self, trigger_id~ : String, view~ : Json) -> @model.View raise TypedError
+pub async fn Api::views_update(Self, view~ : Json, view_id? : String, external_id? : String, hash? : String) -> @model.View raise TypedError
+
+pub(all) struct Page[T] {
+  items : Array[T]
+  cursor : String?
+  response : @api.ApiResponse
+}
+pub fn[T] Page::has_more(Self[T]) -> Bool
+
+pub(all) struct Posted {
+  channel : String
+  ts : String
+  message : @model.Message?
+} derive(Eq)
+
+// Type aliases
+
+// Traits

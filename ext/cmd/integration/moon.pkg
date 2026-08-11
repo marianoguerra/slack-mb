@@ -9,7 +9,7 @@
 import {
   "marianoguerra/slack/client",
   "marianoguerra/slack-ext/scenario",
-  "marianoguerra/slack-ext/transport_http",
+  "marianoguerra/slack-http/transport",
   "moonbitlang/async",
   "moonbitlang/core/env",
   "moonbitlang/x/fs",

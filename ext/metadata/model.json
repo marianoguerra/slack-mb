@@ -1,0 +1,1483 @@
+{
+ "note": "Derived from ext/fixtures/java/api and api-large, then curated. Each entity names the paths it was observed at; every field here appeared there at this JSON type. Fields the corpus disagrees about, and objects this version does not model, are deliberately absent: they round-trip through `extra`. ext/test/modelshape is the gate. Regenerate with `just gen`.",
+ "entities": [
+  {
+   "name": "User",
+   "doc": "A member of a workspace: `users.info`, `users.list`, `users.lookupByEmail`.",
+   "paths": [
+    "$.user",
+    "$.self",
+    "$.users[]",
+    "$.members[]",
+    "$.rejected_users[]",
+    "$.*.inviting_user",
+    "$.*.accepting_user"
+   ],
+   "id": "required",
+   "fields": [
+    {
+     "name": "color",
+     "type": "str"
+    },
+    {
+     "name": "created",
+     "type": "int64"
+    },
+    {
+     "name": "date_created",
+     "type": "int64"
+    },
+    {
+     "name": "deleted",
+     "type": "bool"
+    },
+    {
+     "name": "email",
+     "type": "str"
+    },
+    {
+     "name": "enterprise_id",
+     "type": "str"
+    },
+    {
+     "name": "enterprise_name",
+     "type": "str"
+    },
+    {
+     "name": "error",
+     "type": "str"
+    },
+    {
+     "name": "expiration_ts",
+     "type": "int64"
+    },
+    {
+     "name": "first_login",
+     "type": "int64"
+    },
+    {
+     "name": "full_name",
+     "type": "str"
+    },
+    {
+     "name": "has_2fa",
+     "type": "bool"
+    },
+    {
+     "name": "has_sso",
+     "type": "bool"
+    },
+    {
+     "name": "image_192",
+     "type": "str"
+    },
+    {
+     "name": "image_24",
+     "type": "str"
+    },
+    {
+     "name": "image_32",
+     "type": "str"
+    },
+    {
+     "name": "image_48",
+     "type": "str"
+    },
+    {
+     "name": "image_512",
+     "type": "str"
+    },
+    {
+     "name": "image_72",
+     "type": "str"
+    },
+    {
+     "name": "is_active",
+     "type": "bool"
+    },
+    {
+     "name": "is_admin",
+     "type": "bool"
+    },
+    {
+     "name": "is_app_user",
+     "type": "bool"
+    },
+    {
+     "name": "is_bot",
+     "type": "bool"
+    },
+    {
+     "name": "is_connector_bot",
+     "type": "bool"
+    },
+    {
+     "name": "is_email_confirmed",
+     "type": "bool"
+    },
+    {
+     "name": "is_invited_user",
+     "type": "bool"
+    },
+    {
+     "name": "is_owner",
+     "type": "bool"
+    },
+    {
+     "name": "is_primary_owner",
+     "type": "bool"
+    },
+    {
+     "name": "is_restricted",
+     "type": "bool"
+    },
+    {
+     "name": "is_stranger",
+     "type": "bool"
+    },
+    {
+     "name": "is_ultra_restricted",
+     "type": "bool"
+    },
+    {
+     "name": "is_workflow_bot",
+     "type": "bool"
+    },
+    {
+     "name": "last_active_ts",
+     "type": "int64"
+    },
+    {
+     "name": "locale",
+     "type": "str"
+    },
+    {
+     "name": "manual_presence",
+     "type": "str"
+    },
+    {
+     "name": "name",
+     "type": "str"
+    },
+    {
+     "name": "presence",
+     "type": "str"
+    },
+    {
+     "name": "profile",
+     "type": "obj:Profile"
+    },
+    {
+     "name": "real_name",
+     "type": "str"
+    },
+    {
+     "name": "roles",
+     "type": "str[]"
+    },
+    {
+     "name": "team_id",
+     "type": "str"
+    },
+    {
+     "name": "teams",
+     "type": "str[]"
+    },
+    {
+     "name": "two_factor_type",
+     "type": "str"
+    },
+    {
+     "name": "tz",
+     "type": "str"
+    },
+    {
+     "name": "tz_label",
+     "type": "str"
+    },
+    {
+     "name": "tz_offset",
+     "type": "int"
+    },
+    {
+     "name": "updated",
+     "type": "int64"
+    },
+    {
+     "name": "username",
+     "type": "str"
+    },
+    {
+     "name": "who_can_share_contact_card",
+     "type": "str"
+    },
+    {
+     "name": "workspaces",
+     "type": "str[]"
+    }
+   ]
+  },
+  {
+   "name": "Profile",
+   "doc": "A user's profile. Separate because Slack sends it separately -- `users.profile.get` returns one on its own.",
+   "paths": [
+    "$.profile",
+    "$.*.profile",
+    "$.*.*.profile"
+   ],
+   "id": "none",
+   "fields": [
+    {
+     "name": "always_active",
+     "type": "bool"
+    },
+    {
+     "name": "api_app_id",
+     "type": "str"
+    },
+    {
+     "name": "avatar_hash",
+     "type": "str"
+    },
+    {
+     "name": "bot_id",
+     "type": "str"
+    },
+    {
+     "name": "display_name",
+     "type": "str"
+    },
+    {
+     "name": "display_name_normalized",
+     "type": "str"
+    },
+    {
+     "name": "email",
+     "type": "str"
+    },
+    {
+     "name": "first_name",
+     "type": "str"
+    },
+    {
+     "name": "guest_invited_by",
+     "type": "str"
+    },
+    {
+     "name": "huddle_state",
+     "type": "str"
+    },
+    {
+     "name": "huddle_state_expiration_ts",
+     "type": "int64"
+    },
+    {
+     "name": "image_1024",
+     "type": "str"
+    },
+    {
+     "name": "image_192",
+     "type": "str"
+    },
+    {
+     "name": "image_24",
+     "type": "str"
+    },
+    {
+     "name": "image_32",
+     "type": "str"
+    },
+    {
+     "name": "image_48",
+     "type": "str"
+    },
+    {
+     "name": "image_512",
+     "type": "str"
+    },
+    {
+     "name": "image_72",
+     "type": "str"
+    },
+    {
+     "name": "image_original",
+     "type": "str"
+    },
+    {
+     "name": "is_custom_image",
+     "type": "bool"
+    },
+    {
+     "name": "last_name",
+     "type": "str"
+    },
+    {
+     "name": "phone",
+     "type": "str"
+    },
+    {
+     "name": "pronouns",
+     "type": "str"
+    },
+    {
+     "name": "real_name",
+     "type": "str"
+    },
+    {
+     "name": "real_name_normalized",
+     "type": "str"
+    },
+    {
+     "name": "skype",
+     "type": "str"
+    },
+    {
+     "name": "start_date",
+     "type": "str"
+    },
+    {
+     "name": "status_clear_on_focus_end",
+     "type": "bool"
+    },
+    {
+     "name": "status_emoji",
+     "type": "str"
+    },
+    {
+     "name": "status_emoji_url",
+     "type": "str"
+    },
+    {
+     "name": "status_expiration",
+     "type": "int64"
+    },
+    {
+     "name": "status_text",
+     "type": "str"
+    },
+    {
+     "name": "status_text_canonical",
+     "type": "str"
+    },
+    {
+     "name": "team",
+     "type": "str"
+    },
+    {
+     "name": "title",
+     "type": "str"
+    }
+   ]
+  },
+  {
+   "name": "Channel",
+   "doc": "A conversation: public or private channel, DM or MPIM. Slack calls all four a channel here.",
+   "paths": [
+    "$.channel",
+    "$.channels[]",
+    "$.group",
+    "$.groups[]",
+    "$.ims[]",
+    "$.conversations[]"
+   ],
+   "id": "required",
+   "fields": [
+    {
+     "name": "channel_manager_count",
+     "type": "int"
+    },
+    {
+     "name": "connected_limited_team_ids",
+     "type": "str[]"
+    },
+    {
+     "name": "connected_team_ids",
+     "type": "str[]"
+    },
+    {
+     "name": "context_team_id",
+     "type": "str"
+    },
+    {
+     "name": "conversation_host_id",
+     "type": "str"
+    },
+    {
+     "name": "created",
+     "type": "int64"
+    },
+    {
+     "name": "creator",
+     "type": "str"
+    },
+    {
+     "name": "creator_id",
+     "type": "str"
+    },
+    {
+     "name": "date_connected",
+     "type": "int64"
+    },
+    {
+     "name": "enterprise_id",
+     "type": "str"
+    },
+    {
+     "name": "external_user_count",
+     "type": "int"
+    },
+    {
+     "name": "has_pins",
+     "type": "bool"
+    },
+    {
+     "name": "internal_team_ids",
+     "type": "str[]"
+    },
+    {
+     "name": "internal_team_ids_count",
+     "type": "int"
+    },
+    {
+     "name": "internal_team_ids_sample_team",
+     "type": "str"
+    },
+    {
+     "name": "is_archived",
+     "type": "bool"
+    },
+    {
+     "name": "is_channel",
+     "type": "bool"
+    },
+    {
+     "name": "is_disconnect_in_progress",
+     "type": "bool"
+    },
+    {
+     "name": "is_ext_shared",
+     "type": "bool"
+    },
+    {
+     "name": "is_frozen",
+     "type": "bool"
+    },
+    {
+     "name": "is_general",
+     "type": "bool"
+    },
+    {
+     "name": "is_global_shared",
+     "type": "bool"
+    },
+    {
+     "name": "is_group",
+     "type": "bool"
+    },
+    {
+     "name": "is_im",
+     "type": "bool"
+    },
+    {
+     "name": "is_member",
+     "type": "bool"
+    },
+    {
+     "name": "is_moved",
+     "type": "int"
+    },
+    {
+     "name": "is_mpim",
+     "type": "bool"
+    },
+    {
+     "name": "is_non_threadable",
+     "type": "bool"
+    },
+    {
+     "name": "is_open",
+     "type": "bool"
+    },
+    {
+     "name": "is_org_default",
+     "type": "bool"
+    },
+    {
+     "name": "is_org_mandatory",
+     "type": "bool"
+    },
+    {
+     "name": "is_org_shared",
+     "type": "bool"
+    },
+    {
+     "name": "is_pending_ext_shared",
+     "type": "bool"
+    },
+    {
+     "name": "is_private",
+     "type": "bool"
+    },
+    {
+     "name": "is_read_only",
+     "type": "bool"
+    },
+    {
+     "name": "is_shared",
+     "type": "bool"
+    },
+    {
+     "name": "is_starred",
+     "type": "bool"
+    },
+    {
+     "name": "is_thread_only",
+     "type": "bool"
+    },
+    {
+     "name": "is_user_deleted",
+     "type": "bool"
+    },
+    {
+     "name": "last_activity_ts",
+     "type": "int64"
+    },
+    {
+     "name": "last_read",
+     "type": "str"
+    },
+    {
+     "name": "latest",
+     "type": "obj:Message"
+    },
+    {
+     "name": "locale",
+     "type": "str"
+    },
+    {
+     "name": "member_count",
+     "type": "int"
+    },
+    {
+     "name": "members",
+     "type": "str[]"
+    },
+    {
+     "name": "name",
+     "type": "str"
+    },
+    {
+     "name": "name_normalized",
+     "type": "str"
+    },
+    {
+     "name": "num_members",
+     "type": "int"
+    },
+    {
+     "name": "parent_conversation",
+     "type": "str"
+    },
+    {
+     "name": "parent_group",
+     "type": "str"
+    },
+    {
+     "name": "pending_connected_team_ids",
+     "type": "str[]"
+    },
+    {
+     "name": "pending_shared",
+     "type": "str[]"
+    },
+    {
+     "name": "previous_names",
+     "type": "str[]"
+    },
+    {
+     "name": "priority",
+     "type": "int"
+    },
+    {
+     "name": "shared_team_ids",
+     "type": "str[]"
+    },
+    {
+     "name": "topic",
+     "type": "obj:ChannelText"
+    },
+    {
+     "name": "unlinked",
+     "type": "int"
+    },
+    {
+     "name": "unread_count",
+     "type": "int"
+    },
+    {
+     "name": "unread_count_display",
+     "type": "int"
+    },
+    {
+     "name": "updated",
+     "type": "int64"
+    },
+    {
+     "name": "user",
+     "type": "str"
+    }
+   ]
+  },
+  {
+   "name": "ChannelText",
+   "doc": "A channel's topic or purpose. The same three fields for both.",
+   "paths": [
+    "$.*.purpose",
+    "$.*.topic",
+    "$.*.*.purpose",
+    "$.*.*.topic"
+   ],
+   "id": "none",
+   "fields": [
+    {
+     "name": "creator",
+     "type": "str"
+    },
+    {
+     "name": "last_set",
+     "type": "int64"
+    },
+    {
+     "name": "value",
+     "type": "str"
+    }
+   ]
+  },
+  {
+   "name": "Message",
+   "doc": "A message, as `conversations.history`, `conversations.replies` and `chat.postMessage` return one.",
+   "paths": [
+    "$.message",
+    "$.messages[]",
+    "$.channel.latest",
+    "$.group.latest",
+    "$.messages[].root",
+    "$.items[].message",
+    "$.messages.matches[]"
+   ],
+   "id": "none",
+   "fields": [
+    {
+     "name": "app_id",
+     "type": "str"
+    },
+    {
+     "name": "blocks",
+     "type": "blocks"
+    },
+    {
+     "name": "bot_id",
+     "type": "str"
+    },
+    {
+     "name": "bot_profile",
+     "type": "obj:BotProfile"
+    },
+    {
+     "name": "client_msg_id",
+     "type": "str"
+    },
+    {
+     "name": "display_as_bot",
+     "type": "bool"
+    },
+    {
+     "name": "edited",
+     "type": "obj:Edited"
+    },
+    {
+     "name": "files",
+     "type": "arr:File"
+    },
+    {
+     "name": "iid",
+     "type": "str"
+    },
+    {
+     "name": "inviter",
+     "type": "str"
+    },
+    {
+     "name": "is_locked",
+     "type": "bool"
+    },
+    {
+     "name": "is_mpim",
+     "type": "bool"
+    },
+    {
+     "name": "is_starred",
+     "type": "bool"
+    },
+    {
+     "name": "last_read",
+     "type": "str"
+    },
+    {
+     "name": "latest_reply",
+     "type": "str"
+    },
+    {
+     "name": "no_notifications",
+     "type": "bool"
+    },
+    {
+     "name": "no_reactions",
+     "type": "bool"
+    },
+    {
+     "name": "parent_user_id",
+     "type": "str"
+    },
+    {
+     "name": "permalink",
+     "type": "str"
+    },
+    {
+     "name": "purpose",
+     "type": "str"
+    },
+    {
+     "name": "reactions",
+     "type": "arr:Reaction"
+    },
+    {
+     "name": "reply_count",
+     "type": "int"
+    },
+    {
+     "name": "reply_users",
+     "type": "str[]"
+    },
+    {
+     "name": "reply_users_count",
+     "type": "int"
+    },
+    {
+     "name": "root",
+     "type": "obj:Message"
+    },
+    {
+     "name": "score",
+     "type": "int"
+    },
+    {
+     "name": "subscribed",
+     "type": "bool"
+    },
+    {
+     "name": "subtype",
+     "type": "str"
+    },
+    {
+     "name": "team",
+     "type": "str"
+    },
+    {
+     "name": "text",
+     "type": "str"
+    },
+    {
+     "name": "thread_ts",
+     "type": "str"
+    },
+    {
+     "name": "topic",
+     "type": "str"
+    },
+    {
+     "name": "ts",
+     "type": "str"
+    },
+    {
+     "name": "type",
+     "type": "str"
+    },
+    {
+     "name": "upload",
+     "type": "bool"
+    },
+    {
+     "name": "user",
+     "type": "str"
+    },
+    {
+     "name": "username",
+     "type": "str"
+    },
+    {
+     "name": "x_files",
+     "type": "str[]"
+    }
+   ]
+  },
+  {
+   "name": "Edited",
+   "doc": "When a message was last edited, and by whom.",
+   "paths": [
+    "$.*.edited",
+    "$.*.*.edited"
+   ],
+   "id": "none",
+   "fields": [
+    {
+     "name": "ts",
+     "type": "str"
+    },
+    {
+     "name": "user",
+     "type": "str"
+    }
+   ]
+  },
+  {
+   "name": "Reaction",
+   "doc": "One emoji on a message, and who added it.",
+   "paths": [
+    "$.*.reactions[]",
+    "$.*.*.reactions[]"
+   ],
+   "id": "none",
+   "fields": [
+    {
+     "name": "count",
+     "type": "int"
+    },
+    {
+     "name": "name",
+     "type": "str"
+    },
+    {
+     "name": "url",
+     "type": "str"
+    },
+    {
+     "name": "users",
+     "type": "str[]"
+    }
+   ]
+  },
+  {
+   "name": "BotProfile",
+   "doc": "The app behind a bot message.",
+   "paths": [
+    "$.bot",
+    "$.bots[]",
+    "$.*.bot_profile",
+    "$.*.*.bot_profile"
+   ],
+   "id": "none",
+   "fields": [
+    {
+     "name": "app_id",
+     "type": "str"
+    },
+    {
+     "name": "bot_access_token",
+     "type": "str"
+    },
+    {
+     "name": "bot_user_id",
+     "type": "str"
+    },
+    {
+     "name": "deleted",
+     "type": "bool"
+    },
+    {
+     "name": "id",
+     "type": "str"
+    },
+    {
+     "name": "is_workflow_bot",
+     "type": "bool"
+    },
+    {
+     "name": "name",
+     "type": "str"
+    },
+    {
+     "name": "team_id",
+     "type": "str"
+    },
+    {
+     "name": "updated",
+     "type": "int64"
+    },
+    {
+     "name": "user_id",
+     "type": "str"
+    }
+   ]
+  },
+  {
+   "name": "Team",
+   "doc": "A workspace.",
+   "paths": [
+    "$.team",
+    "$.teams[]"
+   ],
+   "id": "required",
+   "fields": [
+    {
+     "name": "avatar_base_url",
+     "type": "str"
+    },
+    {
+     "name": "date_create",
+     "type": "int64"
+    },
+    {
+     "name": "default_channels",
+     "type": "str[]"
+    },
+    {
+     "name": "discoverability",
+     "type": "str"
+    },
+    {
+     "name": "discoverable",
+     "type": "str"
+    },
+    {
+     "name": "domain",
+     "type": "str"
+    },
+    {
+     "name": "email_domain",
+     "type": "str"
+    },
+    {
+     "name": "enterprise_domain",
+     "type": "str"
+    },
+    {
+     "name": "enterprise_id",
+     "type": "str"
+    },
+    {
+     "name": "enterprise_name",
+     "type": "str"
+    },
+    {
+     "name": "is_sfdc_auto_slack",
+     "type": "bool"
+    },
+    {
+     "name": "is_verified",
+     "type": "bool"
+    },
+    {
+     "name": "limit_ts",
+     "type": "int64"
+    },
+    {
+     "name": "lob_sales_home_enabled",
+     "type": "bool"
+    },
+    {
+     "name": "locale",
+     "type": "str"
+    },
+    {
+     "name": "messages_count",
+     "type": "int"
+    },
+    {
+     "name": "msg_edit_window_mins",
+     "type": "int"
+    },
+    {
+     "name": "name",
+     "type": "str"
+    },
+    {
+     "name": "onboarding_channel_id",
+     "type": "str"
+    },
+    {
+     "name": "over_storage_limit",
+     "type": "bool"
+    },
+    {
+     "name": "pay_prod_cur",
+     "type": "str"
+    },
+    {
+     "name": "plan",
+     "type": "str"
+    },
+    {
+     "name": "team_url",
+     "type": "str"
+    },
+    {
+     "name": "url",
+     "type": "str"
+    }
+   ]
+  },
+  {
+   "name": "Usergroup",
+   "doc": "A user group, which Slack also calls a subteam.",
+   "paths": [
+    "$.usergroup",
+    "$.usergroups[]",
+    "$.subteams.all[]"
+   ],
+   "id": "required",
+   "fields": [
+    {
+     "name": "auto_provision",
+     "type": "bool"
+    },
+    {
+     "name": "channel_count",
+     "type": "int"
+    },
+    {
+     "name": "created_by",
+     "type": "str"
+    },
+    {
+     "name": "date_create",
+     "type": "int64"
+    },
+    {
+     "name": "date_delete",
+     "type": "int64"
+    },
+    {
+     "name": "date_update",
+     "type": "int64"
+    },
+    {
+     "name": "deleted_by",
+     "type": "str"
+    },
+    {
+     "name": "description",
+     "type": "str"
+    },
+    {
+     "name": "enterprise_subteam_id",
+     "type": "str"
+    },
+    {
+     "name": "handle",
+     "type": "str"
+    },
+    {
+     "name": "is_editing_restricted",
+     "type": "bool"
+    },
+    {
+     "name": "is_external",
+     "type": "bool"
+    },
+    {
+     "name": "is_idp_group",
+     "type": "bool"
+    },
+    {
+     "name": "is_membership_locked",
+     "type": "bool"
+    },
+    {
+     "name": "is_org_level",
+     "type": "bool"
+    },
+    {
+     "name": "is_section",
+     "type": "bool"
+    },
+    {
+     "name": "is_subteam",
+     "type": "bool"
+    },
+    {
+     "name": "is_usergroup",
+     "type": "bool"
+    },
+    {
+     "name": "is_visible",
+     "type": "bool"
+    },
+    {
+     "name": "name",
+     "type": "str"
+    },
+    {
+     "name": "team_id",
+     "type": "str"
+    },
+    {
+     "name": "updated_by",
+     "type": "str"
+    },
+    {
+     "name": "user_count",
+     "type": "int"
+    },
+    {
+     "name": "users",
+     "type": "str[]"
+    }
+   ]
+  },
+  {
+   "name": "View",
+   "doc": "A modal or App Home view.",
+   "paths": [
+    "$.view",
+    "$.views[]"
+   ],
+   "id": "required",
+   "fields": [
+    {
+     "name": "app_id",
+     "type": "str"
+    },
+    {
+     "name": "app_installed_team_id",
+     "type": "str"
+    },
+    {
+     "name": "app_unfurl_url",
+     "type": "str"
+    },
+    {
+     "name": "blocks",
+     "type": "blocks"
+    },
+    {
+     "name": "bot_id",
+     "type": "str"
+    },
+    {
+     "name": "callback_id",
+     "type": "str"
+    },
+    {
+     "name": "channel",
+     "type": "str"
+    },
+    {
+     "name": "clear_on_close",
+     "type": "bool"
+    },
+    {
+     "name": "close",
+     "type": "text"
+    },
+    {
+     "name": "entity_url",
+     "type": "str"
+    },
+    {
+     "name": "external_id",
+     "type": "str"
+    },
+    {
+     "name": "hash",
+     "type": "str"
+    },
+    {
+     "name": "message_ts",
+     "type": "str"
+    },
+    {
+     "name": "notify_on_close",
+     "type": "bool"
+    },
+    {
+     "name": "previous_view_id",
+     "type": "str"
+    },
+    {
+     "name": "private_metadata",
+     "type": "str"
+    },
+    {
+     "name": "root_view_id",
+     "type": "str"
+    },
+    {
+     "name": "submit",
+     "type": "text"
+    },
+    {
+     "name": "submit_disabled",
+     "type": "bool"
+    },
+    {
+     "name": "team_id",
+     "type": "str"
+    },
+    {
+     "name": "thread_ts",
+     "type": "str"
+    },
+    {
+     "name": "title",
+     "type": "text"
+    },
+    {
+     "name": "type",
+     "type": "str"
+    }
+   ]
+  },
+  {
+   "name": "File",
+   "doc": "An uploaded file.",
+   "paths": [
+    "$.file",
+    "$.files[]",
+    "$.files.matches[]",
+    "$.*.files[]"
+   ],
+   "id": "required",
+   "fields": [
+    {
+     "name": "access",
+     "type": "str"
+    },
+    {
+     "name": "alt_txt",
+     "type": "str"
+    },
+    {
+     "name": "app_id",
+     "type": "str"
+    },
+    {
+     "name": "app_name",
+     "type": "str"
+    },
+    {
+     "name": "blocks",
+     "type": "blocks"
+    },
+    {
+     "name": "bot_id",
+     "type": "str"
+    },
+    {
+     "name": "channels",
+     "type": "str[]"
+    },
+    {
+     "name": "comments_count",
+     "type": "int"
+    },
+    {
+     "name": "converted_pdf",
+     "type": "str"
+    },
+    {
+     "name": "created",
+     "type": "int64"
+    },
+    {
+     "name": "deanimate_gif",
+     "type": "str"
+    },
+    {
+     "name": "display_as_bot",
+     "type": "bool"
+    },
+    {
+     "name": "duration_ms",
+     "type": "int"
+    },
+    {
+     "name": "editable",
+     "type": "bool"
+    },
+    {
+     "name": "editor",
+     "type": "str"
+    },
+    {
+     "name": "external_id",
+     "type": "str"
+    },
+    {
+     "name": "external_type",
+     "type": "str"
+    },
+    {
+     "name": "external_url",
+     "type": "str"
+    },
+    {
+     "name": "file_access",
+     "type": "str"
+    },
+    {
+     "name": "filetype",
+     "type": "str"
+    },
+    {
+     "name": "groups",
+     "type": "str[]"
+    },
+    {
+     "name": "has_rich_preview",
+     "type": "bool"
+    },
+    {
+     "name": "hls",
+     "type": "str"
+    },
+    {
+     "name": "ims",
+     "type": "str[]"
+    },
+    {
+     "name": "is_external",
+     "type": "bool"
+    },
+    {
+     "name": "is_modified_by_ai",
+     "type": "bool"
+    },
+    {
+     "name": "is_public",
+     "type": "bool"
+    },
+    {
+     "name": "is_starred",
+     "type": "bool"
+    },
+    {
+     "name": "last_editor",
+     "type": "str"
+    },
+    {
+     "name": "lines",
+     "type": "int"
+    },
+    {
+     "name": "media_display_type",
+     "type": "str"
+    },
+    {
+     "name": "mimetype",
+     "type": "str"
+    },
+    {
+     "name": "mode",
+     "type": "str"
+    },
+    {
+     "name": "mp4",
+     "type": "str"
+    },
+    {
+     "name": "name",
+     "type": "str"
+    },
+    {
+     "name": "num_stars",
+     "type": "int"
+    },
+    {
+     "name": "original_attachment_count",
+     "type": "int"
+    },
+    {
+     "name": "permalink",
+     "type": "str"
+    },
+    {
+     "name": "permalink_public",
+     "type": "str"
+    },
+    {
+     "name": "pinned_to",
+     "type": "str[]"
+    },
+    {
+     "name": "plain_text",
+     "type": "str"
+    },
+    {
+     "name": "pretty_type",
+     "type": "str"
+    },
+    {
+     "name": "preview",
+     "type": "str"
+    },
+    {
+     "name": "preview_is_truncated",
+     "type": "bool"
+    },
+    {
+     "name": "public_url_shared",
+     "type": "bool"
+    },
+    {
+     "name": "reactions",
+     "type": "arr:Reaction"
+    },
+    {
+     "name": "size",
+     "type": "int"
+    },
+    {
+     "name": "source_team",
+     "type": "str"
+    },
+    {
+     "name": "subtype",
+     "type": "str"
+    },
+    {
+     "name": "timestamp",
+     "type": "int64"
+    },
+    {
+     "name": "title",
+     "type": "str"
+    },
+    {
+     "name": "title_blocks",
+     "type": "blocks"
+    },
+    {
+     "name": "url_private",
+     "type": "str"
+    },
+    {
+     "name": "url_private_download",
+     "type": "str"
+    },
+    {
+     "name": "user",
+     "type": "str"
+    },
+    {
+     "name": "user_team",
+     "type": "str"
+    },
+    {
+     "name": "username",
+     "type": "str"
+    }
+   ]
+  }
+ ]
+}

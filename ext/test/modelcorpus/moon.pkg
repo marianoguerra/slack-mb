@@ -1,0 +1,15 @@
+// The acceptance gate for @model, on the same corpus @model was derived from.
+//
+// It reads ext/metadata/model.json rather than restating the paths, so the
+// metadata is the single source of truth for where an entity lives and the
+// entity table below is the only thing a new entity has to be added to.
+import {
+}
+
+import {
+  "marianoguerra/slack/model",
+  "marianoguerra/slack-ext/test/fixtures",
+  "moonbitlang/x/fs",
+  "moonbitlang/core/json",
+  "moonbitlang/core/string",
+} for "test"

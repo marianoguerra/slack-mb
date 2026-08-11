@@ -1,4 +1,5 @@
 members = [
   "slack",
+  "http",
   "ext",
 ]

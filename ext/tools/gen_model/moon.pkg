@@ -1,0 +1,13 @@
+// Reads metadata/model.json and prints ../slack/model/generated_model.mbt to
+// stdout. In MoonBit rather than a script for the reason gen_methods is: CI
+// needs no second toolchain, and the generator dogfoods this library's own JSON
+// handling.
+import {
+  "moonbitlang/x/fs",
+  "moonbitlang/core/json",
+  "moonbitlang/core/string",
+}
+
+supported_targets = "+native"
+
+pkgtype(kind: "executable")

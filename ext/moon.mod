@@ -1,23 +1,26 @@
-// Not published. This module exists to keep `marianoguerra/slack` free of the
-// two dependencies below: `moonbitlang/async` (the HTTP transport, native only)
-// and `moonbitlang/x` (filesystem access, needed by the code generator and by
-// the conformance tests that read the vendored reference fixtures).
+// Not published. This module holds the things a consumer has no use for: the
+// code generator, the conformance tests over 5 MB of vendored fixtures, the
+// demo CLI and the integration scenario. What they drag in -- `moonbitlang/x`
+// for filesystem access, `moonbitlang/async` for the tests that must be async
+// -- is what keeps `marianoguerra/slack` free of both.
 //
-// Nothing here is part of the library's public API. A consumer who wants the
-// native transport copies transport_http/ or writes their own `@api.Transport`.
+// The native transport used to live here too, which made it unpublishable for
+// no better reason than its neighbours. It is `marianoguerra/slack-http` now,
+// and this module is one of its consumers.
 
 name = "marianoguerra/slack-ext"
 
-version = "0.2.0"
+version = "0.3.0"
 
 license = "Apache-2.0"
 
 preferred_target = "native"
 
-description = "Native HTTP transport, method-table generator and reference-fixture conformance tests for marianoguerra/slack. Not published."
+description = "Code generators, reference-fixture conformance tests and the demo CLI for marianoguerra/slack. Not published."
 
 import {
-  "marianoguerra/slack@0.2.0",
+  "marianoguerra/slack@0.3.0",
+  "marianoguerra/slack-http@0.3.0",
   "moonbitlang/async@0.20.4",
   "moonbitlang/x@0.4.49",
 }

@@ -11,16 +11,18 @@ ci: fmt-check gen-check check backends test info-check
 
 check:
     cd slack && moon check --deny-warn
+    cd http && moon check --deny-warn --target native
     cd ext && moon check --deny-warn --target native
 
-# The library must build on every backend. `ext` is native-only by design.
+# The library must build on every backend. `http` and `ext` are native-only by
+# design -- that is what the library not depending on them buys.
 backends:
     cd slack && moon check --target wasm
     cd slack && moon check --target wasm-gc
     cd slack && moon check --target js
     cd slack && moon check --target native
 
-# wasm run skips the native-only packages (transport_http, corpus_large, the
+# wasm run skips the native-only packages (the transport, corpus_large, the
 # async client tests); the native run picks them up.
 test:
     moon test

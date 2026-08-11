@@ -37,3 +37,28 @@ pub using @blocks {
 
 ///|
 pub using @methods {type RateLimitTier}
+
+///|
+/// The high-level client, which answers the types below instead of an
+/// envelope. `@typed.Api::of(client)` is how a caller reaches it.
+pub using @typed {type Api, type Page, type Posted, type TypedError}
+
+///|
+/// The domain model. Unlike the Block Kit types above, these are plain structs
+/// with no constructors to lose, so naming one here is the whole of what a
+/// consumer needs -- `@slack.User` reads a `users.info` response without
+/// importing anything else.
+pub using @model {
+  type User,
+  type Profile,
+  type Channel,
+  type ChannelText,
+  type Message,
+  type Edited,
+  type Reaction,
+  type BotProfile,
+  type Team,
+  type Usergroup,
+  type View,
+  type File,
+}

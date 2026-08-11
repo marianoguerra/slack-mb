@@ -1,0 +1,47 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "marianoguerra/slack/internal/jsonx"
+
+// Values
+pub fn fields_of(Map[String, Json]) -> Map[String, Json]
+
+pub fn merge_extra(Map[String, Json], Map[String, Json]) -> Json
+
+pub fn[T] put_arr(Map[String, Json], String, Array[T]?, (T) -> Json) -> Unit
+
+pub fn put_bool(Map[String, Json], String, Bool?) -> Unit
+
+pub fn put_int(Map[String, Json], String, Int?) -> Unit
+
+pub fn put_int64(Map[String, Json], String, Int64?) -> Unit
+
+pub fn put_json(Map[String, Json], String, Json?) -> Unit
+
+pub fn[T] put_obj(Map[String, Json], String, T?, (T) -> Json) -> Unit
+
+pub fn put_str(Map[String, Json], String, String?) -> Unit
+
+pub fn put_str_arr(Map[String, Json], String, Array[String]?) -> Unit
+
+pub fn[T] take_arr(Map[String, Json], String, (Json) -> T?) -> Array[T]?
+
+pub fn take_bool(Map[String, Json], String) -> Bool?
+
+pub fn take_int(Map[String, Json], String) -> Int?
+
+pub fn take_int64(Map[String, Json], String) -> Int64?
+
+pub fn take_json(Map[String, Json], String) -> Json?
+
+pub fn[T] take_obj(Map[String, Json], String, (Json) -> T?) -> T?
+
+pub fn take_str(Map[String, Json], String) -> String?
+
+pub fn take_str_arr(Map[String, Json], String) -> Array[String]?
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

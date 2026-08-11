@@ -1,6 +1,6 @@
 // A demo CLI.
 //
-// Its real job is to exercise `transport_http`, which is the one package no
+// Its real job is to exercise `marianoguerra/slack-http`, which is the one package no
 // unit test covers and cannot: everything above it is tested against a scripted
 // transport, and everything below it is moonbitlang/async's problem. This is
 // how the seam between them gets checked by a person.
@@ -81,7 +81,7 @@ fn parse_args(argv : Array[String]) -> Args? {
 
 ///|
 async fn run(args : Args, token : String) -> Unit {
-  let transport = @transport_http.HttpTransport::new()
+  let transport = @transport.HttpTransport::new()
   let client = @client.Client::new(transport, token)
   // A method Slack's metadata does not list is not refused -- it may simply be
   // newer than this library -- but it is worth saying out loud, because a typo

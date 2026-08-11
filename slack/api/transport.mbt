@@ -2,7 +2,7 @@
 //
 // Modelled on marianoguerra/mcp's `Transport`: the trait lives in the
 // dependency-free package so a js or wasm host can implement it over `fetch`,
-// while marianoguerra/slack-ext/transport_http implements it over
+// while marianoguerra/slack-http implements it over
 // moonbitlang/async for native. Everything above this line is a pure function
 // of bytes, which is why almost every reference SDK test ports here without a
 // server.

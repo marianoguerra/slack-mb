@@ -6,6 +6,8 @@ import {
   "marianoguerra/slack/blocks",
   "marianoguerra/slack/client",
   "marianoguerra/slack/methods",
+  "marianoguerra/slack/model",
+  "marianoguerra/slack/typed",
 }
 
 // Values
@@ -15,6 +17,8 @@ import {
 // Types and methods
 
 // Type aliases
+pub using @typed {type Api}
+
 pub using @api {type ApiResponse}
 
 pub using @blocks {type BlockElement}
@@ -23,7 +27,17 @@ pub using @blocks {type BlockParseError}
 
 pub using @api {type BoolStyle}
 
+pub using @model {type BotProfile}
+
+pub using @model {type Channel}
+
+pub using @model {type ChannelText}
+
 pub using @client {type Client}
+
+pub using @model {type Edited}
+
+pub using @model {type File}
 
 pub using @api {type HttpRequest}
 
@@ -31,13 +45,23 @@ pub using @api {type HttpResponse}
 
 pub using @blocks {type LayoutBlock}
 
+pub using @model {type Message}
+
+pub using @typed {type Page}
+
 pub using @client {type Paginator}
 
 pub using @api {type ParamValue}
 
 pub using @api {type Params}
 
+pub using @typed {type Posted}
+
+pub using @model {type Profile}
+
 pub using @methods {type RateLimitTier}
+
+pub using @model {type Reaction}
 
 pub using @api {type ResponseMetadata}
 
@@ -49,11 +73,21 @@ pub using @api {type Severity}
 
 pub using @api {type SlackError}
 
+pub using @model {type Team}
+
 pub using @blocks {type TextKind}
 
 pub using @blocks {type TextObject}
 
+pub using @typed {type TypedError}
+
 pub using @blocks {type UnknownPolicy}
+
+pub using @model {type User}
+
+pub using @model {type Usergroup}
+
+pub using @model {type View}
 
 pub using @api {trait Transport}
 

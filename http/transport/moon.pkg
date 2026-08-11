@@ -1,0 +1,13 @@
+// The adapter, and nothing else.
+//
+// Keeping the package this thin is what lets `marianoguerra/slack` stay
+// portable: everything that could be checked without a socket -- building the
+// request, reading the envelope, deciding what a status means -- is already
+// checked over there, on every backend.
+import {
+  "marianoguerra/slack/api",
+  "moonbitlang/async/http",
+  "moonbitlang/core/encoding/utf8",
+}
+
+supported_targets = "+native"

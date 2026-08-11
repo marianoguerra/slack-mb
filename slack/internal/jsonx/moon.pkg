@@ -1,0 +1,18 @@
+// Reading and writing JSON objects without losing anything.
+//
+// Internal to this module: `internal/` is MoonBit's convention for a package
+// that is published because it must be, not because it is an API. Nothing here
+// is covered by the version guarantee, and a consumer who imports it is on
+// their own.
+//
+// It exists because @blocks and @model need the same parser discipline and a
+// second copy of it would drift. The rationale for the discipline itself is in
+// json_util.mbt.
+import {
+  "moonbitlang/core/json",
+}
+
+import {
+  "moonbitlang/core/test",
+  "moonbitlang/core/json",
+} for "test"

@@ -11,7 +11,7 @@ pub let default_api_url : String = "https://slack.com/api/"
 /// name the SDK first and then the runtime. There is no runtime to name here
 /// that is true on all four backends, so this is the SDK part alone and a
 /// caller who wants to add `myapp/1.2.3` passes it as an extra header.
-pub let user_agent : String = "MoonBit-Slack-SDK; marianoguerra/slack/0.2.0"
+pub let user_agent : String = "MoonBit-Slack-SDK; marianoguerra/slack/0.3.0"
 
 ///|
 /// Ensure the base URL ends in `/`, so that `base + method` is a URL.

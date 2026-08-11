@@ -1,11 +1,15 @@
 // The native HTTP transport.
 //
-// The only package in this repo that touches a socket, and the only one that is
-// not portable -- which is exactly why it is the only thing in it. A
-// `moon check --target wasm` that skips this package loses no coverage, and a
-// consumer who cannot accept moonbitlang/async depends on marianoguerra/slack
-// alone and writes their own `@api.Transport` over whatever their host offers.
-// The trait exists for that.
+//   moon add marianoguerra/slack-http
+//
+//   let client = @client.Client::new(@transport.HttpTransport::new(), token)
+//
+// Its own module rather than a package of `marianoguerra/slack`, because an
+// import is module-wide: putting it there would hand moonbitlang/async to
+// everyone who only wants Block Kit on wasm-gc. The whole point of the
+// `@api.Transport` trait is that this is a choice -- a consumer whose host
+// already has an HTTP client implements the trait over that in a dozen lines
+// and never depends on this module at all.
 //
 // There are no unit tests here, deliberately. Everything this file does that
 // could be checked without a server -- building the request, reading the

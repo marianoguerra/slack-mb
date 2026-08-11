@@ -2,6 +2,7 @@
 // `client`. Its fixtures are small enough to embed as raw strings, which keeps
 // this package free of filesystem access and therefore portable.
 import {
+  "marianoguerra/slack/internal/jsonx",
   "moonbitlang/core/json",
 }
 

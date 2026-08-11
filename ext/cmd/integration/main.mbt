@@ -53,7 +53,7 @@ async fn main {
     println("recording to \{path}")
   }
   println("")
-  let http = @transport_http.HttpTransport::new()
+  let http = @transport.HttpTransport::new()
   let recorder = @scenario.RecordingTransport::new(http)
   // The recorder is always in the chain; only writing it out is conditional.
   // A wrapper that was sometimes absent would mean the recorded run and the

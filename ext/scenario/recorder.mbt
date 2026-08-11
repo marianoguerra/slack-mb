@@ -2,7 +2,7 @@
 //
 // A wrapper rather than a hook inside the scenario, so that recording stays a
 // transport concern and `run` stays a plain consumer of a `Client`: the same
-// `RecordingTransport` wraps @transport_http for a real recording and
+// `RecordingTransport` wraps @transport for a real recording and
 // @mock.MockTransport for the mock's, and neither knows.
 
 ///|

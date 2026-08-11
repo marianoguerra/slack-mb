@@ -1,0 +1,31 @@
+// @typed, against the in-memory Slack.
+//
+// Here rather than beside the code because every method on `Api` is `async`,
+// an `async test` needs moonbitlang/async, and `marianoguerra/slack` does not
+// depend on it -- the same reason ext/test/calls exists.
+//
+// The directory is `highlevel` and not `typed` because a package's own name is
+// in scope as an alias, and `ext/test/typed` would shadow `@typed`.
+//
+// The transport is @mock rather than a scripted one on purpose. What these
+// tests are about is the pairing of a method with the key its payload arrives
+// under, and a scripted transport would answer whatever the test's author
+// believed that pairing to be -- which is the thing under test.
+import {
+}
+
+import {
+  "moonbitlang/async",
+  "marianoguerra/slack/api",
+  "marianoguerra/slack/blocks",
+  "marianoguerra/slack/client",
+  "marianoguerra/slack/mock",
+  "marianoguerra/slack/model",
+  "marianoguerra/slack/testing",
+  "marianoguerra/slack/typed",
+  "moonbitlang/core/json",
+  "moonbitlang/core/string",
+  "moonbitlang/x/fs",
+} for "test"
+
+supported_targets = "+native"

@@ -13,6 +13,8 @@ import {
   "marianoguerra/slack/blocks",
   "marianoguerra/slack/client",
   "marianoguerra/slack/methods",
+  "marianoguerra/slack/model",
+  "marianoguerra/slack/typed",
 }
 
 import {

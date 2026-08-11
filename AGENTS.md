@@ -9,11 +9,13 @@ You can browse and install extra skills here:
 
 ## Project Structure
 
-- Two modules, joined by `moon.work`: `slack/` (published, dependency-free,
-  every backend) and `ext/` (not published; the native HTTP transport, the code
-  generator, the fixture-corpus tests). The rationale is in `README.md` — in
-  short, a single module would put an async runtime in the dependency graph of
-  anyone who only wants Block Kit on wasm.
+- Three modules, joined by `moon.work`: `slack/` (published, dependency-free,
+  every backend), `http/` (published, the native transport, `moonbitlang/async`,
+  native only) and `ext/` (not published; the code generator, the fixture-corpus
+  tests, the demo CLI). The rationale is in `README.md` — in short, a single
+  module would put an async runtime in the dependency graph of anyone who only
+  wants Block Kit on wasm, and the transport is something a consumer may
+  legitimately want, so it cannot hide in the module nobody can depend on.
 
 - MoonBit packages are organized per directory; each directory contains a
   `moon.pkg` file listing its dependencies. Each package has its files and
@@ -37,8 +39,9 @@ You can browse and install extra skills here:
 - **`slack/` must not gain a dependency.** Not `moonbitlang/async`, not
   `moonbitlang/x`, nothing outside `moonbitlang/core`. It is what lets the
   library build on wasm, wasm-gc, js and native, and `just backends` is the
-  gate. Anything that needs a socket, a filesystem or a clock goes in `ext/`,
-  or behind an argument the caller supplies (`now : Int64`, `&Transport`).
+  gate. Anything that needs a socket goes in `http/`, anything that needs a
+  filesystem or a clock goes in `ext/`, and anything else goes behind an
+  argument the caller supplies (`now : Int64`, `&Transport`).
 
 - **That includes `slack/mock`,** which is the package most tempted to break it:
   a mock Slack wants a clock and wants to read fixtures off disk. It gets
@@ -54,9 +57,20 @@ You can browse and install extra skills here:
   saying why the corpus is wrong rather than the mock. Adding a typed method to
   `@client` fails the drift gate until a handler exists in `@mock`.
 
-- **`slack/methods/generated_methods.mbt` is generated.** Do not edit it. Change
-  `ext/metadata/rate_limit_tiers.json` and run `just gen`; `just gen-check` is a
-  CI gate and `ext/test/coverage` is a normal test.
+- **Two files are generated.** Do not edit either:
+  `slack/methods/generated_methods.mbt` from `ext/metadata/rate_limit_tiers.json`,
+  and `slack/model/generated_model.mbt` from `ext/metadata/model.json`. Change
+  the metadata and run `just gen`; `just gen-check` is a CI gate, and
+  `ext/test/coverage` and `ext/test/modelcorpus` are the normal tests behind
+  them.
+
+- **The model answers to the corpus, the way the mock does.** A field exists in
+  `ext/metadata/model.json`, at the type it has there, because
+  `ext/fixtures/java` shows it that way — not because Slack's documentation
+  says so. `ext/test/modelcorpus` is the gate: it round-trips every entity
+  occurrence, refuses to let a modelled field fall into `extra`, and holds a
+  coverage floor. Its `allow_unmodelled` table is the check being switched off
+  for one field and needs a reason saying why the corpus is the odd one.
 
 - **Every behavioural rule should cite its source.** The point of this library
   is that its semantics come from Slack's own SDKs rather than from guesswork,
@@ -73,12 +87,21 @@ You can browse and install extra skills here:
   unexpected type falls through to `extra` rather than being dropped.
 
 - **`async test` needs `moonbitlang/async`,** which `slack/` does not have. Tests
-  that must be async live in `ext/test/calls/`. Everything that can be
-  synchronous already is, next to the code.
+  that must be async live in `ext/test/calls/` (the client) and
+  `ext/test/highlevel/` (`@typed`). Everything that can be synchronous already
+  is, next to the code — which is why `@model` is tested beside itself and
+  `@typed` is not.
 
 - A package's own name is in scope as an alias, so a test package called
-  `client` would shadow `@client`. `ext/test/calls` is named that way for this
-  reason.
+  `client` would shadow `@client`. `ext/test/calls` and `ext/test/highlevel`
+  are named that way for this reason.
+
+- **`@typed` is a layer and nothing else.** A method there is its `@client`
+  counterpart, unchanged in name and arguments, plus the key its payload
+  arrives under. Extraction is per method and never generic — `channel` is an
+  object on `conversations.info` and a string on `chat.postMessage` — so a new
+  wrapper names its own key, and `ext/test/highlevel` checks the pairing
+  against `@mock` rather than a scripted response.
 
 - MoonBit's `Compare` for `String` is **shortlex** (shorter strings sort first).
   Use `lexical_compare` when you want dictionary order — the generated method

@@ -1,9 +1,9 @@
-// A demo CLI whose real job is to exercise transport_http, which no unit test
+// A demo CLI whose real job is to exercise @transport, which no unit test
 // covers. Needs a real token; never runs in CI.
 import {
   "marianoguerra/slack/api",
   "marianoguerra/slack/client",
-  "marianoguerra/slack-ext/transport_http",
+  "marianoguerra/slack-http/transport",
   "moonbitlang/async",
   "moonbitlang/core/env",
   "moonbitlang/core/string",

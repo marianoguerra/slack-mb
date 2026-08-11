@@ -1,5 +1,5 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "marianoguerra/slack-ext/transport_http"
+package "marianoguerra/slack-http/transport"
 
 import {
   "marianoguerra/slack/api",

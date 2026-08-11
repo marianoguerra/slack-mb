@@ -1,5 +1,140 @@
 # Changelog
 
+## 0.3.0
+
+### Added
+
+- **`marianoguerra/slack-http` — the native HTTP transport, now published.** It
+  was `ext/transport_http`, which meant the only ready-made way to reach Slack
+  over a socket lived in a module explicitly marked "not published"; the
+  documented answer was to copy the file. It is its own module now, one package
+  and one file, depending on `marianoguerra/slack` and `moonbitlang/async` and
+  nothing else.
+
+  ```sh
+  moon add marianoguerra/slack-http
+  ```
+
+  ```moonbit
+  let client = @client.Client::new(@transport.HttpTransport::new(), token)
+  ```
+
+  A third module rather than a package of `marianoguerra/slack`, because in
+  MoonBit an import is module-wide: putting it there would hand an async runtime
+  to everyone who only wants Block Kit on wasm-gc. The public API is byte for
+  byte what it was — `HttpTransport`, `HttpTransport::new(description?)` and the
+  `@api.Transport` impl — so the only change for an existing caller is the
+  import path, `marianoguerra/slack-ext/transport_http` becoming
+  `marianoguerra/slack-http/transport`.
+
+- **`slack/model` — the domain model.** Twelve entities as MoonBit structs:
+  `User`, `Profile`, `Channel`, `ChannelText`, `Message`, `Edited`, `Reaction`,
+  `BotProfile`, `Team`, `Usergroup`, `View` and `File`. Until now the only way
+  to read a response was to walk `ApiResponse.raw` by hand, with no
+  compile-time help and no single place where Slack's field names lived.
+
+  ```moonbit
+  let response = client.users_info(user="U0123456789")
+  guard @model.User::from_json(response.get("user").unwrap()) is Some(user)
+  println("\{user.display()} in \{user.tz.unwrap_or("an unknown zone")}")
+  ```
+
+  It does not replace `raw`, it sits beside it. Every field but `id` is
+  optional, absent is `None` rather than `""`, and each struct carries an
+  `extra` holding everything this version does not model — so a field Slack
+  ships next Tuesday arrives intact rather than breaking anything. A message's
+  `blocks` parse into the `LayoutBlock` values `@blocks` already models, which
+  is most of the reason to model a message at all.
+
+  There is deliberately no generic extractor. `channel` is an object on
+  `conversations.info` and a string on `chat.postMessage`; `members` is a list
+  of users on `users.list` and a list of ids on `conversations.members`. Only
+  the method knows which, so only the caller can say.
+
+  `generated_model.mbt` comes from `ext/metadata/model.json`, which records
+  where in the corpus each entity was observed and at which type — the same
+  arrangement the method table has had since 0.1.0. `just gen-check` is the
+  drift gate.
+
+  Five hand-written accessors sit on top, each one collapsing an option chain
+  that is easy to get subtly wrong: `User::display` falls back display_name →
+  real_name → name → id the way Slack's own clients do, and
+  `Message::thread_root` answers the question neither `ts` nor `thread_ts`
+  answers alone.
+
+- **`slack/typed` — the same calls, one level up.** `Api` wraps a `Client` and
+  offers 31 of its methods under **the same names and the same arguments**,
+  differing only in what they answer: a `User` rather than an `ApiResponse`, a
+  `Page[Message]` rather than an envelope to walk.
+
+  ```moonbit
+  let api = @typed.Api::of(client)
+  let page = api.conversations_history(channel="C1", limit=50)
+  for message in page.items {
+    println(api.users_info(user=message.user.unwrap()).display())
+  }
+  api.client().bookmarks_list(channel_id="C1")   // and the low level, still there
+  ```
+
+  A wrapper struct rather than more methods on `Client`, for two reasons.
+  MoonBit only allows a method in the package that defines its type. And
+  keeping them apart is what lets a call here take the same name as the one it
+  wraps — `client.users_info(...)` gives an envelope, `api.users_info(...)`
+  gives a `User`.
+
+  `Api::client()` is the other half rather than an escape hatch: `Client::call`
+  reaches all 326 methods, `ApiResponse.raw` reaches every field, and mixing
+  the two levels in one function is the expected way to use this.
+
+  `Page[T]` carries the items, the whole response, and a `cursor` normalised to
+  `None` on the last page — Slack ends a walk with an *empty* `next_cursor`
+  rather than by omitting it, which is the easiest way there is to write an
+  infinite loop over the last page.
+
+  Failures are `TypedError`: `Slack(e)`, which is everything `Client` could
+  already fail with, untouched; or `ResponseShapeError(api_method~, key~)` for
+  `ok: true` with a payload this version cannot read. `TypedError::slack()`
+  reaches the wrapped error in one step, because a rate limit is the case that
+  actually happens. A separate type rather than a seventh `SlackError` variant
+  on purpose: that taxonomy's `code()` strings are node-slack-sdk's `ErrorCode`
+  values verbatim, there is no node counterpart to borrow for this, and
+  inventing one would make @api's claim to be a faithful port false. Nothing in
+  `@api` or `@client` changed.
+
+### Verification
+
+- **`ext/test/highlevel`** runs all 31 calls against `@mock` rather than a
+  scripted transport. What a typed call knows that nothing else does is which
+  key its method puts the payload under, and a fake would answer whatever its
+  author believed that key to be — the belief being the thing under test. The
+  mock's own output is held to the recorded corpus by `ext/test/mockshape`, so
+  a wrong key fails instead of agreeing with itself. A drift test scrapes the
+  two generated interfaces and fails if an `Api` method has no `Client`
+  counterpart of the same name.
+
+- **`ext/test/modelcorpus`** holds three properties over both fixture tiers:
+  every entity occurrence round-trips byte for byte — 279 in the small tier and
+  327 in the large one, where the messages are; no modelled field is ever left
+  in `extra`, which is what catches Slack changing a field's type and the struct
+  quietly reading `None` forever; and a per-entity coverage floor, so the first
+  two cannot be satisfied by modelling nothing. Coverage today: `User` 50 of 52
+  observed fields, `Channel` 61 of 68, `Message` 38 of 52, `File` 57 of 159 —
+  the last deliberately, since most of the rest are thumbnail dimensions in a
+  dozen sizes.
+
+### Changed
+
+- **`slack/internal/jsonx`** — the take-and-remove JSON helpers moved out of
+  `@blocks` into an internal package, unchanged, so a second parser can inherit
+  the discipline rather than a second copy of it. `@blocks`'s `.mbti` is
+  untouched, which is the proof the refactor is one; the helpers now carry six
+  tests of their own, pinning invariants their doc comments had been claiming on
+  the strength of `ext/test/corpus` alone. `internal/` means no version
+  guarantee: nothing outside this repo should import it.
+
+  Preparation for a domain-model package (`User`, `Channel`, `Message`) over the
+  responses `ApiResponse.raw` currently hands back as `Json`.
+
 ## 0.2.0
 
 ### Added

@@ -12,20 +12,27 @@ This file is about the repository.
 moon add marianoguerra/slack
 ```
 
-## Two modules
+## Three modules
 
 ```
-slack/   marianoguerra/slack       published; no dependencies; wasm, wasm-gc, js, native
-ext/     marianoguerra/slack-ext   not published; native HTTP, the generator, the corpus tests
+slack/   marianoguerra/slack        published; no dependencies; wasm, wasm-gc, js, native
+http/    marianoguerra/slack-http   published; the native transport; moonbitlang/async; native
+ext/     marianoguerra/slack-ext    not published; the generator, the corpus tests, the demo CLI
 ```
 
 The split is not cosmetic. In MoonBit the module is the unit of publication
 *and* of dependencies, so a single module would make someone who only wants
 `@slack/blocks` on wasm-gc resolve an async runtime they will never link.
 `slack/` therefore imports nothing outside `moonbitlang/core`, and everything
-that would have cost it that — the HTTP transport (`moonbitlang/async`, native
-only), the code generator and the conformance tests that read 5 MB of vendored
-fixtures off disk (`moonbitlang/x/fs`) — lives in `ext/`.
+that would have cost it that lives elsewhere.
+
+That is two different reasons to be elsewhere, which is why there are two other
+modules rather than one. `http/` is a dependency a consumer may well want, just
+not unconditionally: it is one file, it depends on `moonbitlang/async`, and it
+is published so that `moon add marianoguerra/slack-http` is the whole story.
+`ext/` is a dependency nobody wants — the code generator and the conformance
+tests that read 5 MB of vendored fixtures off disk (`moonbitlang/x/fs`) — so it
+is not published at all.
 
 | Package | What is in it |
 | --- | --- |
@@ -37,14 +44,18 @@ fixtures off disk (`moonbitlang/x/fs`) — lives in `ext/`.
 | `slack/methods` | 326 method names and their rate-limit tiers (generated) |
 | `slack/ratectl` | Leaky-bucket throttling, with an injected clock |
 | `slack/testing` | `FakeTransport`: a scripted transport |
+| `slack/model` | The domain model: `User`, `Channel`, `Message` and nine more, with `from_json` (generated) |
+| `slack/typed` | `Api`: 31 of `Client`'s calls, answering domain types instead of an envelope |
 | `slack/mock` | An in-memory Slack: a workspace with state, and a transport over it |
-| `ext/transport_http` | The native transport, over `moonbitlang/async` |
+| `slack/internal/jsonx` | The take-and-remove JSON helpers @blocks parses with. Internal; no version guarantee |
+| `http/transport` | The native transport, over `moonbitlang/async` |
 | `ext/scenario` | The integration scenario, as a library: one `run`, two transports |
 | `ext/shape` | Comparing two payloads by shape rather than by value |
-| `ext/cmd/main` | A demo CLI, which is how `transport_http` gets exercised |
+| `ext/cmd/main` | A demo CLI, which is how the transport gets exercised |
 | `ext/cmd/integration` | The scenario against a real workspace; needs a token |
 | `ext/tools/gen_methods` | Generates `slack/methods/generated_methods.mbt` |
-| `ext/test/*` | Conformance tests over the vendored corpus, the mock, and the async client tests |
+| `ext/tools/gen_model` | Generates `slack/model/generated_model.mbt` |
+| `ext/test/*` | Conformance tests over the vendored corpus, the mock, the model and the async client tests |
 
 ## Working on it
 
@@ -63,7 +74,7 @@ most of it. `moon test`, on the other hand, covers the whole workspace from
 wherever it was invoked, which is why the tests that read files probe for their
 fixtures rather than assuming a working directory.
 
-266 tests: 230 on wasm and 36 more on native (the async client tests, the
+306 tests: 251 on wasm and 55 more on native (the async client tests, the
 scenario against the mock, everything that reads the corpus off disk, and
 anything else that needs a runtime).
 
@@ -79,6 +90,84 @@ merged so that each file is the union of every shape its method has been
 observed to return. `ext/test/corpus` parses all of them and asserts that every
 Block Kit payload inside round-trips byte for byte — 2,548 blocks, including
 fields this library has never heard of.
+
+## The domain model
+
+`slack/client` answers an `ApiResponse` whose payload is `Json`, because 326
+methods cannot have 326 response types and because a field Slack shipped last
+Tuesday must not break a bot. `slack/model` is the other half of that bargain:
+twelve entities — `User`, `Profile`, `Channel`, `ChannelText`, `Message`,
+`Edited`, `Reaction`, `BotProfile`, `Team`, `Usergroup`, `View`, `File` — as
+structs, with everything else still reachable.
+
+```moonbit
+let response = client.users_info(user="U0123456789")
+guard @model.User::from_json(response.get("user").unwrap()) is Some(user)
+println("\{user.display()} in \{user.tz.unwrap_or("an unknown zone")}")
+```
+
+Three rules, all inherited from the Block Kit model next door:
+
+- **Every field is optional but `id`**, and absent is `None` rather than `""`.
+  Slack sends `""` for an unset display name and omits the field entirely when
+  it is outside your scopes; a model that defaulted would erase the difference.
+- **Nothing is dropped.** Each struct carries an `extra` holding every field
+  this version does not model, and `to_json(from_json(x)) == x` over the whole
+  corpus. A field at an unexpected type is never *taken*, so it lands in `extra`
+  rather than being silently lost — which is what makes `extra` a mechanism
+  instead of a promise.
+- **A message's `blocks` are Block Kit**, parsed into `Array[LayoutBlock]` by
+  the package that already models them.
+
+Extraction is per method, never generic, and the corpus is why: `channel` is an
+object on `conversations.info` and a *string* on `chat.postMessage`, and
+`members` is `Array[User]` on `users.list` and `Array[String]` on
+`conversations.members`. There is no `ApiResponse::user()`, and there should not
+be one.
+
+`slack/model/generated_model.mbt` is generated from `ext/metadata/model.json`,
+which records where in the corpus each entity was observed and at which type.
+`ext/test/modelcorpus` is the gate: it round-trips every occurrence in both
+fixture tiers, fails if a modelled field ever falls into `extra` — the signal
+that Slack changed a type and the struct field now reads `None` forever — and
+holds a per-entity coverage floor so the first two properties cannot be
+satisfied by modelling nothing.
+
+## Two levels
+
+`slack/typed` puts the two together. `Api` wraps a `Client` and offers 31 of its
+calls under **the same names and the same arguments**, differing only in what
+they answer:
+
+```moonbit
+let api = @typed.Api::of(client)
+
+let user = api.users_info(user="U0123456789")          // a User
+let page = api.conversations_history(channel="C1")     // a Page[Message]
+let posted = api.chat_post_message(channel="C1", text="hi")  // ids and a Message
+
+api.client().bookmarks_list(channel_id="C1")           // and the low level, still there
+```
+
+`Api::client()` is not an escape hatch so much as the other half: `Client::call`
+reaches all 326 methods and `ApiResponse.raw` reaches every field. Mixing the
+two in one function is the expected way to use this.
+
+Failures come back as `TypedError`, which is `Slack(e)` — everything `Client`
+could already fail with, untouched — or `ResponseShapeError(api_method~, key~)`
+for the case where Slack answered `ok: true` and the payload was not what this
+version models. `TypedError::slack()` gets to the wrapped error in one step,
+because a rate limit is the case that actually happens. It is a separate type
+rather than a seventh `SlackError` variant because `SlackError::code()` returns
+node-slack-sdk's `ErrorCode` strings verbatim, and there is no node counterpart
+to borrow for this one.
+
+`ext/test/highlevel` runs all of it against `@mock` rather than a scripted
+transport, because what these calls know that nothing else does is which key
+each method puts its payload under — and a fake would answer whatever its
+author believed that key to be. A drift test scrapes the two generated
+interfaces and fails if an `Api` method has no `Client` counterpart of the same
+name.
 
 ## Testing against a Slack that is not there
 
@@ -221,9 +310,10 @@ on a developer's machine too.
 
 ## Releasing
 
-`slack/` is the published module; `ext/` is not published. The tarball is built
-from `slack/` alone, so it must stand up with no workspace around it — which is
-what the pre-publish check below proves.
+`slack/` and `http/` are published; `ext/` is not. Each tarball is built from
+its own directory, so it must stand up with no workspace around it — which is
+what the pre-publish check below proves. Publish `slack/` first: `http/`
+depends on it at an exact version.
 
 ```sh
 cd slack
@@ -232,9 +322,29 @@ moon package                     # writes _build/publish/marianoguerra-slack-<ve
 #   for t in wasm wasm-gc js native; do moon check --target $t --deny-warn; done
 #   moon test --target all
 moon publish
+
+cd ../http
+moon package
+# extract it somewhere empty and, from there:
+#   moon check --target native --deny-warn
+moon publish
 ```
 
-Bump `version` in `slack/moon.mod`, add a `CHANGELOG.md` entry, tag `v<version>`.
+The version lives in **six** places, and only the first is obvious. Grep the
+old string rather than trusting this list:
+
+```sh
+grep -rn "$OLD_VERSION" --include="*.mod" --include="*.mbt" slack http ext
+```
+
+| where | what |
+| --- | --- |
+| `slack/moon.mod` | `version` |
+| `slack/api/request.mbt` | `user_agent` hardcodes it, and nothing fails if it goes stale — the test only asserts the string *contains* `marianoguerra/slack` |
+| `http/moon.mod` | `version`, and the `marianoguerra/slack@` import constraint |
+| `ext/moon.mod` | `version`, and both import constraints — or the workspace stops resolving |
+
+Then add a `CHANGELOG.md` entry and tag `v<version>`.
 A published version cannot be withdrawn.
 
 ## Licence
