@@ -11,6 +11,28 @@ import {
 // Errors
 
 // Types and methods
+pub(all) struct Bookmark {
+  id : String
+  app_action_id : String?
+  app_id : String?
+  channel_id : String?
+  date_created : Int64?
+  date_updated : Int64?
+  emoji : String?
+  entity_id : String?
+  icon_url : String?
+  last_updated_by_team_id : String?
+  last_updated_by_user_id : String?
+  link : String?
+  rank : String?
+  shortcut_id : String?
+  title : String?
+  type_ : String?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+pub fn Bookmark::from_json(Json) -> Self?
+pub fn Bookmark::to_json(Self) -> Json
+
 pub(all) struct BotProfile {
   app_id : String?
   bot_access_token : String?
@@ -274,6 +296,17 @@ pub(all) struct Reaction {
 } derive(Eq, @debug.Debug)
 pub fn Reaction::from_json(Json) -> Self?
 pub fn Reaction::to_json(Self) -> Json
+
+pub(all) struct ScheduledMessage {
+  id : String
+  channel_id : String?
+  date_created : Int64?
+  post_at : Int64?
+  text : String?
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+pub fn ScheduledMessage::from_json(Json) -> Self?
+pub fn ScheduledMessage::to_json(Self) -> Json
 
 pub(all) struct Team {
   id : String

@@ -16,6 +16,7 @@ import {
   "marianoguerra/slack/blocks",
   "marianoguerra/slack/client",
   "marianoguerra/slack/model",
+  "moonbitlang/core/debug",
   "moonbitlang/core/json",
 }
 

@@ -25,6 +25,8 @@ pub using @blocks {type BlockElement}
 
 pub using @blocks {type BlockParseError}
 
+pub using @model {type Bookmark}
+
 pub using @api {type BoolStyle}
 
 pub using @model {type BotProfile}
@@ -68,6 +70,8 @@ pub using @api {type ResponseMetadata}
 pub using @blocks {type RichTextBlockElement}
 
 pub using @blocks {type RichTextItem}
+
+pub using @model {type ScheduledMessage}
 
 pub using @api {type Severity}
 

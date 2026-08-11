@@ -1478,6 +1478,103 @@
      "type": "str"
     }
    ]
+  },
+  {
+   "name": "Bookmark",
+   "doc": "A channel bookmark: a pinned link, file or app shortcut in a channel's header.",
+   "paths": [
+    "$.bookmark",
+    "$.bookmarks[]"
+   ],
+   "id": "required",
+   "fields": [
+    {
+     "name": "app_action_id",
+     "type": "str"
+    },
+    {
+     "name": "app_id",
+     "type": "str"
+    },
+    {
+     "name": "channel_id",
+     "type": "str"
+    },
+    {
+     "name": "date_created",
+     "type": "int64"
+    },
+    {
+     "name": "date_updated",
+     "type": "int64"
+    },
+    {
+     "name": "emoji",
+     "type": "str"
+    },
+    {
+     "name": "entity_id",
+     "type": "str"
+    },
+    {
+     "name": "icon_url",
+     "type": "str"
+    },
+    {
+     "name": "last_updated_by_team_id",
+     "type": "str"
+    },
+    {
+     "name": "last_updated_by_user_id",
+     "type": "str"
+    },
+    {
+     "name": "link",
+     "type": "str"
+    },
+    {
+     "name": "rank",
+     "type": "str"
+    },
+    {
+     "name": "shortcut_id",
+     "type": "str"
+    },
+    {
+     "name": "title",
+     "type": "str"
+    },
+    {
+     "name": "type",
+     "type": "str"
+    }
+   ]
+  },
+  {
+   "name": "ScheduledMessage",
+   "doc": "A message queued for later by `chat.scheduleMessage`, until it is sent or cancelled.",
+   "paths": [
+    "$.scheduled_messages[]"
+   ],
+   "id": "required",
+   "fields": [
+    {
+     "name": "channel_id",
+     "type": "str"
+    },
+    {
+     "name": "date_created",
+     "type": "int64"
+    },
+    {
+     "name": "post_at",
+     "type": "int64"
+    },
+    {
+     "name": "text",
+     "type": "str"
+    }
+   ]
   }
  ]
 }

@@ -1726,3 +1726,138 @@ pub fn File::to_json(self : File) -> Json {
   @jsonx.put_str(o, "username", self.username)
   @jsonx.merge_extra(o, self.extra)
 }
+
+///|
+/// A channel bookmark: a pinned link, file or app shortcut in a channel's header.
+///
+/// Anything Slack sends that is not below is in `extra`. Observed in the
+/// reference corpus at:
+/// $.bookmark, $.bookmarks[]
+pub(all) struct Bookmark {
+  /// Always sent, on every occurrence in the corpus. A payload without
+  /// one is not this entity, and `from_json` answers `None`.
+  id : String
+  app_action_id : String?
+  app_id : String?
+  channel_id : String?
+  date_created : Int64?
+  date_updated : Int64?
+  emoji : String?
+  entity_id : String?
+  icon_url : String?
+  last_updated_by_team_id : String?
+  last_updated_by_user_id : String?
+  link : String?
+  rank : String?
+  shortcut_id : String?
+  title : String?
+  type_ : String?
+  /// Every field this version does not model, verbatim.
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+
+///|
+/// `None` when the value is not an object, or has no string `id`.
+pub fn Bookmark::from_json(json : Json) -> Bookmark? {
+  guard json is Object(o) else { return None }
+  let rest = @jsonx.fields_of(o)
+  guard @jsonx.take_str(rest, "id") is Some(id) else { return None }
+  let app_action_id = @jsonx.take_str(rest, "app_action_id")
+  let app_id = @jsonx.take_str(rest, "app_id")
+  let channel_id = @jsonx.take_str(rest, "channel_id")
+  let date_created = @jsonx.take_int64(rest, "date_created")
+  let date_updated = @jsonx.take_int64(rest, "date_updated")
+  let emoji = @jsonx.take_str(rest, "emoji")
+  let entity_id = @jsonx.take_str(rest, "entity_id")
+  let icon_url = @jsonx.take_str(rest, "icon_url")
+  let last_updated_by_team_id = @jsonx.take_str(rest, "last_updated_by_team_id")
+  let last_updated_by_user_id = @jsonx.take_str(rest, "last_updated_by_user_id")
+  let link = @jsonx.take_str(rest, "link")
+  let rank = @jsonx.take_str(rest, "rank")
+  let shortcut_id = @jsonx.take_str(rest, "shortcut_id")
+  let title = @jsonx.take_str(rest, "title")
+  let type_ = @jsonx.take_str(rest, "type")
+  Some({
+    id,
+    app_action_id,
+    app_id,
+    channel_id,
+    date_created,
+    date_updated,
+    emoji,
+    entity_id,
+    icon_url,
+    last_updated_by_team_id,
+    last_updated_by_user_id,
+    link,
+    rank,
+    shortcut_id,
+    title,
+    type_,
+    extra: rest,
+  })
+}
+
+///|
+pub fn Bookmark::to_json(self : Bookmark) -> Json {
+  let o : Map[String, Json] = Map([])
+  o["id"] = Json::string(self.id)
+  @jsonx.put_str(o, "app_action_id", self.app_action_id)
+  @jsonx.put_str(o, "app_id", self.app_id)
+  @jsonx.put_str(o, "channel_id", self.channel_id)
+  @jsonx.put_int64(o, "date_created", self.date_created)
+  @jsonx.put_int64(o, "date_updated", self.date_updated)
+  @jsonx.put_str(o, "emoji", self.emoji)
+  @jsonx.put_str(o, "entity_id", self.entity_id)
+  @jsonx.put_str(o, "icon_url", self.icon_url)
+  @jsonx.put_str(o, "last_updated_by_team_id", self.last_updated_by_team_id)
+  @jsonx.put_str(o, "last_updated_by_user_id", self.last_updated_by_user_id)
+  @jsonx.put_str(o, "link", self.link)
+  @jsonx.put_str(o, "rank", self.rank)
+  @jsonx.put_str(o, "shortcut_id", self.shortcut_id)
+  @jsonx.put_str(o, "title", self.title)
+  @jsonx.put_str(o, "type", self.type_)
+  @jsonx.merge_extra(o, self.extra)
+}
+
+///|
+/// A message queued for later by `chat.scheduleMessage`, until it is sent or cancelled.
+///
+/// Anything Slack sends that is not below is in `extra`. Observed in the
+/// reference corpus at:
+/// $.scheduled_messages[]
+pub(all) struct ScheduledMessage {
+  /// Always sent, on every occurrence in the corpus. A payload without
+  /// one is not this entity, and `from_json` answers `None`.
+  id : String
+  channel_id : String?
+  date_created : Int64?
+  post_at : Int64?
+  text : String?
+  /// Every field this version does not model, verbatim.
+  extra : Map[String, Json]
+} derive(Eq, @debug.Debug)
+
+///|
+/// `None` when the value is not an object, or has no string `id`.
+pub fn ScheduledMessage::from_json(json : Json) -> ScheduledMessage? {
+  guard json is Object(o) else { return None }
+  let rest = @jsonx.fields_of(o)
+  guard @jsonx.take_str(rest, "id") is Some(id) else { return None }
+  let channel_id = @jsonx.take_str(rest, "channel_id")
+  let date_created = @jsonx.take_int64(rest, "date_created")
+  let post_at = @jsonx.take_int64(rest, "post_at")
+  let text = @jsonx.take_str(rest, "text")
+  Some({ id, channel_id, date_created, post_at, text, extra: rest })
+}
+
+///|
+pub fn ScheduledMessage::to_json(self : ScheduledMessage) -> Json {
+  let o : Map[String, Json] = Map([])
+  o["id"] = Json::string(self.id)
+  @jsonx.put_str(o, "channel_id", self.channel_id)
+  @jsonx.put_int64(o, "date_created", self.date_created)
+  @jsonx.put_int64(o, "post_at", self.post_at)
+  @jsonx.put_str(o, "text", self.text)
+  @jsonx.merge_extra(o, self.extra)
+}

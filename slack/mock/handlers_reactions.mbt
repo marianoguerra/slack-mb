@@ -217,7 +217,14 @@ fn Workspace::bookmarks_add(
   auth : TokenRecord,
 ) -> Map[String, Json] raise Refusal {
   ignore(auth)
-  let channel = self.channel_arg(form, allow_name=false)
+  // `channel_id`, not `channel` -- the same spelling `bookmarks.list` uses and
+  // the only two methods in the implemented surface that do, which is why
+  // neither goes through `channel_arg`. Reading `channel` here made every
+  // `bookmarks.add` answer `channel_not_found`; nothing caught it until
+  // ext/test/highlevel called the method for the first time.
+  let channel = self.resolve_channel(
+    form.require_as("channel_id", "channel_not_found"),
+  )
   let title = form.require_as("title", "invalid_arguments")
   // `type` is required and Slack only documents `link`. Anything else is
   // refused rather than stored, because a bookmark of an unknown type is a
@@ -247,9 +254,8 @@ fn Workspace::bookmarks_list(
   auth : TokenRecord,
 ) -> Map[String, Json] raise Refusal {
   ignore(auth)
-  // `channel_id`, not `channel`. The only method in the implemented surface
-  // that spells it that way, which is why it does not go through
-  // `channel_arg`.
+  // `channel_id`, not `channel`. See `bookmarks.add` above: these two are the
+  // only methods in the implemented surface that spell it that way.
   let id = form.require_as("channel_id", "channel_not_found")
   let channel = self.resolve_channel(id)
   { "bookmarks": Json::array(channel.bookmarks.map(b => b.to_json())) }

@@ -2,6 +2,44 @@
 
 ## Unreleased
 
+### Added
+
+- **`@typed.Api` now covers 61 of `Client`'s 69 calls**, up from 31. The new
+  ones fall in three groups: calls that answer an entity `@model` already had
+  (`conversations.invite`, `join`, `rename`, `usergroups.users.update`,
+  `files.completeUploadExternal`); calls that answer a bag of fields nothing
+  else uses, which get a named result — `Identity` for `auth.test`, `Scheduled`
+  for `chat.scheduleMessage`, `Presence`, `Upload`; and the eleven that answer
+  nothing but `{"ok": true}`.
+
+  Wrapping that last group looks pointless and is not. Those methods still fail
+  in every way the others do, and wrapping them is what lets a caller stay
+  inside `Api` for a whole flow instead of dropping a level and handling a
+  second error type halfway through. `Unit` is the honest return.
+
+  The eight remaining are named in the drift test with a reason each: three
+  generic entry points, `api_test` (echoes its own arguments),
+  `team_profile_get` (its `profile` is field definitions, not a user's), and
+  `pins_list`/`reactions_list`/`reactions_get`, whose items are a message *or*
+  a file *or* a comment — a union `@model` does not have yet.
+
+- **`@model.Bookmark` and `@model.ScheduledMessage`**, derived from the corpus
+  like the other twelve, behind `bookmarks.list`, `bookmarks.add` and
+  `chat.scheduledMessages.list`.
+
+### Fixed
+
+- **`@mock`'s `bookmarks.add` read `channel` where Slack and `Client` both say
+  `channel_id`,** so it answered `channel_not_found` every single time and had
+  never once succeeded. Its sibling `bookmarks.list` gets it right and says so
+  in a comment the handler above it ignored.
+
+  The mock's shape gate could not catch this: its probes send whatever the
+  handler wants, so a handler taking the wrong parameter agrees with its own
+  probe. `ext/test/highlevel` caught it on the first run, because it goes
+  through `@client` — which has the parameter name from Slack's documentation.
+  The probe is fixed too, so the shape gate now covers the method for real.
+
 ### Verification
 
 - **`ext/test/version`** — the six places the version lives, checked against

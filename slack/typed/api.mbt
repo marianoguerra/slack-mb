@@ -95,7 +95,7 @@ pub(all) struct Posted {
   /// The message as stored, which is not always the message as sent -- Slack
   /// resolves links and mentions on the way in.
   message : @model.Message?
-} derive(Eq)
+} derive(Eq, @debug.Debug)
 
 ///|
 /// Pull a modelled payload out of a response, or say which method and key

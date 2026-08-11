@@ -261,8 +261,14 @@ fn probe_all(ws : @mock.Workspace) -> Array[Probe] raise {
   p.probe("pins.list", [("channel", general)]) |> ignore
   p.probe("pins.remove", [("channel", general), ("timestamp", thread_root)])
   |> ignore
+  // `channel_id` for both, which is what `Client::bookmarks_add` and
+  // `Client::bookmarks_list` spell it and what Slack documents. This probe
+  // said `channel` until ext/test/highlevel called the method through the
+  // client for the first time and got `channel_not_found`: a probe written
+  // from the handler asks the handler what it wants, so it cannot catch the
+  // handler taking the wrong parameter. Going through `@client` can.
   p.probe("bookmarks.add", [
-    ("channel", general),
+    ("channel_id", general),
     ("title", "Docs"),
     ("type", "link"),
     ("link", "https://example.com/docs"),

@@ -44,8 +44,8 @@ is not published at all.
 | `slack/methods` | 326 method names and their rate-limit tiers (generated) |
 | `slack/ratectl` | Leaky-bucket throttling, with an injected clock |
 | `slack/testing` | `FakeTransport`: a scripted transport |
-| `slack/model` | The domain model: `User`, `Channel`, `Message` and nine more, with `from_json` (generated) |
-| `slack/typed` | `Api`: 31 of `Client`'s calls, answering domain types instead of an envelope |
+| `slack/model` | The domain model: `User`, `Channel`, `Message` and eleven more, with `from_json` (generated) |
+| `slack/typed` | `Api`: 61 of `Client`'s 69 calls, answering domain types instead of an envelope |
 | `slack/mock` | An in-memory Slack: a workspace with state, and a transport over it |
 | `slack/internal/jsonx` | The take-and-remove JSON helpers @blocks parses with. Internal; no version guarantee |
 | `http/transport` | The native transport, over `moonbitlang/async` |
@@ -74,7 +74,7 @@ most of it. `moon test`, on the other hand, covers the whole workspace from
 wherever it was invoked, which is why the tests that read files probe for their
 fixtures rather than assuming a working directory.
 
-309 tests: 252 on wasm and 57 more on native (the async client tests, the
+315 tests: 252 on wasm and 63 more on native (the async client tests, the
 scenario against the mock, everything that reads the corpus off disk, and
 anything else that needs a runtime).
 
@@ -135,8 +135,8 @@ satisfied by modelling nothing.
 
 ## Two levels
 
-`slack/typed` puts the two together. `Api` wraps a `Client` and offers 31 of its
-calls under **the same names and the same arguments**, differing only in what
+`slack/typed` puts the two together. `Api` wraps a `Client` and offers 61 of its
+69 calls under **the same names and the same arguments**, differing only in what
 they answer:
 
 ```moonbit
@@ -162,12 +162,24 @@ rather than a seventh `SlackError` variant because `SlackError::code()` returns
 node-slack-sdk's `ErrorCode` strings verbatim, and there is no node counterpart
 to borrow for this one.
 
+The eight `Client` methods with no wrapper are named in the drift test with a
+reason each: three are generic entry points, `api_test` echoes its own
+arguments, `team_profile_get`'s `profile` is field definitions rather than a
+user's, and `pins_list`/`reactions_list`/`reactions_get` answer items that are
+a message *or* a file *or* a comment — a union `@model` does not have yet.
+
 `ext/test/highlevel` runs all of it against `@mock` rather than a scripted
 transport, because what these calls know that nothing else does is which key
 each method puts its payload under — and a fake would answer whatever its
-author believed that key to be. A drift test scrapes the two generated
-interfaces and fails if an `Api` method has no `Client` counterpart of the same
-name.
+author believed that key to be. It found a real bug the first time it ran:
+`bookmarks.add` in the mock read `channel` where Slack and `Client` both say
+`channel_id`, so it had never once succeeded. The shape gate could not have
+caught it, because its probes ask the handler what the handler wants.
+
+The drift test runs both ways: an `Api` method with no `Client` counterpart is
+a name nobody can guess, and a `Client` method with no `Api` counterpart is a
+hole a caller falls through. Adding a typed call now fails it until the wrapper
+exists or the exception list gains a reason.
 
 ## Testing against a Slack that is not there
 

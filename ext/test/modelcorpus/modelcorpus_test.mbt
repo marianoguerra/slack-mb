@@ -84,6 +84,16 @@ let entities : Array[Entity] = [
     name: "File",
     parse: j => @model.File::from_json(j).map(x => (x.to_json(), x.extra)),
   },
+  {
+    name: "Bookmark",
+    parse: j => @model.Bookmark::from_json(j).map(x => (x.to_json(), x.extra)),
+  },
+  {
+    name: "ScheduledMessage",
+    parse: j => {
+      @model.ScheduledMessage::from_json(j).map(x => (x.to_json(), x.extra))
+    },
+  },
 ]
 
 ///|

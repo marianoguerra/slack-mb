@@ -61,4 +61,6 @@ pub using @model {
   type Usergroup,
   type View,
   type File,
+  type Bookmark,
+  type ScheduledMessage,
 }

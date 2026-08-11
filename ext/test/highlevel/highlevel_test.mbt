@@ -239,18 +239,46 @@ async test "the low-level client is always reachable" {
 }
 
 ///|
-/// The drift gate: every typed call against the one it wraps.
+/// Methods `@client` has that `@typed` deliberately does not wrap.
+///
+/// Every entry carries the reason, because the alternative to a list like this
+/// is a gate that only checks one direction -- and a one-directional gate lets
+/// a new typed call sit unwrapped forever without anyone noticing.
+let unwrapped : Map[String, String] = {
+  // Generic entry points rather than methods. `call` reaches all 326 of
+  // Slack's methods and cannot know what any of them answers.
+  "call": "generic: takes a method name and Params",
+  "paginate": "generic: walks pages of any method",
+  "paginate_collect": "generic: walks and concatenates any method's items",
+  // A diagnostic that echoes its arguments back. There is nothing to model:
+  // the answer is whatever you sent.
+  "api_test": "echoes its own arguments; nothing to model",
+  // These three answer `items` or a target that is a message OR a file OR a
+  // file comment. Modelling that needs a union @model does not have yet, and
+  // guessing one of the three would be worse than not wrapping.
+  "pins_list": "items are message | file | comment; needs a union in @model",
+  "reactions_list": "items are message | file | comment; needs a union in @model",
+  "reactions_get": "target is a message | file; needs a union in @model",
+  // `profile` here is a TEAM profile -- the workspace's custom field
+  // definitions -- and not the `Profile` a user carries. Same key, different
+  // thing, which is the case this whole design exists to take seriously.
+  "team_profile_get": "its `profile` is field definitions, not a user Profile",
+}
+
+///|
+/// The drift gate, in both directions.
 ///
 /// Both inputs are generated interfaces, committed and already CI-gated for
 /// freshness by `just info-check`, which is what makes reading them safe --
 /// the same argument `ext/test/mockshape` makes for its own scrape.
 ///
-/// It catches the two ways this package can rot. A method renamed in `@client`
-/// leaves an `Api::` call wrapping nothing, and `Api` promising a name
-/// `Client` does not have is a name nobody can guess from the low-level API.
-/// Neither is a compile error, because the two are only connected by
+/// Forwards: an `Api` method with no `Client` counterpart is a name nobody can
+/// guess from the low-level API. Backwards: a `Client` method with no `Api`
+/// counterpart is a hole a caller falls through, and adding one now fails this
+/// test until it is either wrapped or written into `unwrapped` with a reason.
+/// Neither direction is a compile error, because the two are connected only by
 /// convention -- so the convention is asserted here.
-test "every typed call wraps a client method of the same name" {
+test "the typed API and the client cover each other" {
   let wrapped = interface_methods("slack/client/pkg.generated.mbti", "Client")
   let typed = interface_methods("slack/typed/pkg.generated.mbti", "Api")
   assert_true(
@@ -258,7 +286,7 @@ test "every typed call wraps a client method of the same name" {
     msg="only \{wrapped.length()} client methods found; the scrape probably broke",
   )
   assert_true(
-    typed.length() >= 25,
+    typed.length() >= 55,
     msg="only \{typed.length()} typed methods found; the scrape probably broke",
   )
   let orphans = typed.filter(name => !wrapped.contains(name))
@@ -266,6 +294,26 @@ test "every typed call wraps a client method of the same name" {
     orphans,
     [],
     msg="Api methods with no Client counterpart: \{orphans.join(", ")}",
+  )
+  let holes = wrapped.filter(name => {
+    !typed.contains(name) && !(unwrapped.get(name) is Some(_))
+  })
+  assert_eq(
+    holes,
+    [],
+    msg="Client methods @typed neither wraps nor excuses: \{holes.join(", ")}",
+  )
+  // And the excuse list cannot outlive what it excuses.
+  let stale = []
+  for name, _ in unwrapped {
+    if typed.contains(name) || !wrapped.contains(name) {
+      stale.push(name)
+    }
+  }
+  assert_eq(
+    stale,
+    [],
+    msg="entries in `unwrapped` that are now wrapped or gone: \{stale.join(", ")}",
   )
 }
 
@@ -301,4 +349,116 @@ fn interface_methods(relative : String, type_ : String) -> Array[String] raise {
     names.push(name.to_owned())
   }
   names
+}
+
+///|
+/// `auth.test` is the first call most apps make, and the one whose answer is
+/// least like an entity: five strings that exist nowhere else.
+async test "auth.test answers an Identity, and knows a bot from a user" {
+  let (ws, api) = new_api()
+  let me = api.auth_test()
+  // `demo_token` is installed by `install_app`, so it is a BOT token and
+  // `auth.test` answers the app's user rather than a human's.
+  assert_eq(me.user_id, ws.demo_id("bot"))
+  assert_true(me.url.has_prefix("https://"))
+  assert_true(me.team != "")
+  assert_eq(me.is_enterprise_install, Some(false))
+  // Which is exactly what `bot_id` is the cheapest way to tell.
+  assert_true(me.bot_id is Some(_))
+  assert_eq(me.is_bot(), true)
+}
+
+///|
+/// A scheduled message has no `ts` until it is sent, so the id is the only
+/// handle -- and the only thing that can cancel it.
+async test "a scheduled message round-trips through its id" {
+  let (ws, api) = new_api()
+  let channel = ws.demo_id("general")
+  let scheduled = api.chat_schedule_message(
+    channel~,
+    post_at=2000000000L,
+    text="tomorrow",
+  )
+  assert_eq(scheduled.channel, channel)
+  assert_eq(scheduled.post_at, 2000000000L)
+  assert_true(scheduled.scheduled_message_id != "")
+  let listed = api.chat_scheduled_messages_list(channel~)
+  assert_true(listed.items.length() >= 1)
+  assert_eq(listed.items[0].id, scheduled.scheduled_message_id)
+  api.chat_delete_scheduled_message(
+    channel~,
+    scheduled_message_id=scheduled.scheduled_message_id,
+  )
+  assert_eq(api.chat_scheduled_messages_list(channel~).items.length(), 0)
+}
+
+///|
+async test "bookmarks come back as Bookmarks" {
+  let (ws, api) = new_api()
+  let channel = ws.demo_id("general")
+  let added = api.bookmarks_add(
+    channel_id=channel,
+    title="Runbook",
+    type_="link",
+    link="https://example.com/runbook",
+    emoji=":book:",
+  )
+  assert_eq(added.title, Some("Runbook"))
+  assert_eq(added.link, Some("https://example.com/runbook"))
+  assert_eq(added.channel_id, Some(channel))
+  let listed = api.bookmarks_list(channel_id=channel)
+  assert_true(listed.map(b => b.id).contains(added.id))
+}
+
+///|
+/// The methods that answer nothing still fail in every way the others do, and
+/// wrapping them is what keeps a caller inside `Api` for a whole flow.
+async test "a whole flow stays inside Api, including the calls that answer nothing" {
+  let (ws, api) = new_api()
+  let channel = api.conversations_create(name="deploys")
+  let posted = api.chat_post_message(channel=channel.id, text="shipping")
+  api.reactions_add(channel=channel.id, name="rocket", timestamp=posted.ts)
+  api.pins_add(channel=channel.id, timestamp=posted.ts)
+  let permalink = api.chat_get_permalink(
+    channel=channel.id,
+    message_ts=posted.ts,
+  )
+  assert_true(permalink.has_prefix("https://"))
+  api.conversations_invite(channel=channel.id, users=[ws.demo_id("bob")])
+  |> ignore
+  let joined = api.conversations_rename(channel=channel.id, name="deployments")
+  assert_eq(joined.display(), "deployments")
+  api.pins_remove(channel=channel.id, timestamp=posted.ts)
+  api.reactions_remove(name="rocket", channel=channel.id, timestamp=posted.ts)
+  let deleted = api.chat_delete(channel=channel.id, ts=posted.ts)
+  assert_eq(deleted.ts, posted.ts)
+  api.conversations_archive(channel=channel.id)
+  assert_eq(api.conversations_info(channel=channel.id).is_archived, Some(true))
+}
+
+///|
+/// A Unit-returning call still raises, which is the entire reason to wrap one.
+async test "a call that answers nothing still reports a refusal" {
+  let (_, api) = new_api()
+  let error = try {
+    api.reactions_add(channel="C_NOPE", name="tada", timestamp="1.2")
+    fail("expected a refusal")
+  } catch {
+    e => @typed.to_typed_error(e)
+  }
+  assert_eq(error.code(), "slack_webapi_platform_error")
+  assert_true(error.slack() is Some(PlatformError(..)))
+}
+
+///|
+async test "presence and the upload handshake are typed too" {
+  let (ws, api) = new_api()
+  let presence = api.users_get_presence(user=ws.demo_id("alice"))
+  assert_true(presence.presence == "active" || presence.presence == "away")
+  let upload = api.files_get_upload_url_external(
+    filename="log.txt",
+    length=1024,
+  )
+  assert_true(upload.upload_url != "")
+  assert_true(upload.file_id != "")
 }
