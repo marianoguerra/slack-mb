@@ -1,0 +1,284 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "marianoguerra/slack/mock"
+
+import {
+  "marianoguerra/slack/api",
+  "marianoguerra/slack/blocks",
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub let any_method : String
+
+pub let demo_token : String
+
+pub let implemented_methods : Array[String]
+
+pub fn is_implemented(String) -> Bool
+
+pub fn ts_compare(String, String) -> Int
+
+// Errors
+
+// Types and methods
+pub struct Bookmark {
+  id : String
+  channel_id : String
+  title : String
+  type_ : String
+  link : String
+  emoji : String
+  date_created : Int64
+}
+pub fn Bookmark::to_json(Self) -> Json
+
+pub struct CallRecord {
+  api_method : String
+  form : Array[(String, String)]
+  status : Int
+  ok : Bool
+  error : String?
+}
+pub fn CallRecord::field(Self, String) -> String?
+
+pub struct Channel {
+  id : String
+  mut name : String
+  kind : ChannelKind
+  created : Int64
+  creator : String
+  mut is_archived : Bool
+  mut is_open : Bool
+  members : Array[String]
+  mut topic : ChannelText
+  mut purpose : ChannelText
+  messages : Array[Message]
+  pins : Array[String]
+  bookmarks : Array[Bookmark]
+  previous_names : Array[String]
+  mut last_read : String
+}
+pub fn Channel::to_json(Self, include_num_members? : Bool, include_locale? : Bool, include_membership? : Bool, for_list? : Bool) -> Json
+
+pub enum ChannelKind {
+  Public
+  Private
+  Im
+  Mpim
+} derive(Eq, @debug.Debug)
+
+pub struct ChannelText {
+  value : String
+  creator : String
+  last_set : Int64
+}
+pub fn ChannelText::empty() -> Self
+pub fn ChannelText::to_json(Self) -> Json
+
+pub(all) enum Fault {
+  ErrorCode(String)
+  RateLimited(Int)
+  Http(status~ : Int, body~ : String, headers~ : Array[(String, String)])
+  NotJson(String)
+  Disconnect(String)
+} derive(Eq, @debug.Debug)
+
+pub struct FileRecord {
+  id : String
+  name : String
+  mut title : String
+  mimetype : String
+  filetype : String
+  user : String
+  size : Int
+  created : Int64
+  channels : Array[String]
+  mut deleted : Bool
+  mut upload_token : String?
+}
+pub fn FileRecord::to_json(Self) -> Json
+
+pub struct Form {
+  entries : Array[(String, String)]
+}
+pub fn Form::bool(Self, String) -> Bool?
+pub fn Form::csv(Self, String) -> Array[String]?
+pub fn Form::entries(Self) -> Array[(String, String)]
+pub fn Form::get(Self, String) -> String?
+pub fn Form::has(Self, String) -> Bool
+pub fn Form::i64(Self, String) -> Int64?
+pub fn Form::int(Self, String) -> Int?
+pub fn Form::new() -> Self
+pub fn Form::of(Array[(String, String)]) -> Self
+
+pub struct Message {
+  ts : String
+  mut text : String
+  user : String
+  bot_id : String?
+  subtype : String?
+  mut blocks : Json?
+  mut attachments : Json?
+  mut metadata : Json?
+  mut thread_ts : String?
+  mut reply_count : Int
+  reply_users : Array[String]
+  mut latest_reply : String?
+  reactions : Array[Reaction]
+  mut edited : (String, String)?
+}
+pub fn Message::to_json(Self, channel_id? : String) -> Json
+
+pub struct MockTransport {
+  workspace : Workspace
+  sent : Array[@api.HttpRequest]
+  description : String
+}
+pub fn MockTransport::body_of(Self, Int) -> String
+pub fn MockTransport::last_request(Self) -> @api.HttpRequest?
+pub fn MockTransport::method_of(Self, Int) -> String
+pub fn MockTransport::new(Workspace, description? : String) -> Self
+pub fn MockTransport::request(Self, Int) -> @api.HttpRequest
+pub fn MockTransport::sent_count(Self) -> Int
+pub fn MockTransport::workspace(Self) -> Workspace
+pub impl @api.Transport for MockTransport
+
+pub struct Reaction {
+  name : String
+  users : Array[String]
+}
+pub fn Reaction::to_json(Self) -> Json
+
+pub struct ScheduledMessage {
+  id : String
+  channel : String
+  text : String
+  post_at : Int64
+  date_created : Int64
+  blocks : Json?
+  thread_ts : String?
+}
+pub fn ScheduledMessage::to_json(Self) -> Json
+
+pub struct Team {
+  id : String
+  name : String
+  domain : String
+  email_domain : String
+  enterprise_id : String?
+}
+pub fn Team::to_json(Self) -> Json
+
+pub struct TokenRecord {
+  token : String
+  user_id : String
+  bot_id : String?
+  app_id : String
+  team_id : String
+  scopes : Array[String]
+  mut revoked : Bool
+}
+pub fn TokenRecord::has_scope(Self, String) -> Bool
+
+pub struct User {
+  id : String
+  team_id : String
+  name : String
+  mut real_name : String
+  mut display_name : String
+  mut email : String
+  mut title : String
+  mut phone : String
+  mut status_text : String
+  mut status_emoji : String
+  tz : String
+  tz_label : String
+  tz_offset : Int
+  is_bot : Bool
+  bot_id : String?
+  is_admin : Bool
+  is_owner : Bool
+  deleted : Bool
+  mut presence : String
+  mut updated : Int64
+  profile_extra : Map[String, Json]
+}
+pub fn User::to_json(Self, String, include_locale? : Bool) -> Json
+
+pub struct Usergroup {
+  id : String
+  team_id : String
+  name : String
+  handle : String
+  description : String
+  mut users : Array[String]
+  channels : Array[String]
+  date_create : Int64
+  mut date_update : Int64
+  date_delete : Int64
+}
+pub fn Usergroup::to_json(Self, include_count? : Bool, include_users? : Bool) -> Json
+
+pub enum ViewKind {
+  Modal
+  Home
+} derive(Eq, @debug.Debug)
+
+pub struct ViewRecord {
+  id : String
+  kind : ViewKind
+  mut payload : Json
+  mut hash : String
+  external_id : String?
+  root_view_id : String
+  previous_view_id : String?
+  user_id : String?
+}
+pub fn ViewRecord::to_json(Self, String) -> Json
+
+type Workspace
+pub fn Workspace::add_bookmark(Self, channel~ : String, title~ : String, link? : String, emoji? : String, type_? : String) -> String
+pub fn Workspace::add_channel(Self, name~ : String, is_private? : Bool, members? : Array[String], topic? : String, purpose? : String, creator? : String, is_archived? : Bool, id? : String) -> String
+pub fn Workspace::add_file(Self, name~ : String, user~ : String, title? : String, mimetype? : String, filetype? : String, size? : Int, channels? : Array[String]) -> String
+pub fn Workspace::add_im(Self, user~ : String, id? : String) -> String
+pub fn Workspace::add_message(Self, channel~ : String, user~ : String, text~ : String, blocks? : Array[@blocks.LayoutBlock], attachments? : Json, subtype? : String, thread_ts? : String, ts? : String) -> String
+pub fn Workspace::add_mpim(Self, users~ : Array[String], id? : String) -> String
+pub fn Workspace::add_reaction(Self, channel~ : String, ts~ : String, user~ : String, name~ : String) -> Unit
+pub fn Workspace::add_user(Self, name~ : String, real_name? : String, display_name? : String, email? : String, title? : String, is_bot? : Bool, bot_id? : String, is_admin? : Bool, is_owner? : Bool, tz? : String, tz_label? : String, tz_offset? : Int, id? : String) -> String
+pub fn Workspace::add_usergroup(Self, name~ : String, handle~ : String, description? : String, users? : Array[String], channels? : Array[String]) -> String
+pub fn Workspace::advance(Self, Int64) -> Unit
+pub fn Workspace::call_count(Self) -> Int
+pub fn Workspace::calls(Self) -> Array[CallRecord]
+pub fn Workspace::calls_to(Self, String) -> Array[CallRecord]
+pub fn Workspace::channel(Self, String) -> Channel?
+pub fn Workspace::clear_faults(Self) -> Unit
+pub fn Workspace::demo() -> Self
+pub fn Workspace::demo_id(Self, String) -> String
+pub fn Workspace::demo_ids(Self) -> Map[String, String]
+pub fn Workspace::grant_all_scopes(Self, String) -> Unit
+pub fn Workspace::handle(Self, @api.HttpRequest) -> @api.HttpResponse raise @api.SlackError
+pub fn Workspace::inject(Self, String, Fault, times? : Int) -> Unit
+pub fn Workspace::install_app(Self, token~ : String, user? : String, scopes? : Array[String], name? : String) -> TokenRecord
+pub fn Workspace::invoke(Self, String, Form, token? : String) -> @api.HttpResponse raise @api.SlackError
+pub fn Workspace::join(Self, channel~ : String, user~ : String) -> Unit
+pub fn Workspace::last_call(Self) -> CallRecord?
+pub fn Workspace::message(Self, String, String) -> Message?
+pub fn Workspace::messages(Self, String) -> Array[Message]
+pub fn Workspace::new(team_id? : String, team_name? : String, domain? : String, email_domain? : String, enterprise_id? : String, now? : Int64) -> Self
+pub fn Workspace::next_ts(Self) -> String
+pub fn Workspace::now(Self) -> Int64
+pub fn Workspace::pending_faults(Self) -> Int
+pub fn Workspace::pin(Self, channel~ : String, ts~ : String) -> Unit
+pub fn Workspace::revoke_token(Self, String) -> Unit
+pub fn Workspace::set_now(Self, Int64) -> Unit
+pub fn Workspace::set_strict_unknown(Self, Bool) -> Unit
+pub fn Workspace::set_tick(Self, Int64) -> Unit
+pub fn Workspace::set_validate_blocks(Self, Bool) -> Unit
+pub fn Workspace::team(Self) -> Team
+pub fn Workspace::token(Self, String) -> TokenRecord?
+pub fn Workspace::transport(Self) -> MockTransport
+pub fn Workspace::user(Self, String) -> User?
+
+// Type aliases
+
+// Traits

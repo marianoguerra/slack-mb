@@ -1,18 +1,18 @@
 // The integration harness: the library against a real Slack workspace.
 //
-// Separate from cmd/main because it drives the TYPED api -- typed blocks, the
-// paginator, the error taxonomy -- rather than passing strings through on the
-// command line. That is the half of the library a CLI cannot reach.
+// The scenario moved to ext/scenario, so that ext/test/mockrun can run the
+// same checks against marianoguerra/slack/mock in CI. What is left here is
+// what needs a token: the environment, the real transport, the recording flag
+// and the exit code.
 //
 // Never runs in CI: it needs a token and a workspace.
 import {
-  "marianoguerra/slack/api",
-  "marianoguerra/slack/blocks",
   "marianoguerra/slack/client",
-  "marianoguerra/slack/methods",
+  "marianoguerra/slack-ext/scenario",
   "marianoguerra/slack-ext/transport_http",
   "moonbitlang/async",
   "moonbitlang/core/env",
+  "moonbitlang/x/fs",
 }
 
 supported_targets = "+native"

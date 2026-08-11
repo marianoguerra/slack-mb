@@ -12,6 +12,8 @@ pub fn fixtures(String) -> Array[Fixture]
 
 pub fn fixtures_root() -> String
 
+pub fn method_fixture(String) -> Fixture?
+
 pub fn read_fixture(Fixture) -> Json
 
 pub fn tier_present(String) -> Bool

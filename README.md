@@ -36,11 +36,15 @@ fixtures off disk (`moonbitlang/x/fs`) — lives in `ext/`.
 | `slack/signature` | Request-signature verification |
 | `slack/methods` | 326 method names and their rate-limit tiers (generated) |
 | `slack/ratectl` | Leaky-bucket throttling, with an injected clock |
-| `slack/testing` | `FakeTransport` |
+| `slack/testing` | `FakeTransport`: a scripted transport |
+| `slack/mock` | An in-memory Slack: a workspace with state, and a transport over it |
 | `ext/transport_http` | The native transport, over `moonbitlang/async` |
+| `ext/scenario` | The integration scenario, as a library: one `run`, two transports |
+| `ext/shape` | Comparing two payloads by shape rather than by value |
 | `ext/cmd/main` | A demo CLI, which is how `transport_http` gets exercised |
+| `ext/cmd/integration` | The scenario against a real workspace; needs a token |
 | `ext/tools/gen_methods` | Generates `slack/methods/generated_methods.mbt` |
-| `ext/test/*` | Conformance tests over the vendored corpus, and the async client tests |
+| `ext/test/*` | Conformance tests over the vendored corpus, the mock, and the async client tests |
 
 ## Working on it
 
@@ -59,8 +63,9 @@ most of it. `moon test`, on the other hand, covers the whole workspace from
 wherever it was invoked, which is why the tests that read files probe for their
 fixtures rather than assuming a working directory.
 
-211 tests: 183 on wasm and 28 more on native (the async client tests, the
-large-fixture corpus, and anything else that needs a runtime).
+266 tests: 230 on wasm and 36 more on native (the async client tests, the
+scenario against the mock, everything that reads the corpus off disk, and
+anything else that needs a runtime).
 
 ## Where the behaviour comes from
 
@@ -75,9 +80,70 @@ observed to return. `ext/test/corpus` parses all of them and asserts that every
 Block Kit payload inside round-trips byte for byte — 2,548 blocks, including
 fields this library has never heard of.
 
+## Testing against a Slack that is not there
+
+`slack/mock` is a Slack workspace in memory: users, channels, DMs, threads,
+reactions, pins, files and views, behind all 62 methods `Client` exposes. It is
+published, and dependency-free, for the same reason `slack/testing` is — an app
+built on this library needs it, and would otherwise write it again, slightly
+worse.
+
+```moonbit
+let ws = @mock.Workspace::new()
+let alice = ws.add_user(name="alice", real_name="Alice Alvarez")
+let general = ws.add_channel(name="general", members=[alice])
+ws.add_message(channel=general, user=alice, text="hello")
+ws.install_app(token="xoxb-test", user=alice, scopes=["chat:write", "channels:history"])
+
+let client = @client.Client::new(ws.transport(), "xoxb-test")
+```
+
+`@mock.Workspace::demo()` skips the seeding: four people and a bot, three
+channels, a DM, an MPIM, a thread with replies and reactions, a pinned message,
+a usergroup and a file, plus `demo_token`, which holds every scope.
+
+Which of the two fakes to reach for: `@testing.FakeTransport` when the test is
+about one call and the response IS the fixture — a 500, a malformed body, a
+specific `ok: false`. `@mock` when the test is about a sequence, and the second
+call has to see what the first one did.
+
+It reproduces what an app actually trips over: `missing_scope` with `needed` and
+`provided`, `invalid_auth` and `token_revoked`, `already_reacted`, `name_taken`,
+`channel_not_found` — including the asymmetry where `chat.postMessage` accepts a
+channel *name* and `chat.update` refuses the same string. Faults are injectable
+(`ws.inject("chat.postMessage", RateLimited(30))`), which reaches the 429,
+5xx, non-JSON and dropped-socket paths mid-scenario rather than only from a
+scripted list. Ids and timestamps are deterministic; the clock is an `Int64` the
+caller advances, so nothing here reads one.
+
+### What keeps it honest
+
+A mock nobody checks drifts from Slack and becomes a machine for passing tests
+that should fail. Four independent checks pin it, all four beside the existing
+suite:
+
+| check | where | what it asserts |
+| --- | --- | --- |
+| shape against the corpus | `ext/test/mockshape` | every field the mock emits exists in `ext/fixtures/java/api/<method>.json` at the same JSON type. Values are never compared, so ids and timestamps diverge harmlessly |
+| coverage | `ext/test/mockshape` | 158 of the 190 top-level response fields the samples carry. A floor, so the check above cannot pass by emitting `{"ok": true}` |
+| the same scenario, both transports | `ext/test/mockrun` | `ext/scenario`'s `run` — the one `ext/cmd/integration` points at Slack — passes against the mock with **zero failures and zero skips**. Every scope is granted there, so a skip is a mock bug |
+| Block Kit round trip | `ext/test/mockshape` | every blocks array the mock emits parses and re-serialises byte for byte, the same property `ext/test/corpus` holds 2,548 real blocks to |
+
+A fifth, opt-in: `ext/recordings/README.md` covers recording a real run and
+diffing the mock's against it. It self-skips without a recording.
+
+The mock's handler list is checked against `Client`'s typed methods by scraping
+the two generated files, so adding a typed call fails a test until a handler
+exists.
+
+Three tolerances are recorded in `ext/test/mockshape`, each with its reason:
+they are places where java-slack-sdk's sample is a union of what its maintainers
+happened to record and is missing a field Slack documents. Their growth is worth
+watching in review — each one is the check being switched off for a path.
+
 ## The integration harness
 
-`ext/cmd/integration` runs the library against a real workspace. It never runs
+`ext/cmd/integration` runs the same scenario against a real workspace. It never runs
 in CI — it needs a token — but it checks two things no fixture can:
 
 - **the form encoder against Slack's own parser.** `api.test` echoes its
@@ -91,7 +157,14 @@ in CI — it needs a token — but it checks two things no fixture can:
 export SLACK_BOT_TOKEN=xoxb-...
 export SLACK_TEST_CHANNEL='#slack-integration'   # optional; this is the default
 moon run --target native ext/cmd/integration
+
+# and, to record the run for ext/test/mockrun to replay against:
+moon run --target native ext/cmd/integration -- --record
 ```
+
+The scenario itself lives in `ext/scenario` and is a plain function of a
+`Client`, which is what lets `ext/test/mockrun` run it in CI against the mock.
+Only the token, the transport and the exit code are here.
 
 It skips, loudly, whatever the token's scopes do not allow, so it is useful with
 a minimal token and more useful with a broad one. Everything it posts, it

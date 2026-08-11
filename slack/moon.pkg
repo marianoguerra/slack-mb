@@ -16,6 +16,7 @@ import {
 }
 
 import {
+  "marianoguerra/slack/mock",
   "marianoguerra/slack/ratectl",
   "marianoguerra/slack/signature",
   "marianoguerra/slack/testing",

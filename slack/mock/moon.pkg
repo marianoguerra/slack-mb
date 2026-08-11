@@ -1,0 +1,30 @@
+// An in-memory Slack, for testing a Slack app without a Slack.
+//
+// Published, and dependency-free, for the same reason `testing` is: someone
+// writing an MCP server or a bot against this library needs a workspace with
+// STATE in it -- a channel that remembers its messages, a `ts` that comes back
+// out of conversations.history, a user that users.info can find -- and
+// `FakeTransport`'s scripted list of responses cannot do that. Every test
+// against it has to hand-write the JSON it expects, which means the test
+// asserts what its author believed Slack would say.
+//
+// It imports only sibling packages inside this module, so `just backends` still
+// passes on wasm, wasm-gc, js and native. Nothing here reads a clock, a socket
+// or a file: `now` is an Int64 the caller supplies, exactly as in @ratectl and
+// @signature, and the whole state machine is synchronous so that it can be
+// tested here rather than in ext/.
+import {
+  "marianoguerra/slack/api",
+  "marianoguerra/slack/blocks",
+  "marianoguerra/slack/methods",
+  "moonbitlang/core/json",
+  "moonbitlang/core/string",
+}
+
+import {
+  "marianoguerra/slack/api",
+  "marianoguerra/slack/blocks",
+  "marianoguerra/slack/client",
+  "moonbitlang/core/json",
+  "moonbitlang/core/test",
+} for "test"

@@ -231,3 +231,98 @@ pub fn percent_encode_component(s : String) -> String {
   }
   out.to_string()
 }
+
+///|
+/// The value of one hexadecimal digit, in either case.
+fn hex_value(b : Byte) -> Int? {
+  let c = b.to_int()
+  if c >= '0'.to_int() && c <= '9'.to_int() {
+    Some(c - '0'.to_int())
+  } else if c >= 'A'.to_int() && c <= 'F'.to_int() {
+    Some(c - 'A'.to_int() + 10)
+  } else if c >= 'a'.to_int() && c <= 'f'.to_int() {
+    Some(c - 'a'.to_int() + 10)
+  } else {
+    None
+  }
+}
+
+///|
+/// Decode one percent-encoded form field name or value.
+///
+/// Over the UTF-8 bytes, like the encoder, and for the same reason: MoonBit
+/// strings are UTF-16, so decoding per code unit would reassemble `%C3%A3` as
+/// two characters instead of one and mangle every accented value that encoded
+/// correctly.
+///
+/// An invalid escape -- `%zz`, a trailing `%`, `%4` at the end -- is left as the
+/// literal characters rather than raising. WHATWG's urlencoded parser does the
+/// same, and a hand-built body with one stray `%` in it is far more useful
+/// decoded than rejected.
+///
+/// `+` becomes a space. `percent_encode_component` never emits `+` for a space
+/// (it emits `%20`, which is what node:querystring and OkHttp's FormBody both
+/// send) and it escapes a literal `+` as `%2B` -- so reading `+` as a space
+/// costs this pairing nothing, and it is what a body from any other client
+/// means.
+pub fn percent_decode_component(s : String) -> String {
+  let bytes = @utf8.encode(s)
+  let out : Array[Byte] = []
+  let mut i = 0
+  while i < bytes.length() {
+    let c = bytes[i].to_int()
+    if c == '%'.to_int() &&
+      i + 2 < bytes.length() &&
+      hex_value(bytes[i + 1]) is Some(hi) &&
+      hex_value(bytes[i + 2]) is Some(lo) {
+      out.push(((hi << 4) | lo).to_byte())
+      i += 3
+    } else if c == '+'.to_int() {
+      out.push(' '.to_int().to_byte())
+      i += 1
+    } else {
+      out.push(bytes[i])
+      i += 1
+    }
+  }
+  @utf8.decode_lossy(Bytes::from_array(out[:])[:])
+}
+
+///|
+/// Decode an `application/x-www-form-urlencoded` body into ordered pairs.
+///
+/// The inverse of `encode_form`, and it lives here rather than beside its first
+/// caller because it has a second one that has nothing to do with testing:
+/// Slack delivers slash commands and interactivity payloads as form bodies, and
+/// `@signature` -- which verifies exactly those requests -- is already in this
+/// module. Anyone handling one today writes this by hand.
+///
+/// Ordered, and not a `Map`, for the same reason `Params` is: the order is
+/// information, a repeated key is legal, and a caller comparing what went out
+/// with what came back wants both preserved.
+///
+/// An entry with no `=` yields an empty value, which is how `a&b=1` is read
+/// everywhere else. An EMPTY body yields no pairs -- not one pair of two empty
+/// strings, which is what a naive split gives and is the bug that makes
+/// `chat.postMessage` with no arguments look like a request for a channel
+/// named "".
+pub fn decode_form(body : String) -> Array[(String, String)] {
+  let out : Array[(String, String)] = []
+  for pair in body.split("&") {
+    // Also skips the empty segments in `a=1&&b=2` and after a trailing `&`.
+    if pair.is_empty() {
+      continue
+    }
+    match pair.split_once("=") {
+      Some((key, value)) =>
+        out.push(
+          (
+            percent_decode_component(key.to_owned()),
+            percent_decode_component(value.to_owned()),
+          ),
+        )
+      None => out.push((percent_decode_component(pair.to_owned()), ""))
+    }
+  }
+  out
+}

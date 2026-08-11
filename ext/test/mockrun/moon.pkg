@@ -1,0 +1,29 @@
+// The integration scenario, against the mock, in CI.
+//
+// The other half of the split ext/scenario exists for: ext/cmd/integration
+// points `run` at a real workspace and needs a token, this points it at
+// marianoguerra/slack/mock and needs nothing. Between them the same checks --
+// the form encoder against a parser, the Block Kit round trip on blocks the
+// SERVER produced, the refusals a caller meets -- run on every commit AND
+// against Slack when somebody has a token.
+//
+// Named `mockrun` and not `mock`: a package's own name is in scope as an alias,
+// so a package called `mock` would shadow `@mock` and make the thing under test
+// unreachable. Same reason ext/test/calls is not called `client`.
+//
+// Native-only, like ext/test/calls, because `async test` needs
+// moonbitlang/async.
+import {
+}
+
+import {
+  "marianoguerra/slack/client",
+  "marianoguerra/slack/mock",
+  "marianoguerra/slack-ext/scenario",
+  "marianoguerra/slack-ext/shape",
+  "moonbitlang/async",
+  "moonbitlang/core/json",
+  "moonbitlang/x/fs",
+} for "test"
+
+supported_targets = "+native"

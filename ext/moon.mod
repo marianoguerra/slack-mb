@@ -8,7 +8,7 @@
 
 name = "marianoguerra/slack-ext"
 
-version = "0.1.0"
+version = "0.2.0"
 
 license = "Apache-2.0"
 
@@ -17,7 +17,7 @@ preferred_target = "native"
 description = "Native HTTP transport, method-table generator and reference-fixture conformance tests for marianoguerra/slack. Not published."
 
 import {
-  "marianoguerra/slack@0.1.0",
+  "marianoguerra/slack@0.2.0",
   "moonbitlang/async@0.20.4",
   "moonbitlang/x@0.4.49",
 }

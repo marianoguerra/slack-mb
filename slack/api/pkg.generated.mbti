@@ -8,6 +8,8 @@ import {
 // Values
 pub fn build_request(String, String, Params, token? : String, extra_headers? : Map[String, String], bool_style? : BoolStyle) -> HttpRequest
 
+pub fn decode_form(String) -> Array[(String, String)]
+
 pub let default_api_url : String
 
 pub fn encode_form(Params, bool_style? : BoolStyle) -> String
@@ -15,6 +17,8 @@ pub fn encode_form(Params, bool_style? : BoolStyle) -> String
 pub fn normalize_api_url(String) -> String
 
 pub fn parse_retry_after(String) -> Int?
+
+pub fn percent_decode_component(String) -> String
 
 pub fn percent_encode_component(String) -> String
 

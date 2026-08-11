@@ -1,0 +1,31 @@
+// The mock, against the shapes Slack really sends.
+//
+// ext/test/corpus asserts that this library can PARSE 548 recorded Slack
+// responses. This asserts the other direction: that what the mock PRODUCES has
+// the same shape as what Slack was recorded producing, field by field and type
+// by type -- never value by value, so ids and timestamps diverge harmlessly.
+//
+// Values are never compared, which is what makes the check possible at all;
+// what it catches is the mock inventing a field Slack has never sent, dropping
+// one it always does, or sending a number where Slack sends a string.
+//
+// Named `mockshape` and not `mock`: a package's own name is in scope as an
+// alias and would shadow `@mock`. Same reason ext/test/calls is not `client`.
+//
+// No moonbitlang/async here on purpose: it drives `Workspace::handle`
+// synchronously, so nothing about the mock forces a runtime. Reading the corpus
+// off disk still does, so like ext/test/corpus this lands in the native half of
+// `moon test` -- which is why it needs no `supported_targets` of its own.
+import {
+}
+
+import {
+  "marianoguerra/slack/api",
+  "marianoguerra/slack/blocks",
+  "marianoguerra/slack/client",
+  "marianoguerra/slack/mock",
+  "marianoguerra/slack-ext/shape",
+  "marianoguerra/slack-ext/test/fixtures",
+  "moonbitlang/core/json",
+  "moonbitlang/x/fs",
+} for "test"

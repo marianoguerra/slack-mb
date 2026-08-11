@@ -1,0 +1,26 @@
+// The integration scenario, as a library.
+//
+// It used to be the body of ext/cmd/integration's `main`, which meant the only
+// way to run it was against a real workspace with a real token -- so the checks
+// it makes (does the encoder agree with the parser, does a block payload
+// round-trip, does a bad channel refuse the way we think) ran when somebody
+// remembered, and never in CI.
+//
+// Split out here, `run` takes a `Client` and does not care what is behind it:
+// ext/cmd/integration still points it at Slack, and ext/test/mockrun points it
+// at marianoguerra/slack/mock, in CI, on every commit. Two runs of one
+// scenario is the whole design -- the mock's fidelity is then defined by
+// something other than the mock's own tests.
+//
+// This package must NOT import marianoguerra/slack/mock. `run` takes a client;
+// the caller supplies the transport. That is what keeps ext/cmd/integration a
+// pure real-Slack binary.
+import {
+  "marianoguerra/slack/api",
+  "marianoguerra/slack/blocks",
+  "marianoguerra/slack/client",
+  "marianoguerra/slack/methods",
+  "moonbitlang/core/json",
+}
+
+supported_targets = "+native"

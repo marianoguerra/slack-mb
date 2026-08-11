@@ -1,0 +1,11 @@
+// Comparing two payloads by shape rather than by value.
+//
+// Its own package, and not part of ext/scenario, because both conformance
+// checks need it and they do not run on the same targets: ext/test/mockrun is
+// native-only (it drives a Client, so it needs `async test`), while
+// ext/test/mockshape drives the mock synchronously and runs wherever `moon
+// test` does. One implementation rather than two nearly-identical ones, so that
+// a tolerance added for one check is a tolerance the other gets too.
+import {
+  "moonbitlang/core/json",
+}

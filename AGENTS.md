@@ -40,6 +40,20 @@ You can browse and install extra skills here:
   gate. Anything that needs a socket, a filesystem or a clock goes in `ext/`,
   or behind an argument the caller supplies (`now : Int64`, `&Transport`).
 
+- **That includes `slack/mock`,** which is the package most tempted to break it:
+  a mock Slack wants a clock and wants to read fixtures off disk. It gets
+  neither. `now` is an `Int64` the caller advances, `Workspace::demo()` is code
+  rather than a file, and the whole state machine is synchronous so that
+  `Workspace::invoke` can be tested in the package itself -- only the two-line
+  `Transport` impl is async.
+
+- **The mock answers to the corpus.** `slack/mock/render.mbt` may only emit
+  fields that appear in `ext/fixtures/java/api/<method>.json`, at the type they
+  appear at. `ext/test/mockshape` is the gate, and its `allow_unknown` table is
+  the check being switched off for a path -- an entry there needs a reason
+  saying why the corpus is wrong rather than the mock. Adding a typed method to
+  `@client` fails the drift gate until a handler exists in `@mock`.
+
 - **`slack/methods/generated_methods.mbt` is generated.** Do not edit it. Change
   `ext/metadata/rate_limit_tiers.json` and run `just gen`; `just gen-check` is a
   CI gate and `ext/test/coverage` is a normal test.

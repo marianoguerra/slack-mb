@@ -1,0 +1,78 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "marianoguerra/slack-ext/scenario"
+
+import {
+  "marianoguerra/slack/api",
+  "marianoguerra/slack/blocks",
+  "marianoguerra/slack/client",
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn describe(@api.SlackError) -> String
+
+pub fn exchanges_of_json(Json) -> Array[Exchange]
+
+pub async fn run(@client.Client, channel~ : String, cleanup_ts? : String) -> Report
+
+pub fn scrub_json(Json) -> Json
+
+pub fn scrub_text(String) -> String
+
+pub fn test_blocks() -> Array[@blocks.LayoutBlock]
+
+// Errors
+pub suberror Failed {
+  Failed(String)
+}
+pub impl Show for Failed
+
+// Types and methods
+pub struct Exchange {
+  api_method : String
+  form : Array[(String, String)]
+  status : Int
+  body : Json
+}
+pub fn Exchange::api_method(Self) -> String
+pub fn Exchange::body(Self) -> Json
+pub fn Exchange::form(Self) -> Array[(String, String)]
+pub fn Exchange::status(Self) -> Int
+
+pub enum Outcome {
+  Pass
+  Skip
+  Fail(String)
+} derive(Eq, @debug.Debug)
+
+pub struct RecordingTransport {
+  inner : &@api.Transport
+  exchanges : Array[Exchange]
+}
+pub fn RecordingTransport::exchanges(Self) -> Array[Exchange]
+pub fn RecordingTransport::methods(Self) -> Array[String]
+pub fn RecordingTransport::new(&@api.Transport) -> Self
+pub fn RecordingTransport::to_json(Self, scrub? : Bool) -> Json
+pub impl @api.Transport for RecordingTransport
+
+pub struct Report {
+  outcomes : Array[Outcome]
+  names : Array[String]
+  reasons : Array[String]
+}
+pub async fn Report::check(Self, String, async () -> Unit) -> Unit
+pub fn Report::exit_code(Self) -> Int
+pub fn Report::fail(Self, String, String) -> Unit
+pub fn Report::failure_report(Self) -> String
+pub fn Report::failures(Self) -> Array[String]
+pub fn Report::new() -> Self
+pub fn Report::pass(Self, String) -> Unit
+pub fn Report::passed(Self) -> Int
+pub fn Report::print_summary(Self) -> Unit
+pub fn Report::skip(Self, String, String) -> Unit
+pub fn Report::skip_report(Self) -> String
+pub fn Report::skipped(Self) -> Int
+
+// Type aliases
+
+// Traits

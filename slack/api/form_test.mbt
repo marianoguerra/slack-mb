@@ -284,3 +284,132 @@ test "an empty parameter list is an empty body" {
 test "an empty value keeps its field" {
   assert_eq(form([("text", Str(""))]), "text=")
 }
+
+///|
+/// The property the decoder exists for: what comes out is exactly the pairs
+/// that went in, as `to_wire` rendered them.
+///
+/// Stated modulo `to_wire` rather than as `decode(encode(p)) == p`, because the
+/// wire has no types: `Int(42)` and `Str("42")` are the same four bytes, and a
+/// decoder that claimed to tell them apart would be lying.
+fn round_trips(
+  entries : Array[(String, @api.ParamValue)],
+  bool_style~ : @api.BoolStyle,
+) -> Bool {
+  let params = @api.Params::of(entries)
+  let expected = entries.map(e => (e.0, e.1.to_wire(bool_style~)))
+  @api.decode_form(@api.encode_form(params, bool_style~)) == expected
+}
+
+///|
+/// Driven over the awkward set `ext/cmd/integration` sends through `api.test`,
+/// which is the one place in this repo where a value is compared with what
+/// SLACK decoded rather than with another SDK's expectations.
+test "every encoder case decodes back to what it encoded" {
+  let cases : Array[(String, @api.ParamValue)] = [
+    ("team_id", Str("T12345678")),
+    ("city", Str("São Paulo")),
+    ("query", Str("a&b=c")),
+    ("sum", Str("1+1 = 2")),
+    ("emoji", Str("🎉")),
+    ("percent", Str("100%")),
+    ("multiline", Str("one\ntwo")),
+    ("empty", Str("")),
+    ("limit", Int(200)),
+    ("big", I64(9007199254740993L)),
+    ("frac", Num(1.5)),
+    ("flag", Bool(true)),
+    ("off", Bool(false)),
+    ("users", Csv(["U1", "U2"])),
+    ("blocks", JsonVal([{ "type": "section", "text": "*hi*" }])),
+  ]
+  // Named rather than `Show`n: `BoolStyle` derives Debug, not Show.
+  let styles : Array[(String, @api.BoolStyle)] = [
+    ("TrueFalse", TrueFalse),
+    ("OneZero", OneZero),
+  ]
+  for style in styles {
+    let (label, bool_style) = style
+    assert_true(round_trips(cases, bool_style~), msg="style \{label}")
+    // And one field at a time, so a failure names the value that broke.
+    for entry in cases {
+      assert_true(
+        round_trips([entry], bool_style~),
+        msg="\{entry.0} at style \{label}",
+      )
+    }
+  }
+}
+
+///|
+/// An empty body is no pairs at all -- not one pair of two empty strings, which
+/// is what a naive split gives and is the bug that makes a no-argument call
+/// look like a request for a channel named "".
+test "an empty body decodes to nothing" {
+  assert_eq(@api.decode_form(""), [])
+}
+
+///|
+/// A field with no `=` is present with an empty value, which is how `a&b=1` is
+/// read everywhere else.
+test "a field with no equals sign keeps its name" {
+  assert_eq(@api.decode_form("a"), [("a", "")])
+  assert_eq(@api.decode_form("a&b=1"), [("a", ""), ("b", "1")])
+}
+
+///|
+/// Empty segments are skipped, so a trailing `&` or a doubled one does not
+/// invent a nameless field.
+test "empty segments are skipped" {
+  assert_eq(@api.decode_form("a=1&&b=2&"), [("a", "1"), ("b", "2")])
+}
+
+///|
+test "repeated keys survive the round trip" {
+  assert_eq(@api.decode_form("k=1&k=2"), [("k", "1"), ("k", "2")])
+}
+
+///|
+/// Only the FIRST `=` splits. This encoder escapes `=` as `%3D` so it never
+/// produces such a pair itself, but a body from another client can, and losing
+/// everything after the second `=` would be silent data loss.
+test "only the first equals sign splits a pair" {
+  assert_eq(@api.decode_form("q=a=b=c"), [("q", "a=b=c")])
+}
+
+///|
+/// `+` is a space on the way in. This encoder emits `%20` for a space and
+/// `%2B` for a literal `+`, so the pairing is unaffected -- but every other
+/// client's body means a space here.
+test "plus decodes to a space" {
+  assert_eq(@api.decode_form("a+b=c+d"), [("a b", "c d")])
+  assert_eq(@api.decode_form("sum=1%2B1"), [("sum", "1+1")])
+}
+
+///|
+/// Multi-byte characters are reassembled from their UTF-8 bytes, not from
+/// UTF-16 code units. `%E2%9C%93` is three bytes and one character.
+test "percent escapes decode over UTF-8 bytes" {
+  assert_eq(@api.decode_form("x=%E2%9C%93"), [("x", "✓")])
+  assert_eq(@api.decode_form("x=S%C3%A3o%20Paulo"), [("x", "São Paulo")])
+  // An astral code point is four bytes and one code point.
+  assert_eq(@api.decode_form("x=%F0%9F%8E%89"), [("x", "🎉")])
+}
+
+///|
+/// Hex digits are read in either case. Slack sends uppercase; some clients
+/// send lowercase, and both are legal.
+test "hex escapes are case-insensitive" {
+  assert_eq(@api.decode_form("x=%2f%2F"), [("x", "//")])
+}
+
+///|
+/// An invalid escape is left literal rather than raising, as WHATWG's
+/// urlencoded parser does. A hand-built body with one stray `%` in it is far
+/// more useful decoded than rejected.
+test "an invalid escape is left as written" {
+  assert_eq(@api.decode_form("a=%zz"), [("a", "%zz")])
+  assert_eq(@api.decode_form("a=100%"), [("a", "100%")])
+  assert_eq(@api.decode_form("a=%4"), [("a", "%4")])
+  assert_eq(@api.decode_form("a=%%41"), [("a", "%A")])
+}

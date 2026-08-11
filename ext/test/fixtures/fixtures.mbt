@@ -115,3 +115,25 @@ fn walk(j : Json, out : Array[Json]) -> Unit {
     _ => ()
   }
 }
+
+///|
+/// The recorded reference response for one Web API method.
+///
+/// Looks in whichever tier it lives in: most are under `java/api/`, but the
+/// eight biggest -- `chat.postMessage`, `conversations.history` and friends --
+/// are under `java/api-large/` and are gitignored, so a caller has to be ready
+/// for `tier == "large"` and `tier_present("large") == false`.
+///
+/// Matched on the file name rather than by joining a directory, so that a
+/// re-vendor which moves a fixture between tiers needs no change here.
+pub fn method_fixture(api_method : String) -> Fixture? {
+  let wanted = "/" + api_method + ".json"
+  for tier in ["small", "large"] {
+    for fixture in fixtures(tier) {
+      if fixture.path.has_suffix(wanted) {
+        return Some(fixture)
+      }
+    }
+  }
+  None
+}

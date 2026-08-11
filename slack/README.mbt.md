@@ -285,8 +285,12 @@ test {
 
 ## Testing your app
 
+There are two fakes, and which one you want depends on what the test is about.
+
 `@testing.FakeTransport` answers a scripted list of responses and remembers
-every request, so you can assert on what went out.
+every request, so you can assert on what went out. Reach for it when the test is
+about ONE call and the response is the fixture: a 500, a body that is not JSON,
+a specific `ok: false`.
 
 ```mbt check
 ///|
@@ -299,6 +303,73 @@ test {
   assert_eq(fake.describe(), "fake transport")
 }
 ```
+
+`@mock.Workspace` is a Slack in memory: users, channels, DMs, threads,
+reactions, pins, files and views, behind every method `Client` exposes. Reach
+for it when the test is about a SEQUENCE, and the second call has to see what
+the first one did -- which a scripted list cannot do, and which is most of what
+an app actually does.
+
+```mbt check
+///|
+test {
+  let ws = @mock.Workspace::new()
+  let alice = ws.add_user(name="alice", real_name="Alice Alvarez")
+  let general = ws.add_channel(name="general", members=[alice])
+  ws.install_app(token="xoxb-test", user=alice, scopes=[
+    "chat:write", "channels:history",
+  ])
+  |> ignore
+
+  // Post, and read it back. Two calls, one workspace.
+  let posted = ws.invoke(
+    "chat.postMessage",
+    @mock.Form::of([("channel", general), ("text", "hello")]),
+    token="xoxb-test",
+  )
+  assert_eq(posted.status, 200)
+  assert_eq(ws.messages(general).length(), 1)
+
+  // A scope it was not granted is refused the way Slack refuses it, with the
+  // `needed` and `provided` that `describe_error_java` reads.
+  let refused = ws.invoke("users.list", @mock.Form::new(), token="xoxb-test")
+  let result = @api.ApiResponse::of_http(refused)
+  assert_eq(result.error, Some("missing_scope"))
+  assert_eq(result.needed, Some("users:read"))
+}
+```
+
+The example above drives the workspace directly, because this README is
+compiled and `Client` is async. In a real test you would hand `ws.transport()`
+to `Client::new` and call the typed methods.
+
+`@mock.Workspace::demo()` skips the seeding: four people and a bot, three
+channels, a DM, an MPIM, a thread with replies and reactions, a pinned message,
+a usergroup and a file, plus `@mock.demo_token`, which holds every scope.
+
+Faults are injectable, which is how the paths a client only meets in production
+become reachable in a test:
+
+```mbt check
+///|
+test {
+  let ws = @mock.Workspace::demo()
+  ws.inject("chat.postMessage", RateLimited(30))
+  ws.inject(
+    "conversations.history",
+    Http(status=503, body="upstream", headers=[]),
+  )
+  ws.inject("auth.test", Disconnect("connection reset"))
+  assert_eq(ws.pending_faults(), 3)
+}
+```
+
+Ids and timestamps are deterministic and the clock is an `Int64` you advance, so
+two runs of the same test produce the same bytes. They are not Slack's real ids,
+and nothing else about the mock is guesswork: what it answers is checked against
+548 recorded Slack responses, and the integration scenario that runs against a
+real workspace is run against it too. See "What keeps it honest" in the
+repository README.
 
 ## Writing a transport
 
@@ -338,7 +409,8 @@ accented character in it will otherwise declare fewer bytes than it sends.
 | `marianoguerra/slack/signature` | Request-signature verification |
 | `marianoguerra/slack/methods` | 326 method names and their rate-limit tiers |
 | `marianoguerra/slack/ratectl` | Leaky-bucket throttling, with an injected clock |
-| `marianoguerra/slack/testing` | `FakeTransport` |
+| `marianoguerra/slack/testing` | `FakeTransport`: a scripted transport |
+| `marianoguerra/slack/mock` | An in-memory Slack workspace, and a transport over it |
 
 ## Not included
 

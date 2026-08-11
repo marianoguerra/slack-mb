@@ -1,5 +1,5 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "marianoguerra/slack-ext/cmd/integration"
+package "marianoguerra/slack-ext/test/mockrun"
 
 // Values
 

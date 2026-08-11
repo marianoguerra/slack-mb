@@ -1,5 +1,61 @@
 # Changelog
 
+## 0.2.0
+
+### Added
+
+- **`slack/mock` — an in-memory Slack.** A workspace with state in it: users,
+  channels, DMs, MPIMs, threads, reactions, pins, bookmarks, usergroups, files
+  and views, behind all 62 methods `Client` exposes. Published and
+  dependency-free, for the reason `slack/testing` already is — an app built on
+  this library needs one, and would otherwise write it again, slightly worse.
+
+  `@testing.FakeTransport` answers a scripted list, which cannot express "the
+  second call sees what the first one did"; this can. It reproduces the
+  refusals an app actually meets (`missing_scope` with `needed`/`provided`,
+  `invalid_auth`, `token_revoked`, `already_reacted`, `name_taken`), including
+  the asymmetry where `chat.postMessage` takes a channel *name* and
+  `chat.update` answers `channel_not_found` for the same string. Faults are
+  injectable, reaching the 429, 5xx, non-JSON and dropped-socket paths
+  mid-scenario. Ids and timestamps are deterministic and the clock is an `Int64`
+  the caller advances — nothing here reads one, which is what keeps the package
+  on every backend.
+
+- **`@api.decode_form` and `@api.percent_decode_component`** — the inverse of
+  the form encoder, beside it. The mock needs it, and so does anyone handling a
+  slash command or an interactivity payload, which arrive as form bodies.
+  Pinned by a round-trip property stated modulo `to_wire`, since the wire has no
+  types.
+
+### Verification
+
+Four independent checks keep the mock from drifting into a machine for passing
+tests that should fail:
+
+- **Shape against the corpus** (`ext/test/mockshape`) — every field the mock
+  emits exists in that method's recorded sample at the same JSON type. Values
+  are never compared, so ids and timestamps diverge harmlessly. It found three
+  invented fields while being written.
+- **Coverage** — 158 of the 190 top-level response fields the samples carry,
+  with a floor, so the check above cannot be satisfied by emitting `{"ok": true}`.
+- **One scenario, two transports** (`ext/test/mockrun`) — `ext/cmd/integration`'s
+  scenario moved into `ext/scenario` as a plain function of a `Client`. The CLI
+  still points it at Slack; CI now points it at the mock and asserts **zero
+  failures and zero skips**, since every scope is granted there.
+- **Block Kit round trip on the mock's own output** — the property
+  `ext/test/corpus` holds 2,548 real blocks to.
+
+Plus a drift gate: the mock's handler list is derived a third way, from
+`Client`'s typed methods, so adding one fails a test until a handler exists.
+
+An opt-in fifth check records a real run, scrubs it, and diffs the mock's
+against it; see `ext/recordings/README.md`.
+
+### Changed
+
+- `ext/cmd/integration` keeps its environment variables, defaults, output and
+  exit codes, and gains `--record`. Its scenario now lives in `ext/scenario`.
+
 ## 0.1.0
 
 First release.
