@@ -13,7 +13,7 @@
 
 name = "marianoguerra/slack-http"
 
-version = "0.3.0"
+version = "0.4.0"
 
 readme = "README.md"
 
@@ -28,6 +28,6 @@ preferred_target = "native"
 description = "Native HTTP transport for marianoguerra/slack, over moonbitlang/async. Implements @api.Transport; native target only."
 
 import {
-  "marianoguerra/slack@0.3.0",
+  "marianoguerra/slack@0.4.0",
   "moonbitlang/async@0.20.4",
 }
